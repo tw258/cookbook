@@ -5,14 +5,9 @@ import { AppComponent } from './app.component';
 import { IngredientFormComponent } from './ingredient-form/ingredient-form.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    IngredientFormComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
+  declarations: [AppComponent, IngredientFormComponent],
+  imports: [BrowserModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

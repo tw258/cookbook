@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { Ingredient } from "./ingredient.service";
-import { nanoid } from "nanoid";
+import { Injectable } from '@angular/core';
+import { Ingredient } from './ingredient.service';
+import { nanoid } from 'nanoid';
 
 export enum Difficulty {
   Easy,
@@ -33,7 +33,7 @@ export interface Recipe {
 }
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class RecipeService {
   private recipes: Recipe[] = [];

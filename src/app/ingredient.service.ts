@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { nanoid } from "nanoid";
+import { Injectable } from '@angular/core';
+import { nanoid } from 'nanoid';
 
 export interface Ingredient {
   id?: string;
@@ -9,7 +9,7 @@ export interface Ingredient {
 }
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class IngredientService {
   private ingredients: Ingredient[] = [];
