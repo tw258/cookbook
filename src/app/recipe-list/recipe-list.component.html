@@ -1,1 +1,1 @@
-<p>recipe-list works!</p>
+<app-recipe-card *ngFor="let recipe of recipes; let isFirst = first" [recipe]="recipe" [marginTop]="isFirst ? 0 : 10"></app-recipe-card>
