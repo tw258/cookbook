@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
 }
 
@@ -20,7 +20,13 @@ body * {
 input,
 textarea {
   padding: 5px;
-}
+} */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
