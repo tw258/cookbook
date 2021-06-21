@@ -3,9 +3,9 @@ import { Ingredient } from './ingredient.service';
 import { nanoid } from 'nanoid';
 
 export enum Difficulty {
-  Easy,
-  Medium,
-  Hard,
+  Easy = 'Einfach',
+  Medium = 'Mittel',
+  Hard = 'Schwer',
 }
 
 export enum Measurement {
@@ -16,6 +16,7 @@ export enum Measurement {
   Teaspoon,
   Tablespoon,
   Pinch,
+  Pieces,
 }
 
 export interface Recipe {
@@ -25,7 +26,7 @@ export interface Recipe {
   parameterizedIngredients: {
     amount: number;
     measurement?: Measurement;
-    ingredientId: string;
+    ingredient: string;
   }[];
   difficulty?: Difficulty;
   preparationTimeInMinutes: number;
