@@ -1,1 +1,15 @@
-<app-recipe-card *ngFor="let recipe of recipes; let isFirst = first" [recipe]="recipe" [marginTop]="isFirst ? 0 : 10"></app-recipe-card>
+<div *ngIf="recipes.length != 0; else NoRecipes">
+  <app-recipe-card
+    *ngFor="let recipe of recipes; let isFirst = first"
+    [recipe]="recipe"
+    [marginTop]="isFirst ? 0 : 10"
+  ></app-recipe-card>
+</div>
+
+<ng-template #NoRecipes>
+  <div class="text-center mat-body-strong">Keine Rezepte verfügbar</div>
+</ng-template>
+
+<a class="btn-add-recipe" [routerLink]="['/new-recipe']" mat-fab color="primary">
+  <mat-icon>add</mat-icon>
+</a>
