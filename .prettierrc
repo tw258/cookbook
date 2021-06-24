@@ -9,7 +9,7 @@
     {
       "files": "*.html",
       "options": {
-        "printWidth": 200
+        "printWidth": 100
       }
     }
   ]
