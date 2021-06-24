@@ -1,1 +1,40 @@
-<p>recipe-form works!</p>
+<h1>Neues Rezept</h1>
+<form>
+  <mat-form-field appearance="outline">
+    <mat-label>Rezeptname</mat-label>
+    <input matInput placeholder="z.B. Spaghetti Bolognese" />
+  </mat-form-field>
+
+  <section class="mt-1">
+    <h3>Zutaten</h3>
+
+    <div class="ingredient-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Menge</mat-label>
+        <input type="number" min="0" matInput placeholder="0,1,..." />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Einheit</mat-label>
+        <mat-select>
+          <mat-option value="Gram">Gram</mat-option>
+          <mat-option value="Kilogram">Kilogram</mat-option>
+          <mat-option value="Milliliter">Milliliter</mat-option>
+          <mat-option value="Liter">Liter</mat-option>
+          <mat-option value="Teaspoon">Teaspoon</mat-option>
+          <mat-option value="Tablespoon">Tablespoon</mat-option>
+          <mat-option value="Pinch">Pinch</mat-option>
+          <mat-option value="Pieces">Pieces</mat-option>
+          <!-- TODO refactor einheiten-->
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Zutat</mat-label>
+        <input matInput placeholder="Eier, Mehl, ..." />
+      </mat-form-field>
+
+      <button class="mat-form-field-wrapper" mat-icon-button><mat-icon>add</mat-icon></button>
+    </div>
+  </section>
+</form>
