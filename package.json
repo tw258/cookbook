@@ -7,7 +7,7 @@
     "start": "ng serve",
     "test": "ng test",
     "lint": "ng lint",
-    "build": "ng build --prod --base-href \"https://cloud.wt-its.de/cookbook/\"",
+    "build": "ng build --configuration production --base-href \"https://cloud.wt-its.de/cookbook/\"",
     "e2e": "ng e2e"
   },
   "private": true,
