@@ -1,26 +1,33 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* Material overwrites */
+.mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+mat-card-subtitle {
+  margin-bottom: 0 !important;
+}
+
+/* Utility classes */
 .container {
   max-width: 700px;
   margin: auto;
   padding: 10px;
 }
 
-.mt-1 {
-  margin-top: 10px;
-}
-
 .text-center {
   text-align: center;
 }
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-.mat-form-field-wrapper {
-  padding-bottom: 0 !important;
+.mt-1 {
+  margin-top: 10px;
 }
