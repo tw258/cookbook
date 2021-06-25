@@ -11,5 +11,19 @@ mat-form-field {
 }
 
 .zubereitung {
-  min-height: 500px;
+  min-height: 200px;
+}
+
+.difficulty-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.slider-cookingtime {
+  width: 100%;
+}
+
+.ingredient-list-item {
+  padding: 7px 0px !important;
+  height: auto !important;
 }
