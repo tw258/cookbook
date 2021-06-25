@@ -9,25 +9,27 @@ export enum Difficulty {
 }
 
 export enum Measurement {
-  g,
-  kg,
-  ml,
-  l,
-  TL,
-  SL,
-  Prise,
-  stck,
+  g = 'g',
+  kg = 'kg',
+  ml = 'ml',
+  l = 'l',
+  TL = 'TL',
+  EL = 'EL',
+  Prise = 'Prise',
+  Stck = 'Stck',
+}
+
+export interface ParameterizedIngredient {
+  amount: number;
+  measurement?: Measurement;
+  ingredient: string;
 }
 
 export interface Recipe {
   id?: string;
   title: string;
   note: string;
-  parameterizedIngredients: {
-    amount: number;
-    measurement?: Measurement;
-    ingredient: string;
-  }[];
+  parameterizedIngredients: ParameterizedIngredient[];
   difficulty?: Difficulty;
   preparationTimeInMinutes: number;
   //TODO: pics
@@ -48,7 +50,7 @@ export class RecipeService {
         {
           amount: 1,
           ingredient: 'Eier',
-          measurement: Measurement.stck,
+          measurement: Measurement.Stck,
         },
       ],
     },
@@ -62,7 +64,7 @@ export class RecipeService {
         {
           amount: 1,
           ingredient: 'Eier',
-          measurement: Measurement.stck,
+          measurement: Measurement.Stck,
         },
       ],
     },
