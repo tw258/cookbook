@@ -1,12 +1,13 @@
 {
   "name": "cookbook",
   "version": "0.0.0",
+  "author": "Tobi and Oscar",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "build": "ng build --prod --base-href \"https://cloud.wt-its.de/cookbook/\"",
     "e2e": "ng e2e"
   },
   "private": true,
