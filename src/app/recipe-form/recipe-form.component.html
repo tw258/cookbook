@@ -17,15 +17,14 @@
       <mat-form-field appearance="outline">
         <mat-label>Einheit</mat-label>
         <mat-select>
-          <mat-option value="Gram">Gram</mat-option>
-          <mat-option value="Kilogram">Kilogram</mat-option>
-          <mat-option value="Milliliter">Milliliter</mat-option>
-          <mat-option value="Liter">Liter</mat-option>
-          <mat-option value="Teaspoon">Teaspoon</mat-option>
-          <mat-option value="Tablespoon">Tablespoon</mat-option>
-          <mat-option value="Pinch">Pinch</mat-option>
-          <mat-option value="Pieces">Pieces</mat-option>
-          <!-- TODO refactor einheiten-->
+          <mat-option value="g">g</mat-option>
+          <mat-option value="kg">lg</mat-option>
+          <mat-option value="ml">ml</mat-option>
+          <mat-option value="l">l</mat-option>
+          <mat-option value="TL">TL</mat-option>
+          <mat-option value="SL">SL</mat-option>
+          <mat-option value="Prise">Prise</mat-option>
+          <mat-option value="stck">stck</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -36,5 +35,33 @@
 
       <button class="mat-form-field-wrapper" mat-icon-button><mat-icon>add</mat-icon></button>
     </div>
+
+    <!-- <mat-selection-list #shoes>
+      <mat-list-option *ngFor="let shoe of typesOfShoes">
+        {{shoe}}
+      </mat-list-option>
+    </mat-selection-list> -->
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Zubereitung</mat-label>
+      <textarea class="zubereitung" rows="10" matInput placeholder="1. ...  2. ..."></textarea>
+    </mat-form-field>
+
+    <mat-label>Anspruch: </mat-label>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="bold">Einfach</mat-button-toggle>
+      <mat-button-toggle value="italic">Mittel</mat-button-toggle>
+      <mat-button-toggle value="underline">Schwer</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-label>Zubereitungszeit (min): </mat-label>
+    <mat-slider
+      thumbLabel
+      tickInterval="10"
+      step="10"
+      min="0"
+      max="60"
+      aria-label="units"
+    ></mat-slider>
   </section>
 </form>

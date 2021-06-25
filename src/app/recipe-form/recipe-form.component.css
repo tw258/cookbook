@@ -9,3 +9,7 @@ mat-form-field {
   align-items: center;
   gap: 10px;
 }
+
+.zubereitung {
+  min-height: 500px;
+}

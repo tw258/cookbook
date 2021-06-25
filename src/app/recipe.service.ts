@@ -9,14 +9,14 @@ export enum Difficulty {
 }
 
 export enum Measurement {
-  Gram,
-  Kilogram,
-  Milliliter,
-  Liter,
-  Teaspoon,
-  Tablespoon,
-  Pinch,
-  Pieces,
+  g,
+  kg,
+  ml,
+  l,
+  TL,
+  SL,
+  Prise,
+  stck,
 }
 
 export interface Recipe {
@@ -48,7 +48,7 @@ export class RecipeService {
         {
           amount: 1,
           ingredient: 'Eier',
-          measurement: Measurement.Pieces,
+          measurement: Measurement.stck,
         },
       ],
     },
@@ -62,7 +62,7 @@ export class RecipeService {
         {
           amount: 1,
           ingredient: 'Eier',
-          measurement: Measurement.Pieces,
+          measurement: Measurement.stck,
         },
       ],
     },
