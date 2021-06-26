@@ -1,8 +1,18 @@
-<h1>Neues Rezept</h1>
+<div class="header-grid">
+  <button routerLink="" mat-icon-button>
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <h1>Neues Rezept</h1>
+</div>
 <form>
   <mat-form-field appearance="outline">
     <mat-label>Rezeptname</mat-label>
-    <input matInput placeholder="z.B. Spaghetti Bolognese" />
+    <input
+      [(ngModel)]="recipe.title"
+      [ngModelOptions]="{ standalone: true }"
+      matInput
+      placeholder="z.B. Spaghetti Bolognese"
+    />
   </mat-form-field>
 
   <section class="mt-1">
@@ -11,12 +21,24 @@
     <div class="ingredient-container">
       <mat-form-field appearance="outline">
         <mat-label>Menge</mat-label>
-        <input #ingredientAmount type="number" min="0" matInput placeholder="0,1,..." value="1" />
+        <input
+          [(ngModel)]="currentParameterizedIngredient.amount"
+          [ngModelOptions]="{ standalone: true }"
+          type="number"
+          min="0"
+          matInput
+          placeholder="0,1,..."
+          value="1"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Einheit</mat-label>
-        <mat-select #ingredientMeasurement value="Stck">
+        <mat-select
+          [(ngModel)]="currentParameterizedIngredient.measurement"
+          [ngModelOptions]="{ standalone: true }"
+          value="Stck"
+        >
           <mat-option value="g">g</mat-option>
           <mat-option value="kg">kg</mat-option>
           <mat-option value="ml">ml</mat-option>
@@ -30,25 +52,24 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Zutat</mat-label>
-        <input #ingredientName matInput placeholder="Eier, Mehl, ..." value="Eier" />
+        <input
+          [(ngModel)]="currentParameterizedIngredient.ingredient"
+          [ngModelOptions]="{ standalone: true }"
+          matInput
+          placeholder="Eier, Mehl, ..."
+        />
       </mat-form-field>
 
       <button
         type="button"
         class="mat-form-field-wrapper"
         [disabled]="
-          !ingredientAmount.value || !ingredientMeasurement.value || !ingredientName.value
+          !currentParameterizedIngredient.amount ||
+          !currentParameterizedIngredient.ingredient ||
+          !currentParameterizedIngredient.measurement
         "
         mat-icon-button
-        (click)="
-          handleAddIngredient(
-            ingredientAmount.value,
-            ingredientMeasurement.value,
-            ingredientName.value
-          );
-          ingredientAmount.value = '';
-          ingredientName.value = ''
-        "
+        (click)="handleAddIngredient()"
       >
         <mat-icon>add</mat-icon>
       </button>
@@ -57,7 +78,7 @@
       <mat-list-item
         class="ingredient-list-item"
         role="listitem"
-        *ngFor="let paramIngr of parameterizedIngredients"
+        *ngFor="let paramIngr of recipe.parameterizedIngredients"
       >
         <div>{{ paramIngr.amount }} {{ paramIngr.measurement }} {{ paramIngr.ingredient }}</div>
       </mat-list-item>
@@ -66,19 +87,33 @@
 
   <mat-form-field class="mt-1" appearance="outline">
     <mat-label>Zubereitung</mat-label>
-    <textarea class="zubereitung" matInput placeholder="1. ...  2. ..."></textarea>
+    <textarea
+      [(ngModel)]="recipe.note"
+      [ngModelOptions]="{ standalone: true }"
+      class="zubereitung"
+      matInput
+      placeholder="1. ...  2. ..."
+    ></textarea>
   </mat-form-field>
 
   <div class="mt-1">
     <mat-label class="mat-small">Anspruch</mat-label>
-    <mat-button-toggle-group class="difficulty-box" name="fontStyle">
+    <mat-button-toggle-group
+      [(ngModel)]="recipe.difficulty"
+      [ngModelOptions]="{ standalone: true }"
+      class="difficulty-box"
+      name="fontStyle"
+    >
       <mat-button-toggle value="Einfach">Einfach</mat-button-toggle>
       <mat-button-toggle value="Mittel">Mittel</mat-button-toggle>
       <mat-button-toggle value="Schwer">Schwer</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
-  <div class="mt-1">
+
+  <div class="mt-1 cooking-time-box">
     <mat-slider
+      [(ngModel)]="recipe.preparationTimeInMinutes"
+      [ngModelOptions]="{ standalone: true }"
       class="slider-cookingtime mt-1"
       thumbLabel
       tickInterval="10"
@@ -88,5 +123,12 @@
       color="primary"
     ></mat-slider>
     <mat-label class="mat-small">Zubereitungszeit (min) </mat-label>
+  </div>
+
+  <div class="btn-grid mt-2">
+    <!-- <button mat-stroked-button color="warn">Cancel</button> -->
+    <button (click)="handleSave()" type="button" mat-raised-button color="primary">
+      Speichern
+    </button>
   </div>
 </form>

@@ -5,7 +5,7 @@ mat-form-field {
 
 .ingredient-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 5fr auto;
+  grid-template-columns: 1fr 2fr 4fr auto;
   align-items: center;
   gap: 10px;
 }
@@ -26,4 +26,30 @@ mat-form-field {
 .ingredient-list-item {
   padding: 7px 0px !important;
   height: auto !important;
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* gap: 0 10px; */
+}
+
+.header-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.header-grid h1 {
+  margin: 0;
+}
+
+.cooking-time-box {
+  position: relative;
+}
+
+.cooking-time-box mat-label {
+  position: absolute;
+  left: 5px;
+  top: 40px;
 }
