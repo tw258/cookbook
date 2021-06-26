@@ -9,6 +9,7 @@ import { Route, RouterModule } from '@angular/router';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Route[] = [
   { path: '', component: RecipeListComponent, pathMatch: 'full' },
@@ -23,7 +24,13 @@ const routes: Route[] = [
     RecipeFormComponent,
     RecipeCardComponent,
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, SharedModule, RouterModule.forRoot(routes)],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    RouterModule.forRoot(routes),
+    FormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
