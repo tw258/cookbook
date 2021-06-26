@@ -140,7 +140,13 @@
 
   <div class="btn-grid mt-2">
     <!-- <button mat-stroked-button color="warn">Cancel</button> -->
-    <button (click)="handleSave()" type="button" mat-raised-button color="primary">
+    <button
+      [disabled]="!recipe.title || !recipe.note || !recipe.difficulty"
+      (click)="handleSave()"
+      type="button"
+      mat-raised-button
+      color="primary"
+    >
       Speichern
     </button>
   </div>
