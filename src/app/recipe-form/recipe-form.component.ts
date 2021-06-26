@@ -31,6 +31,10 @@ export class RecipeFormComponent {
     this.router.navigate(['']);
   }
 
+  handleImageSelect(image: File) {
+    console.log(image);
+  }
+
   private createParameterizedIngredient(): ParameterizedIngredient {
     return {
       amount: 1,

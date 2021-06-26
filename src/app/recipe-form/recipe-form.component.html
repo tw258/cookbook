@@ -15,6 +15,18 @@
     />
   </mat-form-field>
 
+  <div class="images-container">
+    <button (click)="imageInput.click()" mat-icon-button type="button">
+      <mat-icon class="material-icons-outlined">add_a_photo</mat-icon>
+    </button>
+    <input
+      #imageInput
+      type="file"
+      (change)="handleImageSelect(imageInput.files![0])"
+      style="display: none"
+    />
+  </div>
+
   <section class="mt-1">
     <h3>Zutaten</h3>
 
@@ -24,6 +36,7 @@
         <input
           [(ngModel)]="currentParameterizedIngredient.amount"
           [ngModelOptions]="{ standalone: true }"
+          P
           type="number"
           min="0"
           matInput
