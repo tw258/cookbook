@@ -1,9 +1,28 @@
+<div class="header-grid">
+  <button routerLink="" mat-icon-button>
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <h1>{{ recipe.title }}</h1>
+</div>
+
 <!-- slideshow (angular, html?) -->
+
+<img
+  src="https://img.chefkoch-cdn.de/rezepte/1121671218451489/bilder/1378567/crop-600x400/pizza-salami-mit-knoblauch.jpg"
+/>
 
 <div class="additional-infos-grid">
   <mat-icon class="material-icons-outlined">access_time</mat-icon>
-  <p>20min</p>
+  <p>{{ recipe.preparationTimeInMinutes }}min</p>
 
   <mat-icon class="material-icons-outlined">lightbulb</mat-icon>
-  <p>Mittel</p>
+  <p>{{ recipe.difficulty }}</p>
 </div>
+
+<mat-selection-list color="primary" #ingredients>
+  <mat-list-option *ngFor="let ingredient of recipe.parameterizedIngredients">
+    {{ ingredient.amount }} {{ ingredient.measurement }} {{ ingredient.ingredient }}
+  </mat-list-option>
+</mat-selection-list>
+
+<p class="mat-h3">{{ recipe.note }}</p>
