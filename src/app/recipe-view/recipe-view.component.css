@@ -1,0 +1,6 @@
+.additional-infos-grid {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  align-content: center;
+  gap: 0 10px;
+}

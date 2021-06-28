@@ -11,6 +11,7 @@ import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 import { FormsModule } from '@angular/forms';
 import { AddImageComponent } from './recipe-form/add-image/add-image.component';
+import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 
 const routes: Route[] = [
   { path: '', component: RecipeListComponent, pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Route[] = [
     RecipeFormComponent,
     RecipeCardComponent,
     AddImageComponent,
+    RecipeViewComponent,
   ],
   imports: [
     BrowserModule,
