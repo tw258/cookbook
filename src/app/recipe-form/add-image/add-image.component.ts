@@ -6,10 +6,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./add-image.component.css'],
 })
 export class AddImageComponent implements OnInit {
-  @Output() imageUpload = new EventEmitter<File>();
-  //this.imageUpload.emit(file);
-  //<app-add-image (imageUpload)="handleImageUpload($event)"> <
+  @Output() imageUpload = new EventEmitter<string>();
+
   constructor() {}
+
+  handleImageSelect(image: File) {
+    //Base64decodingLogic
+
+    this.imageUpload.emit('imageAsBase64');
+  }
 
   ngOnInit(): void {}
 }
