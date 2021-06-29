@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
+    MatChipsModule,
     MatInputModule,
     MatSelectModule,
     MatIconModule,
