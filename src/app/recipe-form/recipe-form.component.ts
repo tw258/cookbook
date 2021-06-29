@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Measurement, ParameterizedIngredient, Recipe, RecipeService } from '../recipe.service';
 
@@ -8,6 +8,8 @@ import { Measurement, ParameterizedIngredient, Recipe, RecipeService } from '../
   styleUrls: ['./recipe-form.component.css'],
 })
 export class RecipeFormComponent {
+  maxTime = 60;
+
   recipe: Recipe = {
     note: '',
     parameterizedIngredients: [],

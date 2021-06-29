@@ -10,6 +10,7 @@
   grid-template-columns: auto 1fr;
   align-items: center;
 }
+
 .header-grid h1 {
   margin: 0;
 }

@@ -4,7 +4,8 @@
   </button>
   <h1>Neues Rezept</h1>
 </div>
-<form>
+
+<form class="mt-1">
   <mat-form-field appearance="outline">
     <mat-label>Rezeptname</mat-label>
     <input
@@ -15,7 +16,11 @@
     />
   </mat-form-field>
 
-  <div class="images-container">
+  <div class="images-container mt-1">
+    <img
+      src="https://img.chefkoch-cdn.de/rezepte/1121671218451489/bilder/1378567/crop-600x400/pizza-salami-mit-knoblauch.jpg"
+      alt=""
+    />
     <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
   </div>
 
@@ -67,7 +72,6 @@
 
       <button
         type="button"
-        class="mat-form-field-wrapper"
         [disabled]="
           !currentParameterizedIngredient.amount ||
           !currentParameterizedIngredient.ingredient ||
@@ -76,7 +80,7 @@
         mat-icon-button
         (click)="handleAddIngredient()"
       >
-        <mat-icon>add</mat-icon>
+        <span class="material-icons-outlined"> add_circle_outline </span>
       </button>
     </div>
     <mat-list role="list">
@@ -115,23 +119,31 @@
     </mat-button-toggle-group>
   </div>
 
-  <div class="mt-1 cooking-time-box">
-    <mat-slider
-      [(ngModel)]="recipe.preparationTimeInMinutes"
-      [ngModelOptions]="{ standalone: true }"
-      class="slider-cookingtime mt-1"
-      thumbLabel
-      tickInterval="10"
-      step="10"
-      min="0"
-      max="60"
-      color="primary"
-    ></mat-slider>
-    <mat-label class="mat-small">Zubereitungszeit (min) </mat-label>
+  <div class="mt-1 preparationtime-box">
+    <div>
+      <span class="mat-small">Zubereitungszeit: </span>
+      <span class="mat-small"
+        ><strong>{{ recipe.preparationTimeInMinutes }} Min</strong></span
+      >
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr auto; align-items: center">
+      <mat-slider
+        [(ngModel)]="recipe.preparationTimeInMinutes"
+        [ngModelOptions]="{ standalone: true }"
+        step="5"
+        min="0"
+        tickInterval="1"
+        [max]="maxTime"
+        color="primary"
+      ></mat-slider>
+      <button (click)="maxTime = maxTime + 30" mat-icon-button>
+        <mat-icon>more_time</mat-icon>
+      </button>
+    </div>
   </div>
 
-  <div class="btn-grid mt-2">
-    <!-- <button mat-stroked-button color="warn">Cancel</button> -->
+  <div class="btn-grid mt-1">
     <button
       [disabled]="!recipe.title || !recipe.note || !recipe.difficulty"
       (click)="handleSave()"

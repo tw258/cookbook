@@ -3,9 +3,24 @@ mat-form-field {
   min-width: 0;
 }
 
+.images-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0 10px;
+}
+
+.images-container * {
+  width: 100%;
+}
+
+.images-container img {
+  border-radius: 5px;
+  box-shadow: var(--image-box-shadow);
+}
+
 .ingredient-container {
   display: grid;
-  grid-template-columns: 1fr 2fr 4fr auto;
+  grid-template-columns: 2fr 2fr 4fr auto;
   align-items: center;
   gap: 10px;
 }
@@ -19,8 +34,8 @@ mat-form-field {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.slider-cookingtime {
-  width: 100%;
+.preparationtime-box {
+  display: grid;
 }
 
 .ingredient-list-item {
@@ -31,7 +46,6 @@ mat-form-field {
 .btn-grid {
   display: grid;
   grid-template-columns: 1fr;
-  /* gap: 0 10px; */
 }
 
 .header-grid {
@@ -42,14 +56,4 @@ mat-form-field {
 
 .header-grid h1 {
   margin: 0;
-}
-
-.cooking-time-box {
-  position: relative;
-}
-
-.cooking-time-box mat-label {
-  position: absolute;
-  left: 5px;
-  top: 40px;
 }

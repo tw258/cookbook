@@ -28,9 +28,11 @@ export interface ParameterizedIngredient {
 export interface Recipe {
   id?: string;
   title: string;
+  author?: string;
   note: string;
   imagesAsBase64: string[];
   parameterizedIngredients: ParameterizedIngredient[];
+  creationDateAsIsoString?: string;
   difficulty?: Difficulty;
   preparationTimeInMinutes: number;
 }
@@ -42,7 +44,9 @@ export class RecipeService {
   private _recipes: Recipe[] = [
     {
       id: '1',
+      creationDateAsIsoString: '2021-06-29T19:20:11.643Z',
       title: 'Spaghetti Bolognese',
+      author: 'Oscar96',
       note: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum...',
       preparationTimeInMinutes: 20,
       difficulty: Difficulty.Easy,
@@ -57,7 +61,9 @@ export class RecipeService {
     },
     {
       id: '2',
+      creationDateAsIsoString: '2021-06-29T19:20:11.643Z',
       title: 'Pizza',
+      author: 'Oscar96',
       note: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum...',
       preparationTimeInMinutes: 40,
       imagesAsBase64: [],

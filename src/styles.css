@@ -1,6 +1,8 @@
 html,
 body {
   height: 100%;
+
+  --image-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 body {
@@ -18,7 +20,7 @@ mat-card-subtitle {
 }
 
 .slideshow-container {
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px !important;
+  box-shadow: var(--image-box-shadow);
   border-radius: 3px !important;
 }
 
