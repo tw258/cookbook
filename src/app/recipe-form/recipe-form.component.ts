@@ -13,6 +13,7 @@ export class RecipeFormComponent {
     parameterizedIngredients: [],
     preparationTimeInMinutes: 0,
     title: '',
+    imagesAsBase64: [],
   };
 
   currentParameterizedIngredient: ParameterizedIngredient = this.createParameterizedIngredient();
@@ -31,8 +32,9 @@ export class RecipeFormComponent {
     this.router.navigate(['']);
   }
 
-  handleImageSelect(image: File) {
-    console.log(image);
+  handleImageAdd(imagesAsBase64: string) {
+    console.log(imagesAsBase64);
+    this.recipe.imagesAsBase64.push(imagesAsBase64);
   }
 
   private createParameterizedIngredient(): ParameterizedIngredient {

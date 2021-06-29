@@ -16,15 +16,7 @@
   </mat-form-field>
 
   <div class="images-container">
-    <button (click)="imageInput.click()" mat-icon-button type="button">
-      <mat-icon class="material-icons-outlined">add_a_photo</mat-icon>
-    </button>
-    <input
-      #imageInput
-      type="file"
-      (change)="handleImageSelect(imageInput.files![0])"
-      style="display: none"
-    />
+    <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
   </div>
 
   <section class="mt-1">
