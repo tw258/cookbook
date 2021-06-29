@@ -1,9 +1,7 @@
 <div *ngIf="recipes.length != 0; else NoRecipes">
-  <app-recipe-card
-    *ngFor="let recipe of recipes; let isFirst = first"
-    [recipe]="recipe"
-    [marginTop]="isFirst ? 0 : 10"
-  ></app-recipe-card>
+  <a *ngFor="let recipe of recipes; let isFirst = first" [routerLink]="['/recipes', recipe.id]">
+    <app-recipe-card [recipe]="recipe" [marginTop]="isFirst ? 0 : 10"> </app-recipe-card>
+  </a>
 </div>
 
 <ng-template #NoRecipes>
