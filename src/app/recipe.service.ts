@@ -29,10 +29,10 @@ export interface Recipe {
   id?: string;
   title: string;
   note: string;
+  imagesAsBase64: string[];
   parameterizedIngredients: ParameterizedIngredient[];
   difficulty?: Difficulty;
   preparationTimeInMinutes: number;
-  //TODO: pics
 }
 
 @Injectable({
@@ -46,6 +46,7 @@ export class RecipeService {
       note: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum...',
       preparationTimeInMinutes: 20,
       difficulty: Difficulty.Easy,
+      imagesAsBase64: [],
       parameterizedIngredients: [
         {
           amount: 1,
@@ -56,15 +57,21 @@ export class RecipeService {
     },
     {
       id: nanoid(),
-      title: 'Spaghetti Bolognese',
+      title: 'Pizza',
       note: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum...',
-      preparationTimeInMinutes: 20,
-      difficulty: Difficulty.Easy,
+      preparationTimeInMinutes: 40,
+      imagesAsBase64: [],
+      difficulty: Difficulty.Medium,
       parameterizedIngredients: [
         {
           amount: 1,
           ingredient: 'Eier',
           measurement: Measurement.Stck,
+        },
+        {
+          amount: 2,
+          ingredient: 'Mehl',
+          measurement: Measurement.kg,
         },
       ],
     },
@@ -72,6 +79,11 @@ export class RecipeService {
 
   get recipes() {
     return this._recipes;
+  }
+
+  getRecipeById(id: string) {
+    const index = this.recipes.findIndex(r => r.id == id);
+    return this.recipes[index];
   }
 
   addRecipe(recipe: Recipe) {
