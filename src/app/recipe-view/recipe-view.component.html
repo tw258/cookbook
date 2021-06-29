@@ -6,17 +6,24 @@
 </div>
 
 <!-- slideshow (angular, html?) -->
-
-<img
-  src="https://img.chefkoch-cdn.de/rezepte/1121671218451489/bilder/1378567/crop-600x400/pizza-salami-mit-knoblauch.jpg"
-/>
+<div class="mt-1 mb-1">
+  <slideshow
+    [height]="'225px'"
+    [showArrows]="false"
+    [showDots]="true"
+    [imageUrls]="[
+      'https://img.chefkoch-cdn.de/rezepte/1121671218451489/bilder/1378567/crop-600x400/pizza-salami-mit-knoblauch.jpg',
+      'https://ais.kochbar.de/kbrezept/435538_1137799/1200x1200/spaghetti-napoli-rezept-bild-nr-2.jpg'
+    ]"
+  ></slideshow>
+</div>
 
 <div class="additional-infos-grid">
   <mat-icon class="material-icons-outlined">access_time</mat-icon>
-  <p>{{ recipe.preparationTimeInMinutes }}min</p>
-
+  <span>{{ recipe.preparationTimeInMinutes }}min</span>
+  <!-- TODO 2 grids, align-items:center -->
   <mat-icon class="material-icons-outlined">lightbulb</mat-icon>
-  <p>{{ recipe.difficulty }}</p>
+  <span>{{ recipe.difficulty }}</span>
 </div>
 
 <mat-selection-list color="primary" #ingredients>
@@ -26,3 +33,7 @@
 </mat-selection-list>
 
 <p class="mat-h3">{{ recipe.note }}</p>
+
+<a class="btn-edit" mat-fab color="primary">
+  <mat-icon class="material-icons-outlined">edit</mat-icon>
+</a>

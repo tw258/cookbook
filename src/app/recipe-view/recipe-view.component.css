@@ -13,3 +13,9 @@
 .header-grid h1 {
   margin: 0;
 }
+
+.btn-edit {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}

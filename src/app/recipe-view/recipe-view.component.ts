@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { nanoid } from 'nanoid';
-import { Difficulty, Measurement, Recipe } from '../recipe.service';
+import { ActivatedRoute } from '@angular/router';
+import { Difficulty, Measurement, Recipe, RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-view',
@@ -8,26 +8,12 @@ import { Difficulty, Measurement, Recipe } from '../recipe.service';
   styleUrls: ['./recipe-view.component.css'],
 })
 export class RecipeViewComponent implements OnInit {
-  @Input() recipe: Recipe = {
-    id: nanoid(),
-    title: 'Spaghetti Bolognese',
-    note: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum...',
-    preparationTimeInMinutes: 20,
-    difficulty: Difficulty.Easy,
-    parameterizedIngredients: [
-      {
-        amount: 1,
-        ingredient: 'Eier',
-        measurement: Measurement.Stck,
-      },
-      {
-        amount: 2,
-        ingredient: 'Milch',
-        measurement: Measurement.l,
-      },
-    ],
-  };
-  constructor() {}
+  recipe!: Recipe;
 
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute, private recipeService: RecipeService) {}
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.params.id;
+    this.recipe = this.recipeService.getRecipeById(id);
+  }
 }
