@@ -17,6 +17,15 @@ mat-card-subtitle {
   margin-bottom: 0 !important;
 }
 
+.slideshow-container {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px !important;
+  border-radius: 3px !important;
+}
+
+a {
+  text-decoration: none;
+}
+
 /* Utility classes */
 .container {
   max-width: 700px;
@@ -34,4 +43,12 @@ mat-card-subtitle {
 
 .mt-2 {
   margin-top: 20px;
+}
+
+.mb-1 {
+  margin-bottom: 10px;
+}
+
+.mb-2 {
+  margin-bottom: 20px;
 }
