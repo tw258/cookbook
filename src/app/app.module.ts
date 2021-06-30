@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { AddImageComponent } from './recipe-form/add-image/add-image.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 import { IngredientsComponent } from './recipe-view/ingredients/ingredients.component';
+import { MultiplyPortionsPipe } from './recipe-view/ingredients/multiply-portions.pipe';
 
 const routes: Route[] = [
   { path: '', component: RecipeListComponent, pathMatch: 'full' },
@@ -30,6 +31,7 @@ const routes: Route[] = [
     AddImageComponent,
     RecipeViewComponent,
     IngredientsComponent,
+    MultiplyPortionsPipe,
   ],
   imports: [
     BrowserModule,
