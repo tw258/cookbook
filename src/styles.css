@@ -1,7 +1,6 @@
 html,
 body {
   height: 100%;
-
   --image-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -22,6 +21,14 @@ mat-card-subtitle {
 .slideshow-container {
   box-shadow: var(--image-box-shadow);
   border-radius: 3px !important;
+}
+
+.mat-list-option .mat-list-item-content {
+  padding: 8px 16px !important;
+}
+
+.mat-list-option {
+  height: auto !important;
 }
 
 a {
@@ -45,6 +52,9 @@ a {
 
 .mt-2 {
   margin-top: 20px;
+}
+.mb-0 {
+  margin-bottom: 0;
 }
 
 .mb-1 {
