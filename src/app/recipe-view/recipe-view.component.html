@@ -33,13 +33,7 @@
     {{ recipe.preparationTimeInMinutes }} min
   </mat-chip>
 </mat-chip-list>
-
-<mat-selection-list color="primary" #ingredients>
-  <mat-list-option *ngFor="let ingredient of recipe.parameterizedIngredients">
-    {{ ingredient.amount }} {{ ingredient.measurement }} {{ ingredient.ingredient }}
-  </mat-list-option>
-</mat-selection-list>
-
+<app-ingredients [parameterizedIngredients]="recipe.parameterizedIngredients"></app-ingredients>
 <p class="mat-h3">{{ recipe.note }}</p>
 
 <a class="btn-edit" mat-fab color="primary">
