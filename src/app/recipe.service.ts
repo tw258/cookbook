@@ -31,6 +31,7 @@ export interface Recipe {
   author?: string;
   note: string;
   imagesAsBase64: string[];
+  portions: number;
   parameterizedIngredients: ParameterizedIngredient[];
   creationDateAsIsoString?: string;
   difficulty?: Difficulty;
@@ -51,6 +52,7 @@ export class RecipeService {
       preparationTimeInMinutes: 20,
       difficulty: Difficulty.Easy,
       imagesAsBase64: [],
+      portions: 2,
       parameterizedIngredients: [
         {
           amount: 1,
@@ -68,6 +70,7 @@ export class RecipeService {
       preparationTimeInMinutes: 40,
       imagesAsBase64: [],
       difficulty: Difficulty.Medium,
+      portions: 1,
       parameterizedIngredients: [
         {
           amount: 1,
@@ -77,6 +80,11 @@ export class RecipeService {
         {
           amount: 2,
           ingredient: 'Mehl',
+          measurement: Measurement.kg,
+        },
+        {
+          amount: 7.5,
+          ingredient: 'Butter',
           measurement: Measurement.kg,
         },
       ],

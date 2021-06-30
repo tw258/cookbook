@@ -12,6 +12,7 @@ export class RecipeFormComponent {
 
   recipe: Recipe = {
     note: '',
+    portions: 1,
     parameterizedIngredients: [],
     preparationTimeInMinutes: 0,
     title: '',
