@@ -1,30 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ParameterizedIngredient } from 'src/app/recipe.service';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ParameterizedIngredient, Recipe } from 'src/app/recipe.service';
 
 @Component({
   selector: 'app-ingredients',
   templateUrl: './ingredients.component.html',
   styleUrls: ['./ingredients.component.css'],
 })
-export class IngredientsComponent implements OnInit {
-  @Input() parameterizedIngredients!: ParameterizedIngredient[];
-  portions: number = 1;
-  constructor() {}
+export class IngredientsComponent {
+  _recipe!: Recipe;
+  currentPortions!: number;
 
-  ngOnInit(): void {}
+  @Input() set recipe(recipe: Recipe) {
+    this._recipe = recipe;
+    this.currentPortions = recipe.portions;
+  }
 
   handleAddPortion() {
-    this.portions++;
-    this.CalculatePortions();
+    this.currentPortions++;
   }
 
   handleRemovePortion() {
-    this.portions--;
-    this.CalculatePortions();
-  }
-
-  CalculatePortions() {
-    console.log(this.portions);
-    this.parameterizedIngredients.forEach(i => (i.amount = i.amount * this.portions));
+    if (this.currentPortions > 1) {
+      this.currentPortions--;
+    }
   }
 }

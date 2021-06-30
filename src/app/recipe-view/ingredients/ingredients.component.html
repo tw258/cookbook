@@ -1,33 +1,22 @@
-<div class="mat-h2 mt-1">
-  <span>Zutaten für</span>
-  <button style="margin: 0 5px" color="primary" (click)="handleRemovePortion()" mat-icon-button>
-    <mat-icon>remove</mat-icon>
-  </button>
-  <span class="mat-body-strong">{{ this.portions }}</span>
-  <button style="margin: 0 5px" color="primary" (click)="handleAddPortion()" mat-icon-button>
-    <mat-icon>add</mat-icon>
-  </button>
-  <span>Personen</span>
-
-  <!--  
-  <div class="portions-grid">
-    <span class="ingredient-text">Zutaten für </span>
-    
-    <button
-      class="btn-refresh"
-      mat-raised-button
-      color="primary"
-      (click)="handleCalculatePortions()"
-    >
-      <mat-icon>sync</mat-icon>
+<div class="mt-1">
+  <div
+    class="mat-h3 mb-0"
+    style="display: grid; grid-template-columns: auto auto auto auto 1fr; align-items: center"
+  >
+    <span>Zutaten für</span>
+    <button color="primary" style="margin: 0 5px" (click)="handleRemovePortion()" mat-icon-button>
+      <mat-icon>remove</mat-icon>
     </button>
-    <span class="ingredient-text"> Portion(en)</span>
+    <strong> {{ currentPortions }}</strong>
+    <button color="primary" style="margin: 0 5px" (click)="handleAddPortion()" mat-icon-button>
+      <mat-icon>add</mat-icon>
+    </button>
+    <span>Personen</span>
   </div>
-</div> -->
-
   <mat-selection-list color="primary" #ingredients>
-    <mat-list-option *ngFor="let ingredient of this.parameterizedIngredients">
-      {{ ingredient.amount }} {{ ingredient.measurement }} {{ ingredient.ingredient }}
+    <mat-list-option *ngFor="let ingredient of this._recipe.parameterizedIngredients">
+      {{ ingredient.amount | multiplyPortions: _recipe.portions:currentPortions }}
+      {{ ingredient.measurement }} {{ ingredient.ingredient }}
     </mat-list-option>
   </mat-selection-list>
 </div>

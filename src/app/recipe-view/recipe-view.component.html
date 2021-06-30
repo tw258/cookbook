@@ -33,8 +33,13 @@
     {{ recipe.preparationTimeInMinutes }} min
   </mat-chip>
 </mat-chip-list>
-<app-ingredients [parameterizedIngredients]="recipe.parameterizedIngredients"></app-ingredients>
-<p class="mat-h3">{{ recipe.note }}</p>
+
+<app-ingredients [recipe]="recipe"></app-ingredients>
+
+<section class="mt-1">
+  <h2>Zubereitung</h2>
+  <p>{{ recipe.note }}</p>
+</section>
 
 <a class="btn-edit" mat-fab color="primary">
   <mat-icon class="material-icons-outlined">edit</mat-icon>
