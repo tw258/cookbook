@@ -18,10 +18,12 @@
     </div>
   </div>
 
-  <mat-selection-list color="primary" #ingredients>
+  <mat-selection-list #selectableIngredients color="primary">
     <mat-list-option *ngFor="let ingredient of this._recipe.parameterizedIngredients">
       {{ ingredient.amount | multiplyPortions: _recipe.portions:currentPortions }}
       {{ ingredient.measurement }} {{ ingredient.ingredient }}
     </mat-list-option>
   </mat-selection-list>
+
+  <p>{{ selectableIngredients.selectedOptions.selected.length }}</p>
 </div>

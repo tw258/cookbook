@@ -9,6 +9,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   exports: [
@@ -22,6 +23,7 @@ import { MatListModule } from '@angular/material/list';
     MatButtonToggleModule,
     MatSliderModule,
     MatListModule,
+    MatSnackBarModule,
   ],
 })
 export class MaterialModule {}

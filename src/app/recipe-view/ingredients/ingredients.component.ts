@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ParameterizedIngredient, Recipe } from 'src/app/recipe.service';
+import { Recipe } from 'src/app/recipe.service';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ingredients',
@@ -15,7 +17,10 @@ export class IngredientsComponent {
     this.currentPortions = recipe.portions;
   }
 
-  constructor() {}
+  constructor(
+    private clipboard: Clipboard,
+    private snackBar: MatSnackBar, //TODO: So richtig?
+  ) {}
 
   handleAddPortion() {
     this.currentPortions++;
@@ -28,6 +33,19 @@ export class IngredientsComponent {
   }
 
   handleAddToClipboard() {
-    // this.clipboard.writeText('test');
+    //TODO: Add logic, that only selected items are copied
+    let stringToCopy: string = '';
+    for (const currIngredient of this._recipe.parameterizedIngredients) {
+      stringToCopy =
+        stringToCopy +
+        currIngredient.amount +
+        ' ' +
+        currIngredient.measurement +
+        ' ' +
+        currIngredient.ingredient +
+        '\n';
+    }
+    this.clipboard.copy(stringToCopy);
+    this.snackBar.open('Selected ingredients copied to clipboard', 'OK', { duration: 3000 });
   }
 }
