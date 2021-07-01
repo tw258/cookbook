@@ -20,6 +20,12 @@
           </div>
           {{ recipe.preparationTimeInMinutes }} min
         </mat-chip>
+        <mat-chip *ngIf="recipe.author">
+          <div class="mr-05" style="display: flex; align-items: center; justify-content: center">
+            <span style="font-size: 20px" class="material-icons-outlined">person</span>
+          </div>
+          {{ recipe.author }}
+        </mat-chip>
       </mat-chip-list>
     </mat-card-subtitle>
   </mat-card-header>
