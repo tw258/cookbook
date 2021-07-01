@@ -2,10 +2,25 @@
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{ recipe.title }}</mat-card-title>
-    <mat-card-subtitle
-      >Anspruch: {{ recipe.difficulty }}, Zeit:
+    <mat-card-subtitle>
+      <!-- Anspruch: {{ recipe.difficulty }}, Zeit:
       {{ recipe.preparationTimeInMinutes }}
-      Minuten</mat-card-subtitle
-    >
+      Minuten -->
+
+      <mat-chip-list>
+        <mat-chip>
+          <div class="mr-05" style="display: flex; align-items: center; justify-content: center">
+            <span style="font-size: 20px" class="material-icons-outlined">lightbulb</span>
+          </div>
+          {{ recipe.difficulty }}
+        </mat-chip>
+        <mat-chip>
+          <div class="mr-05" style="display: flex; align-items: center; justify-content: center">
+            <span style="font-size: 20px" class="material-icons-outlined">access_time</span>
+          </div>
+          {{ recipe.preparationTimeInMinutes }} min
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-subtitle>
   </mat-card-header>
 </mat-card>
