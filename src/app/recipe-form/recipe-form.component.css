@@ -57,3 +57,8 @@ mat-form-field {
 .header-grid h1 {
   margin: 0;
 }
+
+.ingredient-flex {
+  display: flex;
+  justify-content: space-between;
+}

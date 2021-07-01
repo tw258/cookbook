@@ -30,6 +30,13 @@ export class RecipeFormComponent {
     this.currentParameterizedIngredient = this.createParameterizedIngredient();
   }
 
+  handleRemoveIngredient(ingredientToDelete: ParameterizedIngredient) {
+    const indexToDelete = this.recipe.parameterizedIngredients.indexOf(ingredientToDelete, 0);
+    if (indexToDelete > -1) {
+      this.recipe.parameterizedIngredients.splice(indexToDelete, 1);
+    }
+  }
+
   handleSave() {
     this.recipeservice.addRecipe(this.recipe);
     this.router.navigate(['']);
