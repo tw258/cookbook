@@ -8,3 +8,8 @@
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.ingredient-headers-flex {
+  display: flex;
+  justify-content: space-between;
+}

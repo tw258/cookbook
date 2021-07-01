@@ -15,6 +15,8 @@ export class IngredientsComponent {
     this.currentPortions = recipe.portions;
   }
 
+  constructor() {}
+
   handleAddPortion() {
     this.currentPortions++;
   }
@@ -23,5 +25,9 @@ export class IngredientsComponent {
     if (this.currentPortions > 1) {
       this.currentPortions--;
     }
+  }
+
+  handleAddToClipboard() {
+    // this.clipboard.writeText('test');
   }
 }
