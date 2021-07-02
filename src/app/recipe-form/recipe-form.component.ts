@@ -13,6 +13,7 @@ export class RecipeFormComponent {
   recipe: Recipe = {
     note: '',
     portions: 1,
+    isFavorite: false,
     parameterizedIngredients: [],
     preparationTimeInMinutes: 0,
     title: '',

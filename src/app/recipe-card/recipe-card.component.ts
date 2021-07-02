@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Difficulty, Measurement, Recipe } from '../recipe.service';
+import { Component, Input } from '@angular/core';
+import { Recipe } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-card',
@@ -9,4 +9,8 @@ import { Difficulty, Measurement, Recipe } from '../recipe.service';
 export class RecipeCardComponent {
   @Input() recipe!: Recipe;
   @Input() marginTop: number = 0;
+
+  handleFavorite() {
+    this.recipe.isFavorite = !this.recipe.isFavorite;
+  }
 }

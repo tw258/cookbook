@@ -14,6 +14,9 @@ import { AddImageComponent } from './recipe-form/add-image/add-image.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 import { IngredientsComponent } from './recipe-view/ingredients/ingredients.component';
 import { MultiplyPortionsPipe } from './recipe-view/ingredients/multiply-portions.pipe';
+import { ChipComponent } from './recipe-card/chip/chip.component';
+import { CommonModule } from '@angular/common';
+import { SortFavoritesPipe } from './recipe-list/sort-favorites.pipe';
 
 const routes: Route[] = [
   { path: '', component: RecipeListComponent, pathMatch: 'full' },
@@ -32,8 +35,11 @@ const routes: Route[] = [
     RecipeViewComponent,
     IngredientsComponent,
     MultiplyPortionsPipe,
+    ChipComponent,
+    SortFavoritesPipe,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,

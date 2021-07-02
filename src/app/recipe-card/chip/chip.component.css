@@ -1,0 +1,6 @@
+.chip {
+  padding: 2px 5px;
+  border-radius: 3px;
+  background-color: rgb(230, 230, 230);
+  margin-right: 4px;
+}

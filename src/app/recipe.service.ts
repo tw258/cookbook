@@ -31,6 +31,7 @@ export interface Recipe {
   author?: string;
   note: string;
   imagesAsBase64: string[];
+  isFavorite: boolean;
   portions: number;
   parameterizedIngredients: ParameterizedIngredient[];
   creationDateAsIsoString?: string;
@@ -45,6 +46,7 @@ export class RecipeService {
   private _recipes: Recipe[] = [
     {
       id: '1',
+      isFavorite: false,
       creationDateAsIsoString: '2021-06-29T19:20:11.643Z',
       title: 'Spaghetti Bolognese',
       author: 'Oscar96',
@@ -67,6 +69,8 @@ export class RecipeService {
       id: '2',
       creationDateAsIsoString: '2021-06-29T19:20:11.643Z',
       title: 'Pizza',
+      author: 'Tobi',
+      isFavorite: true,
       note: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum...',
       preparationTimeInMinutes: 40,
       imagesAsBase64: [

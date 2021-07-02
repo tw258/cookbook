@@ -1,32 +1,31 @@
-<mat-card [ngStyle]="{ 'margin-top': marginTop + 'px' }">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{ recipe.title }}</mat-card-title>
-    <mat-card-subtitle>
-      <!-- Anspruch: {{ recipe.difficulty }}, Zeit:
-      {{ recipe.preparationTimeInMinutes }}
-      Minuten -->
+<mat-card class="example-card mt-2">
+  <mat-card-content>
+    <div style="display: grid; grid-template-columns: 100px 1fr; gap: 0 10px">
+      <img [src]="recipe.imagesAsBase64" />
 
-      <mat-chip-list>
-        <mat-chip>
-          <div class="mr-05" style="display: flex; align-items: center; justify-content: center">
-            <span style="font-size: 20px" class="material-icons-outlined">lightbulb</span>
-          </div>
-          {{ recipe.difficulty }}
-        </mat-chip>
-        <mat-chip>
-          <div class="mr-05" style="display: flex; align-items: center; justify-content: center">
-            <span style="font-size: 20px" class="material-icons-outlined">access_time</span>
-          </div>
-          {{ recipe.preparationTimeInMinutes }} min
-        </mat-chip>
-        <mat-chip *ngIf="recipe.author">
-          <div class="mr-05" style="display: flex; align-items: center; justify-content: center">
-            <span style="font-size: 20px" class="material-icons-outlined">person</span>
-          </div>
-          {{ recipe.author }}
-        </mat-chip>
-      </mat-chip-list>
-    </mat-card-subtitle>
-  </mat-card-header>
+      <div>
+        <div>
+          <p class="mat-body-strong" style="margin: 0; padding: 0; font-size: 16px">
+            {{ recipe.title }}
+          </p>
+          <span class="mat-caption">{{ recipe.author }}</span>
+        </div>
+        <div class="mt-1">
+          <app-chip
+            [text]="ingr.ingredient"
+            *ngFor="let ingr of recipe.parameterizedIngredients"
+          ></app-chip>
+        </div>
+      </div>
+    </div>
+    <div style="position: absolute; top: 10px; right: 10px">
+      <button
+        (click)="$event.stopPropagation(); $event.preventDefault(); handleFavorite()"
+        mat-icon-button
+      >
+        <mat-icon *ngIf="recipe.isFavorite">favorite</mat-icon>
+        <mat-icon *ngIf="!recipe.isFavorite">favorite_border</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
 </mat-card>
