@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Difficulty, Measurement, Recipe, RecipeService } from '../recipe.service';
+import { Recipe, RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',

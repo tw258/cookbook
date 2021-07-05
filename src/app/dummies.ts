@@ -1,4 +1,6 @@
-import { Difficulty, Measurement, Recipe } from './recipe.service';
+import { Difficulty } from './models/difficulty';
+import { Measurement } from './models/measurement';
+import { Recipe } from './recipe.service';
 
 export const dummyRecipes: Recipe[] = [
   {

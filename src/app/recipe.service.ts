@@ -2,23 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { Ingredient } from './ingredient.service';
 import { nanoid } from 'nanoid';
 import { dummyRecipes } from './dummies';
-
-export enum Difficulty {
-  Easy = 'Einfach',
-  Medium = 'Mittel',
-  Hard = 'Schwer',
-}
-
-export enum Measurement {
-  g = 'g',
-  kg = 'kg',
-  ml = 'ml',
-  l = 'l',
-  TL = 'TL',
-  EL = 'EL',
-  Prise = 'Prise',
-  Stck = 'Stck',
-}
+import { Difficulty } from './models/difficulty';
+import { Measurement } from './models/measurement';
 
 export interface ParameterizedIngredient {
   amount: number;
@@ -43,11 +28,11 @@ export interface Recipe {
 @Injectable({
   providedIn: 'root',
 })
-export class RecipeService implements OnInit {
-  ngOnInit(): void {
-    this._recipes = dummyRecipes;
-  }
-  private _recipes: Recipe[] = [];
+export class RecipeService {
+  // ngOnInit(): void {
+  //   this._recipes = dummyRecipes;
+  // }
+  private _recipes: Recipe[] = dummyRecipes;
 
   get recipes() {
     return this._recipes;
