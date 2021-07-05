@@ -46,6 +46,6 @@ export class IngredientsComponent {
         '\n';
     }
     this.clipboard.copy(stringToCopy);
-    this.snackBar.open('Selected ingredients copied to clipboard', 'OK', { duration: 3000 });
+    this.snackBar.open('Ausgewählte Zutaten kopiert', 'OK', { duration: 2000 });
   }
 }
