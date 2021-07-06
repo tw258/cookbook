@@ -6,8 +6,7 @@
   <h1>{{ recipe.title }}</h1>
 </div>
 
-<!-- slideshow (angular, html?) -->
-<div class="mt-1 mb-1">
+<div *ngIf="recipe.imagesAsBase64.length > 0" class="mt-1 mb-1">
   <slideshow
     [height]="'225px'"
     [showArrows]="false"

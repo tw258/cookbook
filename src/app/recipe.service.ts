@@ -29,9 +29,6 @@ export interface Recipe {
   providedIn: 'root',
 })
 export class RecipeService {
-  // ngOnInit(): void {
-  //   this._recipes = dummyRecipes;
-  // }
   private _recipes: Recipe[] = dummyRecipes;
 
   get recipes() {
