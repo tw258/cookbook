@@ -12,18 +12,19 @@
       <span>Personen</span>
     </div>
     <div class="mr-05">
-      <button mat-icon-button (click)="handleAddToClipboard()">
+      <button mat-icon-button (click)="handleAddToClipboard(selectableIngredients)">
         <mat-icon>content_paste</mat-icon>
       </button>
     </div>
   </div>
 
   <mat-selection-list #selectableIngredients color="primary">
-    <mat-list-option *ngFor="let ingredient of this._recipe.parameterizedIngredients">
+    <mat-list-option
+      *ngFor="let ingredient of this._recipe.parameterizedIngredients"
+      [value]="ingredient"
+    >
       {{ ingredient.amount | multiplyPortions: _recipe.portions:currentPortions }}
       {{ ingredient.measurement }} {{ ingredient.ingredient }}
     </mat-list-option>
   </mat-selection-list>
-
-  <p>{{ selectableIngredients.selectedOptions.selected.length }}</p>
 </div>

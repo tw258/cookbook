@@ -1,7 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Recipe } from 'src/app/recipe.service';
+import { Component, Input } from '@angular/core';
+import { ParameterizedIngredient, Recipe } from 'src/app/recipe.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSelectionList } from '@angular/material/list/public-api';
 
 @Component({
   selector: 'app-ingredients',
@@ -17,10 +18,7 @@ export class IngredientsComponent {
     this.currentPortions = recipe.portions;
   }
 
-  constructor(
-    private clipboard: Clipboard,
-    private snackBar: MatSnackBar, //TODO: So richtig?
-  ) {}
+  constructor(private clipboard: Clipboard, private snackBar: MatSnackBar) {}
 
   handleAddPortion() {
     this.currentPortions++;
@@ -32,19 +30,15 @@ export class IngredientsComponent {
     }
   }
 
-  handleAddToClipboard() {
-    //TODO: Add logic, that only selected items are copied
-    let stringToCopy: string = '';
-    for (const currIngredient of this._recipe.parameterizedIngredients) {
-      stringToCopy =
-        stringToCopy +
-        currIngredient.amount +
-        ' ' +
-        currIngredient.measurement +
-        ' ' +
-        currIngredient.ingredient +
-        '\n';
-    }
+  handleAddToClipboard(selectionList: MatSelectionList) {
+    const values: ParameterizedIngredient[] = selectionList.selectedOptions.selected.map(
+      o => o.value,
+    );
+    const stringToCopy = values.reduce(
+      (acc, curr) =>
+        (acc += `${curr.amount * this.currentPortions} ${curr.measurement} ${curr.ingredient}\n`),
+      '',
+    );
     this.clipboard.copy(stringToCopy);
     this.snackBar.open('Ausgewählte Zutaten kopiert', 'OK', { duration: 2000 });
   }
