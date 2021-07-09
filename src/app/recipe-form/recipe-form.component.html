@@ -89,14 +89,11 @@
         role="listitem"
         *ngFor="let paramIngr of recipe.parameterizedIngredients"
       >
-        <!-- TODO: Anordnung funktioniert nicht mit flex -->
-        <div class="ingredient-flex">
-          <div>
-            {{ paramIngr.amount }} {{ paramIngr.measurement }} {{ paramIngr.ingredient }}
-            <button mat-icon-button type="button" (click)="handleRemoveIngredient(paramIngr)">
-              <span class="material-icons-outlined"> delete </span>
-            </button>
-          </div>
+        <div class="ingredient-box">
+          <span>{{ paramIngr.amount }} {{ paramIngr.measurement }} {{ paramIngr.ingredient }}</span>
+          <button mat-icon-button type="button" (click)="handleRemoveIngredient(paramIngr)">
+            <span class="material-icons-outlined"> clear </span>
+          </button>
         </div>
       </mat-list-item>
     </mat-list>
