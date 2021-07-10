@@ -39,7 +39,11 @@ export class IngredientsComponent {
         (acc += `${curr.amount * this.currentPortions} ${curr.measurement} ${curr.ingredient}\n`),
       '',
     );
-    this.clipboard.copy(stringToCopy);
-    this.snackBar.open('Ausgewählte Zutaten kopiert', 'OK', { duration: 2000 });
+    if (values.length == 0) {
+      this.snackBar.open('Keine Zutaten ausgewählt', 'OK', { duration: 2000 });
+    } else {
+      this.clipboard.copy(stringToCopy);
+      this.snackBar.open('Ausgewählte Zutaten kopiert', 'OK', { duration: 2000 });
+    }
   }
 }
