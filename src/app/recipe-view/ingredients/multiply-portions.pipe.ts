@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ParameterizedIngredient } from 'src/app/recipe.service';
 
 @Pipe({
   name: 'multiplyPortions',

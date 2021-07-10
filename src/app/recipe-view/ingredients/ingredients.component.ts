@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { ParameterizedIngredient, Recipe } from 'src/app/recipe.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectionList } from '@angular/material/list/public-api';
+import { Recipe } from 'src/app/models/Recipe';
+import { ParameterizedIngredient } from 'src/app/models/ParamterizedIngredient';
 
 @Component({
   selector: 'app-ingredients',

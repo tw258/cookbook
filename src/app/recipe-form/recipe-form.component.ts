@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Measurement } from '../models/measurement';
-import { ParameterizedIngredient, Recipe, RecipeService } from '../recipe.service';
+import { ParameterizedIngredient } from '../models/ParamterizedIngredient';
+import { Recipe } from '../models/Recipe';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-form',
