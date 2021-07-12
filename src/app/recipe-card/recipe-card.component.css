@@ -1,5 +1,6 @@
 .recipe-thumbnail {
   width: 100%;
+  border-radius: 5px;
   height: 100%;
   object-fit: cover;
 }
@@ -7,4 +8,8 @@
 .recipe-placeholder {
   max-width: 100%;
   max-height: 100%;
+}
+
+mat-card {
+  padding: 10px;
 }
