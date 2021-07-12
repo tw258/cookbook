@@ -1,10 +1,13 @@
 <mat-card class="example-card mt-2">
   <mat-card-content>
     <div style="display: grid; grid-template-columns: 100px 1fr; gap: 0 10px; height: 80px">
-      <img
-        *ngIf="recipe.imagesAsBase64.length > 0; else NoImages"
-        [src]="recipe.imagesAsBase64[0]"
-      />
+      <div style="text-align: center">
+        <img
+          class="recipe-thumbnail"
+          *ngIf="recipe.imagesAsBase64.length > 0; else NoImages"
+          [src]="recipe.imagesAsBase64[0]"
+        />
+      </div>
 
       <div>
         <div>
@@ -34,5 +37,5 @@
 </mat-card>
 
 <ng-template #NoImages>
-  <img style="height: 80px; width: 50px" src="assets/images/recipe-thumbnail.png" />
+  <img class="recipe-placeholder" src="assets/images/recipe-thumbnail.png" />
 </ng-template>
