@@ -17,11 +17,13 @@
   </mat-form-field>
 
   <div class="images-container mt-1">
+    <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
     <img
       src="https://img.chefkoch-cdn.de/rezepte/1121671218451489/bilder/1378567/crop-600x400/pizza-salami-mit-knoblauch.jpg"
-      alt=""
     />
-    <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
+    <img
+      src="https://img.chefkoch-cdn.de/rezepte/1121671218451489/bilder/1378567/crop-960x720/pizza-salami-mit-knoblauch.jpg"
+    />
   </div>
 
   <section class="mt-1">
