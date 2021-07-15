@@ -1,5 +1,15 @@
-.add-image {
-  width: 100%;
-  height: 100%;
+.content {
+  border: 1px dashed rgb(192, 192, 192);
   text-align: center;
+  height: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgb(250, 250, 250);
+
+  display: grid;
+  align-items: center;
+}
+
+.content:hover {
+  background-color: rgb(240, 240, 240);
 }

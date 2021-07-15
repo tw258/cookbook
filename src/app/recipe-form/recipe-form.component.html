@@ -2,8 +2,9 @@
   <button routerLink="" mat-icon-button>
     <mat-icon>arrow_back_ios</mat-icon>
   </button>
-  <h1>Neues Rezept</h1>
 </div>
+
+<h1 style="margin-top: 10px">Neues Rezept</h1>
 
 <form class="mt-1">
   <mat-form-field appearance="outline">
@@ -18,17 +19,9 @@
 
   <div class="images-container mt-1">
     <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
-    <img
-      src="https://img.chefkoch-cdn.de/rezepte/1121671218451489/bilder/1378567/crop-600x400/pizza-salami-mit-knoblauch.jpg"
-    />
-    <img
-      src="https://img.chefkoch-cdn.de/rezepte/1121671218451489/bilder/1378567/crop-960x720/pizza-salami-mit-knoblauch.jpg"
-    />
   </div>
 
-  <section class="mt-1">
-    <h3>Zutaten</h3>
-
+  <section class="mt-2">
     <div class="ingredient-container">
       <mat-form-field appearance="outline">
         <mat-label>Menge</mat-label>
@@ -82,11 +75,12 @@
         mat-icon-button
         (click)="handleAddIngredient()"
       >
-        <span class="material-icons-outlined"> add_circle_outline </span>
+        <span class="material-icons-outlined"> add </span>
       </button>
     </div>
     <mat-list role="list">
       <mat-list-item
+        style="background-color: rgb(250, 250, 250)"
         class="ingredient-list-item"
         role="listitem"
         *ngFor="let paramIngr of recipe.parameterizedIngredients"
@@ -112,7 +106,7 @@
     ></textarea>
   </mat-form-field>
 
-  <div class="mt-1">
+  <!-- <div class="mt-1">
     <mat-label class="mat-small">Anspruch</mat-label>
     <mat-button-toggle-group
       [(ngModel)]="recipe.difficulty"
@@ -124,7 +118,7 @@
       <mat-button-toggle value="Mittel">Mittel</mat-button-toggle>
       <mat-button-toggle value="Schwer">Schwer</mat-button-toggle>
     </mat-button-toggle-group>
-  </div>
+  </div> -->
 
   <div class="mt-1 preparationtime-box">
     <div>
