@@ -127,26 +127,20 @@
         ><strong>{{ recipe.preparationTimeInMinutes }} Min</strong></span
       >
     </div>
-
-    <div style="display: grid; grid-template-columns: 1fr auto; align-items: center">
-      <mat-slider
-        [(ngModel)]="recipe.preparationTimeInMinutes"
-        [ngModelOptions]="{ standalone: true }"
-        step="5"
-        min="0"
-        tickInterval="1"
-        [max]="maxTime"
-        color="primary"
-      ></mat-slider>
-      <button (click)="maxTime = maxTime + 30" mat-icon-button>
-        <mat-icon>more_time</mat-icon>
-      </button>
-    </div>
+    <mat-slider
+      [(ngModel)]="recipe.preparationTimeInMinutes"
+      [ngModelOptions]="{ standalone: true }"
+      step="5"
+      min="0"
+      tickInterval="1"
+      [max]="60"
+      color="primary"
+    ></mat-slider>
   </div>
 
   <div class="btn-grid mt-1">
     <button
-      [disabled]="!recipe.title || !recipe.note || !recipe.difficulty"
+      [disabled]="!recipe.title || !recipe.note"
       (click)="handleSave()"
       type="button"
       mat-raised-button
