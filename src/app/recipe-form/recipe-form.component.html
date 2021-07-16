@@ -2,9 +2,11 @@
   <button routerLink="" mat-icon-button>
     <mat-icon>arrow_back_ios</mat-icon>
   </button>
+  <h1 class="text-center">Neues Rezept</h1>
+  <button style="visibility: hidden" mat-icon-button>
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
 </div>
-
-<h1 style="margin-top: 10px">Neues Rezept</h1>
 
 <form class="mt-1">
   <mat-form-field appearance="outline">
@@ -18,6 +20,7 @@
   </mat-form-field>
 
   <div class="images-container mt-1">
+    <img *ngFor="let image of recipe.imagesAsBase64" [src]="image" />
     <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
   </div>
 

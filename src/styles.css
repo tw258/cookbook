@@ -46,6 +46,10 @@ a {
   text-align: center;
 }
 
+.fs-2 {
+  font-size: 20px;
+}
+
 .mt-1 {
   margin-top: 10px;
 }

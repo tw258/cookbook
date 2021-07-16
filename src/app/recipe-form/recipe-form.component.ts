@@ -46,8 +46,8 @@ export class RecipeFormComponent {
     this.router.navigate(['']);
   }
 
-  handleImageAdd(imagesAsBase64: string) {
-    this.recipe.imagesAsBase64.push(imagesAsBase64);
+  handleImageAdd(base64string: string) {
+    this.recipe.imagesAsBase64.push(base64string);
   }
 
   private createParameterizedIngredient(): ParameterizedIngredient {
