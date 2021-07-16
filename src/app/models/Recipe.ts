@@ -1,4 +1,3 @@
-import { Difficulty } from './difficulty';
 import { ParameterizedIngredient } from './ParamterizedIngredient';
 
 export interface Recipe {
@@ -11,6 +10,5 @@ export interface Recipe {
   portions: number;
   parameterizedIngredients: ParameterizedIngredient[];
   creationDateAsIsoString?: string;
-  difficulty?: Difficulty;
   preparationTimeInMinutes: number;
 }

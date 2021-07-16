@@ -33,11 +33,6 @@ mat-form-field {
   min-height: 150px;
 }
 
-.difficulty-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
 .preparationtime-box {
   display: grid;
 }
