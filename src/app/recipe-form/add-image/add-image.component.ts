@@ -10,10 +10,24 @@ export class AddImageComponent implements OnInit {
 
   constructor() {}
 
-  handleImageSelect(image: File) {
-    //Base64decodingLogic
+  async handleImageSelect(images: FileList) {
+    for (let i = 0; i < images.length; i++) {
+      const base64string = await this.toBase64(images.item(i));
+      this.imageUpload.emit(base64string);
+    }
+  }
 
-    this.imageUpload.emit('imageAsBase64');
+  toBase64(file: File | null): Promise<any> {
+    if (file == null) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
   }
 
   ngOnInit(): void {}

@@ -47,7 +47,6 @@ export class RecipeFormComponent {
   }
 
   handleImageAdd(imagesAsBase64: string) {
-    console.log(imagesAsBase64);
     this.recipe.imagesAsBase64.push(imagesAsBase64);
   }
 
