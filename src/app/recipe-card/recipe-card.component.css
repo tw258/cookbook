@@ -13,3 +13,14 @@
 mat-card {
   padding: 10px;
 }
+
+mat-card-content {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0 10px;
+  height: 80px;
+}
+
+.recipe-thumbnail-container {
+  height: inherit;
+}

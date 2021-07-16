@@ -3,7 +3,7 @@
     *ngFor="let recipe of recipes | sortFavorites; let isFirst = first"
     [routerLink]="['/recipes', recipe.id]"
   >
-    <app-recipe-card [recipe]="recipe" [marginTop]="isFirst ? 0 : 10"> </app-recipe-card>
+    <app-recipe-card [recipe]="recipe"> </app-recipe-card>
   </a>
 </div>
 
