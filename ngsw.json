@@ -1,0 +1,117 @@
+{
+  "configVersion": 1,
+  "timestamp": 1626716869924,
+  "index": "https://tw258.github.io/cookbook/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://tw258.github.io/cookbook/favicon.ico",
+        "https://tw258.github.io/cookbook/index.html",
+        "https://tw258.github.io/cookbook/main.7b5310760b0230a64b2e.js",
+        "https://tw258.github.io/cookbook/manifest.webmanifest",
+        "https://tw258.github.io/cookbook/polyfills.00096ed7d93ed26ee6df.js",
+        "https://tw258.github.io/cookbook/runtime.7b63b9fd40098a2e8207.js",
+        "https://tw258.github.io/cookbook/styles.3148741cb8837eca53a8.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-114x114.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-120x120.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-128x128.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-144x144.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-152x152.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-180x180.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-57x57.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-60x60.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-72x72.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-76x76.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-precomposed.png",
+        "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon.png",
+        "https://tw258.github.io/cookbook/assets/icons/icon-128x128.png",
+        "https://tw258.github.io/cookbook/assets/icons/icon-144x144.png",
+        "https://tw258.github.io/cookbook/assets/icons/icon-152x152.png",
+        "https://tw258.github.io/cookbook/assets/icons/icon-192x192.png",
+        "https://tw258.github.io/cookbook/assets/icons/icon-384x384.png",
+        "https://tw258.github.io/cookbook/assets/icons/icon-512x512.png",
+        "https://tw258.github.io/cookbook/assets/icons/icon-72x72.png",
+        "https://tw258.github.io/cookbook/assets/icons/icon-96x96.png",
+        "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-2.png",
+        "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-3.jpg",
+        "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-4.png",
+        "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-5.jpg",
+        "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail.png",
+        "https://tw258.github.io/cookbook/assets/test.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-114x114.png": "e94e34285fb41bca767786e9120b56ba4d659734",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-120x120.png": "a2a9a71643ee904e2cc6aeebba1f86197fb4967d",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-128x128.png": "f7cd48fc2f5f1efff85810fb776b0d3fd757611a",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-144x144.png": "c53c4f3c23a68a40c3811c4560d144b2d0e54045",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-152x152.png": "1999b7431d9e9f6d73a816fb1fc2ec6e09d536b0",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-180x180.png": "6ab906e2b11d1e9f13e6eb16a11c33ff7274929b",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-57x57.png": "86949ee4218a12b3b16f78514e60032931998f2d",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-60x60.png": "243f6e085fd3f7f8371fe6f323cbbef57791695d",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-72x72.png": "3b4f34fc6eeac935482dd6817503e4a53da2ed40",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-76x76.png": "af8d459fd7d77078ce357aa94d05c50e7c0ad48f",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon-precomposed.png": "86949ee4218a12b3b16f78514e60032931998f2d",
+    "https://tw258.github.io/cookbook/assets/_icons/apple-touch-icon.png": "243f6e085fd3f7f8371fe6f323cbbef57791695d",
+    "https://tw258.github.io/cookbook/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "https://tw258.github.io/cookbook/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "https://tw258.github.io/cookbook/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "https://tw258.github.io/cookbook/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "https://tw258.github.io/cookbook/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "https://tw258.github.io/cookbook/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "https://tw258.github.io/cookbook/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "https://tw258.github.io/cookbook/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-2.png": "c3bb323b5ac9de71a04b0753a9f31e3a61be0dc0",
+    "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-3.jpg": "d4e895d2bb7028a417602ac91aa3d88db858ccf6",
+    "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-4.png": "954aabf82fce536dde699c5ff7733b410564a37c",
+    "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-5.jpg": "15a1402c492f3d6c1e04a2d585041afe89bfb560",
+    "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail.png": "b968efe6954b99e30beacad5a5d0028e8000e19a",
+    "https://tw258.github.io/cookbook/assets/test.jpg": "4a7784e7144198471a60544d6500f593e6aaf3ba",
+    "https://tw258.github.io/cookbook/favicon.ico": "caf1d46c4abdba28dd9bcd73c08d276b599683ff",
+    "https://tw258.github.io/cookbook/index.html": "2fc58f40841d98509b9f6298b465d139294fc099",
+    "https://tw258.github.io/cookbook/main.7b5310760b0230a64b2e.js": "368167829875333325abc1b79e92a4219d84700e",
+    "https://tw258.github.io/cookbook/manifest.webmanifest": "d9ef3afccbdeefbbee35f808f3493dd81ef6a62d",
+    "https://tw258.github.io/cookbook/polyfills.00096ed7d93ed26ee6df.js": "cfe7b0b53e96bff9ba384b4d497c08475a617d62",
+    "https://tw258.github.io/cookbook/runtime.7b63b9fd40098a2e8207.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "https://tw258.github.io/cookbook/styles.3148741cb8837eca53a8.css": "3324e7a4a46d2d52ad41befef0cdadfbef7f90f2"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
