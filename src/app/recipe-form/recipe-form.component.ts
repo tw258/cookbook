@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Measurement } from '../models/measurement';
 import { ParameterizedIngredient } from '../models/ParamterizedIngredient';
 import { Recipe } from '../models/Recipe';
@@ -10,8 +10,10 @@ import { RecipeService } from '../recipe.service';
   templateUrl: './recipe-form.component.html',
   styleUrls: ['./recipe-form.component.css'],
 })
-export class RecipeFormComponent {
+export class RecipeFormComponent implements OnInit {
   maxTime = 60;
+
+  isEditMode = false;
 
   recipe: Recipe = {
     note: '',
@@ -25,7 +27,19 @@ export class RecipeFormComponent {
 
   currentParameterizedIngredient: ParameterizedIngredient = this.createParameterizedIngredient();
 
-  constructor(private recipeservice: RecipeService, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private recipeservice: RecipeService,
+    private router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.params.id;
+    if (id) {
+      this.recipe = this.recipeservice.getRecipeCopyById(id);
+      this.isEditMode = true;
+    }
+  }
 
   handleAddIngredient() {
     this.recipe.parameterizedIngredients.push(this.currentParameterizedIngredient);
@@ -42,8 +56,13 @@ export class RecipeFormComponent {
   }
 
   handleSave() {
-    this.recipeservice.addRecipe(this.recipe);
-    this.router.navigate(['']);
+    if (this.isEditMode) {
+      this.recipeservice.updateRecipe(this.recipe);
+      this.router.navigate(['/recipes', this.recipe.id]);
+    } else {
+      const id = this.recipeservice.addRecipe(this.recipe).id;
+      this.router.navigate(['/recipes', id]);
+    }
   }
 
   handleImageAdd(base64string: string) {

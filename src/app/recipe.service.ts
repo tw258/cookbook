@@ -11,14 +11,37 @@ export class RecipeService {
   get recipes() {
     return this._recipes;
   }
-  getRecipeById(id: string) {
+
+  getRecipeCopyById(id: string) {
     const index = this.recipes.findIndex(r => r.id == id);
-    return this.recipes[index];
+
+    const copy: Recipe = {
+      ...this.recipes[index],
+      parameterizedIngredients: this.recipes[index].parameterizedIngredients.map(pi => ({
+        ...pi,
+      })),
+    };
+
+    return copy;
   }
-  addRecipe(recipe: Recipe) {
-    this._recipes.push({
+
+  addRecipe(recipe: Recipe): Recipe {
+    recipe = {
       ...recipe,
       id: nanoid(),
-    });
+    };
+
+    this._recipes.push(recipe);
+    return recipe;
+  }
+
+  updateRecipe(recipe: Recipe) {
+    const index = this.recipes.findIndex(r => r.id == recipe.id);
+
+    if (index == -1) {
+      throw Error(`Recipe with id ${recipe.id} does not exist.`);
+    }
+
+    this.recipes[index] = recipe;
   }
 }

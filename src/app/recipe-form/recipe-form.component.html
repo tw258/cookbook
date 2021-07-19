@@ -2,7 +2,7 @@
   <button routerLink="" mat-icon-button>
     <mat-icon>arrow_back_ios</mat-icon>
   </button>
-  <h1 class="text-center">Neues Rezept</h1>
+  <h1 class="text-center">{{ isEditMode ? 'Rezept bearbeiten' : 'Neues Rezept' }}</h1>
   <button style="visibility: hidden" mat-icon-button>
     <mat-icon>arrow_back_ios</mat-icon>
   </button>
@@ -135,7 +135,7 @@
       mat-raised-button
       color="primary"
     >
-      Speichern
+      {{ isEditMode ? 'Aktualisieren' : 'Hinzufügen' }}
     </button>
   </div>
 </form>

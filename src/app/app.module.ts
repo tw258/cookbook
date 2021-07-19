@@ -22,6 +22,7 @@ const routes: Route[] = [
   { path: '', component: RecipeListComponent, pathMatch: 'full' },
   { path: 'new-recipe', component: RecipeFormComponent },
   { path: 'recipes/:id', component: RecipeViewComponent },
+  { path: 'recipes/:id/edit', component: RecipeFormComponent },
 ];
 
 @NgModule({
