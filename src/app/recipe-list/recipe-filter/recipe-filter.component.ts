@@ -1,5 +1,5 @@
 import { Output } from '@angular/core';
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-filter',
