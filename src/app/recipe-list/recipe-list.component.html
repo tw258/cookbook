@@ -1,6 +1,8 @@
-<div *ngIf="recipes.length != 0; else NoRecipes">
+<app-recipe-filter (filterInput)="handleFilterInput($event)"></app-recipe-filter>
+
+<div *ngIf="filteredRecipes.length != 0; else NoRecipes">
   <a
-    *ngFor="let recipe of recipes | sortFavorites; let isFirst = first"
+    *ngFor="let recipe of filteredRecipes | sortFavorites; let isFirst = first"
     [routerLink]="['/recipes', recipe.id]"
   >
     <app-recipe-card [recipe]="recipe"> </app-recipe-card>
@@ -8,7 +10,7 @@
 </div>
 
 <ng-template #NoRecipes>
-  <div class="text-center mat-body-strong">Keine Rezepte verfügbar</div>
+  <div class="text-center mat-body-strong mt-2">Keine Rezepte verfügbar</div>
 </ng-template>
 
 <a class="btn-add-recipe" [routerLink]="['/new-recipe']" mat-fab color="primary">

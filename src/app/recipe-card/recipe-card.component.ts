@@ -8,7 +8,6 @@ import { Recipe } from '../models/Recipe';
 })
 export class RecipeCardComponent {
   @Input() recipe!: Recipe;
-  @Input() marginTop: number = 0;
 
   handleFavorite() {
     this.recipe.isFavorite = !this.recipe.isFavorite;

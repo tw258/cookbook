@@ -9,8 +9,13 @@ import { RecipeService } from '../recipe.service';
 })
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = this.recipeservice.recipes;
+  filteredRecipes: Recipe[] = this.recipeservice.recipes;
 
   constructor(private recipeservice: RecipeService) {}
+
+  handleFilterInput(filterInput: string) {
+    this.filteredRecipes = this.recipes.filter(r => r.title.toUpperCase().includes(filterInput));
+  }
 
   ngOnInit(): void {}
 }

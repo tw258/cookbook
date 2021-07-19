@@ -17,6 +17,7 @@ import { MultiplyPortionsPipe } from './recipe-view/ingredients/multiply-portion
 import { ChipComponent } from './recipe-card/chip/chip.component';
 import { CommonModule } from '@angular/common';
 import { SortFavoritesPipe } from './recipe-list/sort-favorites.pipe';
+import { RecipeFilterComponent } from './recipe-list/recipe-filter/recipe-filter.component';
 
 const routes: Route[] = [
   { path: '', component: RecipeListComponent, pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Route[] = [
     MultiplyPortionsPipe,
     ChipComponent,
     SortFavoritesPipe,
+    RecipeFilterComponent,
   ],
   imports: [
     CommonModule,
