@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1626716869924,
+  "timestamp": 1626718368200,
   "index": "https://tw258.github.io/cookbook/index.html",
   "assetGroups": [
     {
@@ -88,7 +88,7 @@
     "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail.png": "b968efe6954b99e30beacad5a5d0028e8000e19a",
     "https://tw258.github.io/cookbook/assets/test.jpg": "4a7784e7144198471a60544d6500f593e6aaf3ba",
     "https://tw258.github.io/cookbook/favicon.ico": "caf1d46c4abdba28dd9bcd73c08d276b599683ff",
-    "https://tw258.github.io/cookbook/index.html": "2fc58f40841d98509b9f6298b465d139294fc099",
+    "https://tw258.github.io/cookbook/index.html": "dbf094a0cab57ffd7ef089c4b048c56263045412",
     "https://tw258.github.io/cookbook/main.7b5310760b0230a64b2e.js": "368167829875333325abc1b79e92a4219d84700e",
     "https://tw258.github.io/cookbook/manifest.webmanifest": "d9ef3afccbdeefbbee35f808f3493dd81ef6a62d",
     "https://tw258.github.io/cookbook/polyfills.00096ed7d93ed26ee6df.js": "cfe7b0b53e96bff9ba384b4d497c08475a617d62",
