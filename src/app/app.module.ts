@@ -18,6 +18,8 @@ import { ChipComponent } from './recipe-card/chip/chip.component';
 import { CommonModule } from '@angular/common';
 import { SortFavoritesPipe } from './recipe-list/sort-favorites.pipe';
 import { RecipeFilterComponent } from './recipe-list/recipe-filter/recipe-filter.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const routes: Route[] = [
   { path: '', component: RecipeListComponent, pathMatch: 'full' },
@@ -48,6 +50,12 @@ const routes: Route[] = [
     SharedModule,
     RouterModule.forRoot(routes),
     FormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
