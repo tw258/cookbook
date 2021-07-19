@@ -49,7 +49,7 @@ mat-form-field {
 
 .header-grid {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
 }
 
