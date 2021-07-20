@@ -17,14 +17,14 @@ export class AddImageComponent {
         return;
       }
 
-      const compressedImage = await this.getCompressedImage(image);
+      const compressedImage = await this.compressImage(image);
       const imageAsBase64 = await this.toBase64(compressedImage);
 
       this.imageUpload.emit(imageAsBase64);
     }
   }
 
-  private async getCompressedImage(file: File) {
+  private async compressImage(file: File) {
     return await imageCompression(file, { maxSizeMB: 0.2 });
   }
 
