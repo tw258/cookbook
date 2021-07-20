@@ -24,11 +24,11 @@ export class AddImageComponent {
     }
   }
 
-  async getCompressedImage(file: File) {
+  private async getCompressedImage(file: File) {
     return await imageCompression(file, { maxSizeMB: 0.2 });
   }
 
-  toBase64(file: File): Promise<any> {
+  private toBase64(file: File): Promise<any> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
