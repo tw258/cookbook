@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1626720995782,
+  "timestamp": 1626767562422,
   "index": "https://tw258.github.io/cookbook/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://tw258.github.io/cookbook/favicon.ico",
         "https://tw258.github.io/cookbook/index.html",
-        "https://tw258.github.io/cookbook/main.7b5310760b0230a64b2e.js",
+        "https://tw258.github.io/cookbook/main.85ecc67afdf36226ea8e.js",
         "https://tw258.github.io/cookbook/manifest.webmanifest",
         "https://tw258.github.io/cookbook/polyfills.00096ed7d93ed26ee6df.js",
         "https://tw258.github.io/cookbook/runtime.7b63b9fd40098a2e8207.js",
@@ -54,6 +54,8 @@
         "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-4.png",
         "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-5.jpg",
         "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail.png",
+        "https://tw258.github.io/cookbook/assets/logo1.PNG",
+        "https://tw258.github.io/cookbook/assets/logo2.PNG",
         "https://tw258.github.io/cookbook/assets/test.jpg"
       ],
       "patterns": []
@@ -86,10 +88,12 @@
     "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-4.png": "954aabf82fce536dde699c5ff7733b410564a37c",
     "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail-5.jpg": "15a1402c492f3d6c1e04a2d585041afe89bfb560",
     "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail.png": "b968efe6954b99e30beacad5a5d0028e8000e19a",
+    "https://tw258.github.io/cookbook/assets/logo1.PNG": "7a7582c0ac6edde3184d2549dfba18814e23b7a9",
+    "https://tw258.github.io/cookbook/assets/logo2.PNG": "39be0c5bb09504c78f393da2591ef6fdc21e0a3f",
     "https://tw258.github.io/cookbook/assets/test.jpg": "4a7784e7144198471a60544d6500f593e6aaf3ba",
     "https://tw258.github.io/cookbook/favicon.ico": "caf1d46c4abdba28dd9bcd73c08d276b599683ff",
-    "https://tw258.github.io/cookbook/index.html": "a8041e0cb0f11f0f8699fa8d37149238b2b2662f",
-    "https://tw258.github.io/cookbook/main.7b5310760b0230a64b2e.js": "368167829875333325abc1b79e92a4219d84700e",
+    "https://tw258.github.io/cookbook/index.html": "dcb7655ef787857f7f9aefd89aced0d5b3b37668",
+    "https://tw258.github.io/cookbook/main.85ecc67afdf36226ea8e.js": "8f574f4df9aa82b0576511eb0a4d71b35aca7560",
     "https://tw258.github.io/cookbook/manifest.webmanifest": "d9ef3afccbdeefbbee35f808f3493dd81ef6a62d",
     "https://tw258.github.io/cookbook/polyfills.00096ed7d93ed26ee6df.js": "cfe7b0b53e96bff9ba384b4d497c08475a617d62",
     "https://tw258.github.io/cookbook/runtime.7b63b9fd40098a2e8207.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
