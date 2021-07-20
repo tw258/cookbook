@@ -3,3 +3,8 @@
   bottom: 40px;
   right: 40px;
 }
+
+.logo {
+  width: 35%;
+  float: right;
+}
