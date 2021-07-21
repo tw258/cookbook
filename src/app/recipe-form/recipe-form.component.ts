@@ -69,6 +69,11 @@ export class RecipeFormComponent implements OnInit {
     this.recipe.imagesAsBase64.push(base64string);
   }
 
+  handleImageRemove(index: number) {
+    console.log(index);
+    this.recipe.imagesAsBase64.splice(index, 1);
+  }
+
   private createParameterizedIngredient(): ParameterizedIngredient {
     return {
       amount: 1,
