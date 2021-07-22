@@ -1,17 +1,29 @@
 <h1 class="logo-font logo">cookbook.</h1>
 <app-recipe-filter (filterInput)="handleFilterInput($event)"></app-recipe-filter>
 
-<div *ngIf="filteredRecipes.length != 0; else NoRecipes">
-  <a
-    *ngFor="let recipe of filteredRecipes | sortFavorites; let isFirst = first"
-    [routerLink]="['/recipes', recipe.id]"
-  >
-    <app-recipe-card [recipe]="recipe"> </app-recipe-card>
-  </a>
-</div>
+<ng-container *ngIf="recipes.length; else noRecipes">
+  <div *ngIf="filteredRecipes.length; else noRecipesWithFilter">
+    <a
+      *ngFor="let recipe of filteredRecipes | sortFavorites; let isFirst = first"
+      [routerLink]="['/recipes', recipe.id]"
+    >
+      <app-recipe-card [recipe]="recipe"> </app-recipe-card>
+    </a>
+  </div>
+</ng-container>
 
-<ng-template #NoRecipes>
-  <div class="text-center mat-body-strong mt-2">Keine Rezepte verfügbar</div>
+<ng-template #noRecipes>
+  <div class="text-center mat-body-strong mt-2">
+    Noch keine Rezepte vorhanden. Erstelle
+    <a [routerLink]="['/new-recipe']">hier</a>
+    dein erstes 😉
+  </div>
+</ng-template>
+
+<ng-template #noRecipesWithFilter>
+  <div class="text-center mat-body-strong mt-2">
+    Keine Rezepte mit den Filterkriterien verfügbar
+  </div>
 </ng-template>
 
 <a class="btn-add-recipe" [routerLink]="['/new-recipe']" mat-fab color="primary">

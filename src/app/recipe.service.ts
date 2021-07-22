@@ -7,7 +7,7 @@ import { Recipe } from './models/Recipe';
   providedIn: 'root',
 })
 export class RecipeService {
-  private _recipes: Recipe[] = dummyRecipes;
+  private _recipes: Recipe[] = [];
   get recipes() {
     return this._recipes;
   }
