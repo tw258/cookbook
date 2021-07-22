@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1626966941128,
+  "timestamp": 1626968734689,
   "index": "https://tw258.github.io/cookbook/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "https://tw258.github.io/cookbook/favicon.ico",
         "https://tw258.github.io/cookbook/index.html",
-        "https://tw258.github.io/cookbook/main.6d649b9a806b354d7fbf.js",
+        "https://tw258.github.io/cookbook/main.3e9d2afd1ad08e9d8f5a.js",
         "https://tw258.github.io/cookbook/manifest.webmanifest",
         "https://tw258.github.io/cookbook/polyfills.00096ed7d93ed26ee6df.js",
         "https://tw258.github.io/cookbook/runtime.7b63b9fd40098a2e8207.js",
-        "https://tw258.github.io/cookbook/styles.c0401d88d5f1be722cf1.css"
+        "https://tw258.github.io/cookbook/styles.96938d1f0373ba20ddee.css"
       ],
       "patterns": []
     },
@@ -88,12 +88,12 @@
     "https://tw258.github.io/cookbook/assets/images/recipe-thumbnail.png": "b968efe6954b99e30beacad5a5d0028e8000e19a",
     "https://tw258.github.io/cookbook/assets/test.jpg": "4a7784e7144198471a60544d6500f593e6aaf3ba",
     "https://tw258.github.io/cookbook/favicon.ico": "caf1d46c4abdba28dd9bcd73c08d276b599683ff",
-    "https://tw258.github.io/cookbook/index.html": "22852928c1c1d949ce062ac1fbb20f25d0294ed6",
-    "https://tw258.github.io/cookbook/main.6d649b9a806b354d7fbf.js": "a9c54b7518a2f52d345ebb96a90f1d30c757659a",
+    "https://tw258.github.io/cookbook/index.html": "3f110e8c2174933284564f7bde0ebc10db9aee88",
+    "https://tw258.github.io/cookbook/main.3e9d2afd1ad08e9d8f5a.js": "13ceb5523369791d37cbc65ed89983ff269bffcd",
     "https://tw258.github.io/cookbook/manifest.webmanifest": "d9ef3afccbdeefbbee35f808f3493dd81ef6a62d",
     "https://tw258.github.io/cookbook/polyfills.00096ed7d93ed26ee6df.js": "cfe7b0b53e96bff9ba384b4d497c08475a617d62",
     "https://tw258.github.io/cookbook/runtime.7b63b9fd40098a2e8207.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "https://tw258.github.io/cookbook/styles.c0401d88d5f1be722cf1.css": "5aedd6cce49f87b94cabfb7163084a06dbbd2c2f"
+    "https://tw258.github.io/cookbook/styles.96938d1f0373ba20ddee.css": "ea7bb1feb7f3a656f0cc6c18cbe0b6144eca011b"
   },
   "navigationUrls": [
     {
