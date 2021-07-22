@@ -22,21 +22,12 @@
   <div class="images-container mt-1">
     <div *ngFor="let image of recipe.imagesAsBase64; let i = index">
       <img [src]="image" />
-
-      <!-- <button
-        class="images-delete-button"
-        mat-icon-button
-        type="button"
-        (click)="handleImageRemove(i)"
-      > -->
       <span class="material-icons-outlined images-delete-button" (click)="handleImageRemove(i)"
         >cancel</span
       >
-      <!-- </button> -->
     </div>
     <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
   </div>
-
   <section class="mt-2">
     <div class="ingredient-container">
       <mat-form-field appearance="outline">

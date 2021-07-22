@@ -11,9 +11,10 @@ body {
 
 /*Logo font */
 .logo-font {
-  font-family: 'Titillium Web', sans-serif;
-  font-style: italic;
-  font-size: 25px;
+  font-family: 'Titillium Web', sans-serif !important;
+  font-style: italic !important;
+  font-size: 30px !important;
+  margin-bottom: 0 !important;
 }
 
 /* Material overwrites */
