@@ -42,6 +42,14 @@ export class RecipeFormComponent implements OnInit {
   }
 
   handleAddIngredient() {
+    if (
+      !this.currentParameterizedIngredient.amount ||
+      !this.currentParameterizedIngredient.ingredient ||
+      !this.currentParameterizedIngredient.measurement
+    ) {
+      return;
+    }
+
     this.recipe.parameterizedIngredients.push(this.currentParameterizedIngredient);
 
     // Reset input forms

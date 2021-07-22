@@ -66,6 +66,7 @@
         <mat-label>Zutat</mat-label>
         <input
           [(ngModel)]="currentParameterizedIngredient.ingredient"
+          (keyup.enter)="handleAddIngredient()"
           [ngModelOptions]="{ standalone: true }"
           matInput
           placeholder="Eier, Mehl, ..."
