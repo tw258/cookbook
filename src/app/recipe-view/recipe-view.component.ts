@@ -15,6 +15,6 @@ export class RecipeViewComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
-    this.recipe = this.recipeService.getRecipeCopyById(id);
+    this.recipeService.getRecipeById(id).subscribe(r => (this.recipe = r));
   }
 }

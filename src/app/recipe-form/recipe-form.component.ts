@@ -36,8 +36,10 @@ export class RecipeFormComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
     if (id) {
-      this.recipe = this.recipeservice.getRecipeCopyById(id);
-      this.isEditMode = true;
+      this.recipeservice.getRecipeById(id).subscribe(r => {
+        this.recipe = r;
+        this.isEditMode = true;
+      });
     }
   }
 
@@ -65,11 +67,13 @@ export class RecipeFormComponent implements OnInit {
 
   handleSave() {
     if (this.isEditMode) {
-      this.recipeservice.updateRecipe(this.recipe);
-      this.router.navigate(['/recipes', this.recipe.id]);
+      this.recipeservice
+        .updateRecipeById(this.recipe.id!, this.recipe)
+        .subscribe(() => this.router.navigate(['/recipes', this.recipe.id]));
     } else {
-      const id = this.recipeservice.addRecipe(this.recipe).id;
-      this.router.navigate(['/recipes', id]);
+      this.recipeservice
+        .addRecipe(this.recipe)
+        .subscribe(r => this.router.navigate(['/recipes', r.id]));
     }
   }
 

@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { nanoid } from 'nanoid';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { dummyRecipes } from './dummies';
 import { Recipe } from './models/Recipe';
 
@@ -7,42 +11,30 @@ import { Recipe } from './models/Recipe';
   providedIn: 'root',
 })
 export class RecipeService {
-  private _recipes: Recipe[] = [];
-  get recipes() {
-    return this._recipes;
+  constructor(private http: HttpClient) {}
+
+  getRecipes(): Observable<Recipe[]> {
+    const url = environment.apiUrl + '/recipes';
+    return this.http.get<Recipe[]>(url);
   }
 
-  getRecipeCopyById(id: string) {
-    const index = this.recipes.findIndex(r => r.id == id);
-
-    const copy: Recipe = {
-      ...this.recipes[index],
-      imagesAsBase64: this.recipes[index].imagesAsBase64.map(i => i),
-      parameterizedIngredients: this.recipes[index].parameterizedIngredients.map(pi => ({
-        ...pi,
-      })),
-    };
-
-    return copy;
+  getRecipeById(id: string): Observable<Recipe> {
+    const url = `${environment.apiUrl}/recipes/${id}`;
+    return this.http.get<Recipe>(url);
   }
 
-  addRecipe(recipe: Recipe): Recipe {
-    recipe = {
-      ...recipe,
-      id: nanoid(),
-    };
-
-    this._recipes.push(recipe);
-    return recipe;
+  addRecipe(recipe: Recipe): Observable<Recipe> {
+    const url = `${environment.apiUrl}/recipes`;
+    return this.http.post<Recipe>(url, recipe);
   }
 
-  updateRecipe(recipe: Recipe) {
-    const index = this.recipes.findIndex(r => r.id == recipe.id);
+  updateRecipeById(id: string, recipe: Recipe): Observable<Recipe> {
+    const url = `${environment.apiUrl}/recipes/${id}`;
+    return this.http.put<Recipe>(url, recipe);
+  }
 
-    if (index == -1) {
-      throw Error(`Recipe with id ${recipe.id} does not exist.`);
-    }
-
-    this.recipes[index] = recipe;
+  deleteRecipeById(id: string): Observable<void> {
+    const url = `${environment.apiUrl}/recipes/${id}`;
+    return this.http.delete<void>(url);
   }
 }

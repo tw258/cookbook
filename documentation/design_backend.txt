@@ -1,0 +1,5 @@
+GET  /recipes		komplette Liste
+GET  /recipes/id	1 recipe mit id id
+POST /recipes	    erstellt 1 rezept (im body). returned ganzes rezept inkl id
+PUT /recipes/id		aktualisiert 1 rezept
+DELETE /recipes/id  löscht 1 rezept

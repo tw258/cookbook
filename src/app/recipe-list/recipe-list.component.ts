@@ -8,8 +8,8 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = this.recipeservice.recipes;
-  filteredRecipes: Recipe[] = this.recipeservice.recipes;
+  recipes: Recipe[] = [];
+  filteredRecipes: Recipe[] = [];
 
   constructor(private recipeservice: RecipeService) {}
 
@@ -17,5 +17,10 @@ export class RecipeListComponent implements OnInit {
     this.filteredRecipes = this.recipes.filter(r => r.title.toUpperCase().includes(filterInput));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.recipeservice.getRecipes().subscribe(r => {
+      this.recipes = r;
+      this.filteredRecipes = r;
+    });
+  }
 }

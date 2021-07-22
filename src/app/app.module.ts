@@ -20,6 +20,8 @@ import { SortFavoritesPipe } from './recipe-list/sort-favorites.pipe';
 import { RecipeFilterComponent } from './recipe-list/recipe-filter/recipe-filter.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpProxyInterceptor } from './http-proxy.interceptor';
 
 const routes: Route[] = [
   { path: '', component: RecipeListComponent, pathMatch: 'full' },
@@ -30,6 +32,7 @@ const routes: Route[] = [
 
 @NgModule({
   declarations: [
+    //Eigene Komponenten, Pipes, Directives
     AppComponent,
     IngredientFormComponent,
     RecipeListComponent,
@@ -44,6 +47,7 @@ const routes: Route[] = [
     RecipeFilterComponent,
   ],
   imports: [
+    //eigene und Angular Module
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -54,10 +58,11 @@ const routes: Route[] = [
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpProxyInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
