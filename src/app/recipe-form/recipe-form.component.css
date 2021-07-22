@@ -7,19 +7,31 @@ mat-form-field {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 130px;
-  gap: 10px;
+  gap: 15px;
   align-items: center;
 }
 
-.images-container * {
-  width: 100%;
+.images-container > * {
   height: 100%;
+  position: relative;
 }
 
-.images-container img {
+.images-container > div > img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 5px;
   box-shadow: var(--image-box-shadow);
+}
+
+.images-delete-button {
+  position: absolute;
+  top: -11px;
+  right: -11px;
+  background-color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 30px;
 }
 
 .ingredient-container {

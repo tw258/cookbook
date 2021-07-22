@@ -70,7 +70,6 @@ export class RecipeFormComponent implements OnInit {
   }
 
   handleImageRemove(index: number) {
-    console.log(index);
     this.recipe.imagesAsBase64.splice(index, 1);
   }
 

@@ -17,6 +17,7 @@ export class RecipeService {
 
     const copy: Recipe = {
       ...this.recipes[index],
+      imagesAsBase64: this.recipes[index].imagesAsBase64.map(i => i),
       parameterizedIngredients: this.recipes[index].parameterizedIngredients.map(pi => ({
         ...pi,
       })),
