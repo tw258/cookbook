@@ -1,13 +1,23 @@
-<div (click)="imageInput.click()" class="content">
-  <div>
-    <button mat-icon-button type="button">
-      <mat-icon class="material-icons-outlined">add_photo_alternate</mat-icon>
-    </button>
+<div
+  (click)="!isLoading ? imageInput.click() : null"
+  class="content"
+  [class.notLoading]="!isLoading"
+>
+  <span></span>
+  <div style="display: grid">
+    <span *ngIf="!isLoading; else showLoading" class="material-icons-outlined">
+      add_photo_alternate
+    </span>
+    <ng-template #showLoading>
+      <mat-spinner [diameter]="25"></mat-spinner>
+    </ng-template>
     <input
       #imageInput
       type="file"
-      (change)="handleImageSelect(imageInput.files!); imageInput.value = ''"
+      (change)="handleImageSelect(imageInput.files!)"
       style="display: none"
+      multiple="multiple"
     />
   </div>
+  <span></span>
 </div>

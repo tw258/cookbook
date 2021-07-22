@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import imageCompression from 'browser-image-compression';
 
 @Component({
@@ -8,8 +8,12 @@ import imageCompression from 'browser-image-compression';
 })
 export class AddImageComponent {
   @Output() imageUpload = new EventEmitter<string>();
+  @ViewChild('imageInput') imageInput: ElementRef<HTMLInputElement> | undefined;
+
+  isLoading = false;
 
   async handleImageSelect(images: FileList) {
+    this.isLoading = true;
     for (let i = 0; i < images.length; i++) {
       const image = images.item(i);
 
@@ -22,6 +26,9 @@ export class AddImageComponent {
 
       this.imageUpload.emit(imageAsBase64);
     }
+
+    this.isLoading = false;
+    this.imageInput!.nativeElement.value = '';
   }
 
   private async compressImage(file: File) {
