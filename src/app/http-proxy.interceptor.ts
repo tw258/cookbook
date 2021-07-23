@@ -37,7 +37,7 @@ export class HttpProxyInterceptor implements HttpInterceptor {
           return this.handlePut(request);
           break;
         case 'DELETE':
-          //..
+          return this.handleDelete(request);
           break;
         default:
           console.log('HTTP Method not supported');
@@ -103,6 +103,19 @@ export class HttpProxyInterceptor implements HttpInterceptor {
     return of(
       new HttpResponse({
         body: request.body,
+        status: 200,
+      }),
+    );
+  }
+
+  handleDelete(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const id = request.url.split('/').slice(-1)[0];
+    const index = this.recipes.findIndex(r => r.id == id);
+
+    this.recipes.splice(index, 1);
+
+    return of(
+      new HttpResponse({
         status: 200,
       }),
     );

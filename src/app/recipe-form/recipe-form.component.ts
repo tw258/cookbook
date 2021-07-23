@@ -77,6 +77,12 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
+  handleDelete() {
+    this.recipeservice
+      .deleteRecipeById(this.recipe.id!)
+      .subscribe(() => this.router.navigate(['']));
+  }
+
   handleImageAdd(base64string: string) {
     this.recipe.imagesAsBase64.push(base64string);
   }

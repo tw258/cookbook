@@ -132,7 +132,18 @@
     ></mat-slider>
   </div>
 
-  <div class="btn-grid mt-1">
+  <div class="btn-grid mt-2 mb-2">
+    <button
+      [disabled]="!isEditMode"
+      (click)="handleDelete()"
+      type="button"
+      mat-raised-button
+      color="warn"
+    >
+      Rezept löschen
+    </button>
+
+    <!-- <div class="btn-grid mt-1">
     <button
       [disabled]="!recipe.title || !recipe.note"
       (click)="handleSave()"
@@ -141,6 +152,6 @@
       color="primary"
     >
       {{ isEditMode ? 'Aktualisieren' : 'Hinzufügen' }}
-    </button>
+    </button> -->
   </div>
 </form>
