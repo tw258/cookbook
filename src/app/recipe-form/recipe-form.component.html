@@ -1,16 +1,27 @@
-<div class="header-grid">
-  <button routerLink="" mat-icon-button>
-    <mat-icon>arrow_back_ios</mat-icon>
-  </button>
-  <h1 class="text-center">{{ isEditMode ? 'Rezept bearbeiten' : 'Neues Rezept' }}</h1>
-  <button [disabled]="!recipe.title || !recipe.note" (click)="handleSave()" mat-icon-button>
-    <mat-icon class="material-icons-outlined">save</mat-icon>
-  </button>
+<div class="navbar">
+  <div class="navbar__content grid-auto-1fr-auto">
+    <a routerLink="/" mat-icon-button>
+      <mat-icon class="material-icons-outlined">close</mat-icon>
+    </a>
+
+    <span class="navbar__content__title">
+      {{ isEditMode ? 'Rezept bearbeiten' : 'Rezept erstellen' }}
+    </span>
+
+    <button
+      [disabled]="!recipe.title || !recipe.note"
+      color="primary"
+      (click)="handleSave()"
+      mat-icon-button
+    >
+      <mat-icon class="material-icons-outlined">check</mat-icon>
+    </button>
+  </div>
 </div>
 
-<form class="mt-1">
+<form class="pt-6 mb-3">
   <mat-form-field appearance="outline">
-    <mat-label>Rezeptname</mat-label>
+    <mat-label>Name</mat-label>
     <input
       [(ngModel)]="recipe.title"
       [ngModelOptions]="{ standalone: true }"
@@ -22,8 +33,10 @@
   <div class="images-container mt-1">
     <div *ngFor="let image of recipe.imagesAsBase64; let i = index">
       <img [src]="image" />
-      <span class="material-icons-outlined images-delete-button" (click)="handleImageRemove(i)"
-        >cancel</span
+      <span
+        class="material-icons-outlined images-delete-button color-warn"
+        (click)="handleImageRemove(i)"
+        >remove_circle_outline</span
       >
     </div>
     <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
@@ -96,7 +109,7 @@
         <div class="ingredient-box">
           <span>{{ paramIngr.amount }} {{ paramIngr.measurement }} {{ paramIngr.ingredient }}</span>
           <button mat-icon-button type="button" (click)="handleRemoveIngredient(paramIngr)">
-            <span class="material-icons-outlined"> clear </span>
+            <span class="material-icons-outlined color-warn">remove_circle_outline</span>
           </button>
         </div>
       </mat-list-item>
@@ -132,26 +145,14 @@
     ></mat-slider>
   </div>
 
-  <div class="btn-grid mt-3 mb-2">
-    <button
-      [disabled]="!isEditMode"
-      (click)="handleDelete()"
-      type="button"
-      mat-raised-button
-      color="warn"
-    >
-      Rezept löschen
-    </button>
-
-    <!-- <div class="btn-grid mt-1">
-    <button
-      [disabled]="!recipe.title || !recipe.note"
-      (click)="handleSave()"
-      type="button"
-      mat-raised-button
-      color="primary"
-    >
-      {{ isEditMode ? 'Aktualisieren' : 'Hinzufügen' }}
-    </button> -->
-  </div>
+  <button
+    *ngIf="isEditMode"
+    class="w-100"
+    (click)="handleDelete()"
+    type="button"
+    mat-stroked-button
+    color="warn"
+  >
+    Rezept löschen
+  </button>
 </form>
