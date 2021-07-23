@@ -11,6 +11,7 @@ import { delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { dummyRecipes } from './dummies';
 import { Recipe } from './models/Recipe';
+import { nanoid } from 'nanoid';
 
 @Injectable()
 export class HttpProxyInterceptor implements HttpInterceptor {
@@ -30,17 +31,9 @@ export class HttpProxyInterceptor implements HttpInterceptor {
           return handleGet$;
           break;
         case 'POST':
-          // addRecipe(recipe: Recipe): Recipe {
-          //   recipe = {
-          //     ...recipe,
-          //     id: nanoid(),
-          //   };
+          return this.handlePost(request);
           break;
         case 'PUT':
-          //   this._recipes.push(recipe);
-          //   return recipe;
-          // }
-
           // updateRecipe(recipe: Recipe) {
           //   const index = this.recipes.findIndex(r => r.id == recipe.id);
 
@@ -91,5 +84,35 @@ export class HttpProxyInterceptor implements HttpInterceptor {
         }),
       );
     }
+  }
+
+  handlePost(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    let recipe = request.body;
+    recipe = {
+      ...recipe,
+      id: nanoid(),
+    };
+
+    this.recipes.push(recipe);
+    return of(
+      new HttpResponse({
+        body: recipe,
+        status: 200,
+      }),
+    );
+  }
+
+  handlePut(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const id = request.url.split('/').slice(-1)[0];
+    const index = this.recipes.findIndex(r => r.id == id);
+
+    this.recipes[index] = request.body;
+
+    return of(
+      new HttpResponse({
+        body: request.body,
+        status: 200,
+      }),
+    );
   }
 }
