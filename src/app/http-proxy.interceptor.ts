@@ -34,15 +34,7 @@ export class HttpProxyInterceptor implements HttpInterceptor {
           return this.handlePost(request);
           break;
         case 'PUT':
-          // updateRecipe(recipe: Recipe) {
-          //   const index = this.recipes.findIndex(r => r.id == recipe.id);
-
-          //   if (index == -1) {
-          //     throw Error(`Recipe with id ${recipe.id} does not exist.`);
-          //   }
-
-          //   this.recipes[index] = recipe;
-          // }
+          return this.handlePut(request);
           break;
         case 'DELETE':
           //..
