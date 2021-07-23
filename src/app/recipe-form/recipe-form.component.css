@@ -24,7 +24,7 @@ mat-form-field {
   box-shadow: var(--image-box-shadow);
 }
 
-.images-delete-button {
+.delete-image-icon {
   position: absolute;
   top: -11px;
   right: -11px;
@@ -34,12 +34,14 @@ mat-form-field {
   font-size: 25px;
 }
 
-.color-warn {
-  color: #e74c3c;
+.delete-ingredient-icon {
+  cursor: pointer;
+  font-size: 25px;
 }
 
-.color-warn:hover {
-  color: #c94435;
+.delete-image-icon:hover,
+.delete-ingredient-icon:hover {
+  color: rgb(67, 67, 67);
 }
 
 .ingredient-container {

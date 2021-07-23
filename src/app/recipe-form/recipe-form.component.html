@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<form class="pt-6 mb-3">
+<form class="pt-7 mb-3">
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
     <input
@@ -34,7 +34,8 @@
     <div *ngFor="let image of recipe.imagesAsBase64; let i = index">
       <img [src]="image" />
       <span
-        class="material-icons-outlined images-delete-button color-warn"
+        aria-label="Remove image"
+        class="material-icons-outlined delete-image-icon"
         (click)="handleImageRemove(i)"
         >remove_circle_outline</span
       >
@@ -48,7 +49,7 @@
         <input
           [(ngModel)]="currentParameterizedIngredient.amount"
           [ngModelOptions]="{ standalone: true }"
-          (focus)="$any($event.target).select()"
+          (focus)="$any($event.target).value = ''"
           type="number"
           min="0"
           matInput
@@ -96,7 +97,7 @@
         mat-icon-button
         (click)="handleAddIngredient()"
       >
-        <span class="material-icons-outlined"> add </span>
+        <span class="material-icons-outlined">add</span>
       </button>
     </div>
     <mat-list role="list">
@@ -108,9 +109,12 @@
       >
         <div class="ingredient-box">
           <span>{{ paramIngr.amount }} {{ paramIngr.measurement }} {{ paramIngr.ingredient }}</span>
-          <button mat-icon-button type="button" (click)="handleRemoveIngredient(paramIngr)">
-            <span class="material-icons-outlined color-warn">remove_circle_outline</span>
-          </button>
+          <span
+            aria-label="Remove ingredient"
+            class="material-icons-outlined delete-ingredient-icon"
+            (click)="handleRemoveIngredient(paramIngr)"
+            >remove</span
+          >
         </div>
       </mat-list-item>
     </mat-list>
