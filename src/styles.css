@@ -15,6 +15,10 @@ a {
   color: var(--primary);
 }
 
+strong {
+  font-weight: 500;
+}
+
 /*Logo font */
 .logo-font {
   font-family: 'Titillium Web', sans-serif !important;

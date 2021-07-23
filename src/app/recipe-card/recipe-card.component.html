@@ -1,6 +1,6 @@
 <mat-card class="example-card mt-1 mat-elevation-z2">
   <mat-card-content>
-    <div class="text-center recipe-thumbnail-container">
+    <div class="recipe-thumbnail-container">
       <img
         class="recipe-thumbnail"
         *ngIf="recipe.imagesAsBase64.length > 0; else NoImages"
@@ -10,16 +10,17 @@
 
     <div>
       <div>
-        <p class="mat-body-strong" style="margin: 0; padding: 0; font-size: 16px">
+        <p class="mat-body-strong" style="margin: 0; padding: 0; font-size: 17px">
           {{ recipe.title }}
         </p>
-        <span class="mat-caption">{{ recipe.author }}</span>
+        <span class="mat-caption"
+          ><strong>Hauptgericht</strong> von <strong>{{ recipe.author }}</strong> mit:
+        </span>
       </div>
-      <div class="mt-1">
-        <app-chip
-          [text]="ingr.ingredient"
-          *ngFor="let ingr of recipe.parameterizedIngredients"
-        ></app-chip>
+      <div class="mt-1 mat-caption">
+        [<ng-container *ngFor="let ingr of recipe.parameterizedIngredients; let isLast = last"
+          >{{ ingr.ingredient }}{{ isLast ? '' : ', ' }}</ng-container
+        >]
       </div>
     </div>
     <div style="position: absolute; top: 10px; right: 10px">
