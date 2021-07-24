@@ -1,7 +1,12 @@
-<h1 class="logo-font logo">cookbook.</h1>
-<app-recipe-filter (filterInput)="handleFilterInput($event)"></app-recipe-filter>
+<div class="navbar">
+  <div class="navbar__content">
+    <h1 class="logo-font" style="margin: 0">cookbook.</h1>
+  </div>
+</div>
 
-<ng-container *ngIf="recipes.length; else noRecipes">
+<div class="pt-7"></div>
+<app-recipe-filter (filterInput)="handleFilterInput($event)"></app-recipe-filter>
+<div class="pt-6" *ngIf="recipes.length; else noRecipes">
   <div *ngIf="filteredRecipes.length; else noRecipesWithFilter">
     <a
       *ngFor="let recipe of filteredRecipes | sortFavorites; let isFirst = first"
@@ -10,7 +15,7 @@
       <app-recipe-card [recipe]="recipe"> </app-recipe-card>
     </a>
   </div>
-</ng-container>
+</div>
 
 <ng-template #noRecipes>
   <div class="text-center mat-body-strong mt-2">
@@ -21,9 +26,7 @@
 </ng-template>
 
 <ng-template #noRecipesWithFilter>
-  <div class="text-center mat-body-strong mt-2">
-    Kein Rezept entspricht dem Filter 😢
-  </div>
+  <div class="text-center mat-body-strong mt-2">Kein Rezept entspricht dem Filter 😢</div>
 </ng-template>
 
 <a class="btn-add-recipe" [routerLink]="['/new-recipe']" mat-fab color="primary">

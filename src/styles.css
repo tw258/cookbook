@@ -119,7 +119,7 @@ mat-card {
   z-index: 5;
   background-color: rgb(250, 250, 250);
   box-shadow: var(--navbar-box-shadow);
-  height: 60px;
+  height: 55px;
   position: fixed;
   top: 0;
   right: 0;
