@@ -1,16 +1,12 @@
-.btn-add-recipe {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-}
-
-.logo {
-  text-align: right;
-}
-
 .navbar__content {
   display: grid;
   align-items: center;
   text-align: right;
   padding: 0 15px;
+}
+
+.btn-add-recipe {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
 }

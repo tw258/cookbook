@@ -1,10 +1,10 @@
 <div
   (click)="!isLoading ? imageInput.click() : null"
-  class="content"
-  [class.notLoading]="!isLoading"
+  class="add-image-container"
+  [class.add-image-container--not-loading]="!isLoading"
 >
   <span></span>
-  <div style="display: grid">
+  <div class="add-image-container__content">
     <span *ngIf="!isLoading; else showLoading" class="material-icons-outlined">
       add_photo_alternate
     </span>

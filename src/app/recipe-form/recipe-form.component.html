@@ -35,7 +35,7 @@
       <img [src]="image" />
       <span
         aria-label="Remove image"
-        class="material-icons-outlined delete-image-icon"
+        class="material-icons-outlined images-container__icon-delete"
         (click)="handleImageRemove(i)"
         >remove_circle_outline</span
       >
@@ -43,7 +43,7 @@
     <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
   </div>
   <section class="mt-2">
-    <div class="ingredient-container">
+    <div class="ingredient-form">
       <mat-form-field appearance="outline">
         <mat-label>Menge</mat-label>
         <input
@@ -100,18 +100,17 @@
         <span class="material-icons-outlined">add</span>
       </button>
     </div>
-    <mat-list role="list">
+    <mat-list class="list-ingredient" role="list">
       <mat-list-item
-        style="background-color: rgb(250, 250, 250)"
-        class="ingredient-list-item"
+        class="list-ingredient__item"
         role="listitem"
         *ngFor="let paramIngr of recipe.parameterizedIngredients"
       >
-        <div class="ingredient-box">
+        <div class="list-ingredient__item__ingredient-details">
           <span>{{ paramIngr.amount }} {{ paramIngr.measurement }} {{ paramIngr.ingredient }}</span>
           <span
             aria-label="Remove ingredient"
-            class="material-icons-outlined delete-ingredient-icon"
+            class="material-icons-outlined list-ingredient__item__ingredient-details__icon-delete"
             (click)="handleRemoveIngredient(paramIngr)"
             >remove</span
           >
@@ -125,13 +124,13 @@
     <textarea
       [(ngModel)]="recipe.note"
       [ngModelOptions]="{ standalone: true }"
-      class="zubereitung"
+      class="textarea-note"
       matInput
       placeholder="1. ...  2. ..."
     ></textarea>
   </mat-form-field>
 
-  <div class="mt-1 preparationtime-box">
+  <div class="mt-1 preparationtime-container">
     <div>
       <span class="mat-small">Zubereitungszeit: </span>
       <span class="mat-small"

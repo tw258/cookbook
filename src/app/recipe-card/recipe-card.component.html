@@ -1,18 +1,23 @@
 <mat-card class="mt-2">
-  <mat-card-content>
-    <div class="recipe-thumbnail-container">
+  <mat-card-content class="card-content">
+    <div class="card-content__thumbnail-container">
       <img
-        class="recipe-thumbnail"
+        class="card-content__thumbnail-container__thumbnail"
         *ngIf="recipe.imagesAsBase64.length > 0; else NoImages"
         [src]="recipe.imagesAsBase64[0]"
       />
+
+      <ng-template #NoImages>
+        <img
+          class="card-content__thumbnail-container__thumbnail--no-image"
+          src="assets/images/recipe-thumbnail.png"
+        />
+      </ng-template>
     </div>
 
     <div>
       <div>
-        <p class="mat-body-strong" style="margin: 0; padding: 0; font-size: 17px">
-          {{ recipe.title }}
-        </p>
+        <mat-card-title>{{ recipe.title }}</mat-card-title>
         <span class="mat-caption"
           ><strong>Hauptgericht</strong> von <strong>{{ recipe.author }}</strong> mit:
         </span>
@@ -24,18 +29,14 @@
         ></app-chip>
       </div>
     </div>
-    <div style="position: absolute; top: 10px; right: 10px">
-      <button
-        (click)="$event.stopPropagation(); $event.preventDefault(); handleFavorite()"
-        mat-icon-button
-      >
-        <mat-icon *ngIf="recipe.isFavorite">favorite</mat-icon>
-        <mat-icon *ngIf="!recipe.isFavorite">favorite_border</mat-icon>
-      </button>
-    </div>
+
+    <button
+      class="card-content__button-favorite"
+      (click)="$event.stopPropagation(); $event.preventDefault(); handleFavorite()"
+      mat-icon-button
+    >
+      <mat-icon *ngIf="recipe.isFavorite">favorite</mat-icon>
+      <mat-icon *ngIf="!recipe.isFavorite">favorite_border</mat-icon>
+    </button>
   </mat-card-content>
 </mat-card>
-
-<ng-template #NoImages>
-  <img class="recipe-placeholder" src="assets/images/recipe-thumbnail.png" />
-</ng-template>

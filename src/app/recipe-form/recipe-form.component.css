@@ -24,7 +24,7 @@ mat-form-field {
   box-shadow: var(--image-box-shadow);
 }
 
-.delete-image-icon {
+.images-container__icon-delete {
   position: absolute;
   top: -11px;
   right: -11px;
@@ -34,44 +34,39 @@ mat-form-field {
   font-size: 25px;
 }
 
-.delete-ingredient-icon {
-  cursor: pointer;
-  font-size: 25px;
-}
-
-.delete-image-icon:hover,
-.delete-ingredient-icon:hover {
-  color: rgb(67, 67, 67);
-}
-
-.ingredient-container {
+.ingredient-form {
   display: grid;
   grid-template-columns: 2fr 2fr 4fr auto;
   align-items: center;
   gap: 10px;
 }
 
-.zubereitung {
-  min-height: 150px;
-}
-
-.preparationtime-box {
-  display: grid;
-}
-
-.ingredient-list-item {
+.list-ingredient__item {
   padding: 7px 0px !important;
   height: auto !important;
+  background-color: rgb(250, 250, 250);
 }
 
-.btn-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-.ingredient-box {
+.list-ingredient__item__ingredient-details {
   display: flex;
   justify-content: space-between;
   width: 100%;
   align-items: center;
+}
+
+.list-ingredient__item__ingredient-details__icon-delete {
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.list-ingredient__item__ingredient-details__icon-delete:hover {
+  color: rgb(67, 67, 67);
+}
+
+.textarea-note {
+  min-height: 150px;
+}
+
+.preparationtime-container {
+  display: grid;
 }
