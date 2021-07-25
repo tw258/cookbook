@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpRequest, HttpInterceptor, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { dummyRecipes } from './dummies';
 import { Recipe } from './models/Recipe';
@@ -22,37 +15,27 @@ export class HttpProxyInterceptor implements HttpInterceptor {
     if (environment.production) {
       return next.handle(request);
     } else {
-      //implement mock
-      console.log(request);
-
+      //mock
       switch (request.method) {
         case 'GET':
-          const handleGet$ = this.handleGet(request);
-          return handleGet$;
-          break;
+          return this.handleGet(request);
         case 'POST':
           return this.handlePost(request);
-          break;
         case 'PUT':
           return this.handlePut(request);
-          break;
         case 'DELETE':
           return this.handleDelete(request);
-          break;
         default:
           console.log('HTTP Method not supported');
+          return of();
       }
-
-      return new Observable();
     }
   }
 
-  handleGet(request: HttpRequest<any>): Observable<HttpResponse<any>> {
-    //GetRecipeById
+  private handleGet(request: HttpRequest<any>): Observable<HttpResponse<any>> {
     if (request.url.includes('recipes/')) {
-      const id = request.url.split('/').slice(-1)[0];
-      console.log(id);
-
+      //GetRecipeById
+      const id = this.getIdFromUrl(request.url);
       const index = this.recipes.findIndex(r => r.id == id);
       const copy: Recipe = {
         ...this.recipes[index],
@@ -69,6 +52,7 @@ export class HttpProxyInterceptor implements HttpInterceptor {
         }),
       );
     } else {
+      //GetRecipes
       return of(
         new HttpResponse({
           body: this.recipes,
@@ -78,8 +62,8 @@ export class HttpProxyInterceptor implements HttpInterceptor {
     }
   }
 
-  handlePost(request: HttpRequest<any>): Observable<HttpResponse<any>> {
-    let recipe = request.body;
+  private handlePost(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    let recipe: Recipe = request.body;
     recipe = {
       ...recipe,
       id: nanoid(),
@@ -94,8 +78,8 @@ export class HttpProxyInterceptor implements HttpInterceptor {
     );
   }
 
-  handlePut(request: HttpRequest<any>): Observable<HttpResponse<any>> {
-    const id = request.url.split('/').slice(-1)[0];
+  private handlePut(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const id = this.getIdFromUrl(request.url);
     const index = this.recipes.findIndex(r => r.id == id);
 
     this.recipes[index] = request.body;
@@ -108,8 +92,8 @@ export class HttpProxyInterceptor implements HttpInterceptor {
     );
   }
 
-  handleDelete(request: HttpRequest<any>): Observable<HttpResponse<any>> {
-    const id = request.url.split('/').slice(-1)[0];
+  private handleDelete(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const id = this.getIdFromUrl(request.url);
     const index = this.recipes.findIndex(r => r.id == id);
 
     this.recipes.splice(index, 1);
@@ -119,5 +103,9 @@ export class HttpProxyInterceptor implements HttpInterceptor {
         status: 200,
       }),
     );
+  }
+
+  private getIdFromUrl(url: string): string {
+    return url.split('/').slice(-1)[0];
   }
 }
