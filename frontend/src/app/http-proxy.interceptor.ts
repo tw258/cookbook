@@ -12,6 +12,8 @@ export class HttpProxyInterceptor implements HttpInterceptor {
 
   //component -> service -> interceptor1 -> interceptor2 -> Browser -> HTTP Server
   intercept(request: HttpRequest<any>, next: any): Observable<HttpResponse<any>> {
+    return next.handle(request);
+
     if (environment.production) {
       return next.handle(request);
     } else {
