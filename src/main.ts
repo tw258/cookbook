@@ -7,7 +7,7 @@ import { environment } from './environments/environment';
 if (environment.production) {
   enableProdMode();
 }
-//new feature
+//my masterchange
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .catch(err => console.error(err));
