@@ -21,10 +21,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpProxyInterceptor } from './http-proxy.interceptor';
+import { LoginComponent } from './login/login.component';
+import { AuthInterceptor } from './auth.interceptor';
 
 const routes: Route[] = [
-  { path: '', redirectTo: 'recipes', pathMatch: 'full' },
-  { path: 'recipes', component: RecipeListComponent, pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'recipes', component: RecipeListComponent },
   { path: 'new-recipe', component: RecipeFormComponent },
   { path: 'recipes/:id', component: RecipeViewComponent },
   { path: 'recipes/:id/edit', component: RecipeFormComponent },
@@ -44,6 +47,7 @@ const routes: Route[] = [
     ChipComponent,
     SortFavoritesPipe,
     RecipeFilterComponent,
+    LoginComponent,
   ],
   imports: [
     //eigene und Angular Module
@@ -61,7 +65,10 @@ const routes: Route[] = [
     }),
     HttpClientModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpProxyInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpProxyInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
