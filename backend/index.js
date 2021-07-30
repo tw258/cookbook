@@ -24,8 +24,6 @@ function AuthenticationHandler(req, res, next) {
 const app = express();
 app.use(cors(), express.json());
 
-//TODO loadRecipes anpassen, wenn JSON leer.
-
 app.get("/recipes", (req, res) => {
   console.log("get recipes");
 
