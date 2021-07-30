@@ -1,0 +1,34 @@
+<div class="navbar">
+  <div class="navbar__content">
+    <h1 class="logo-font">cookbook.</h1>
+  </div>
+</div>
+
+<h2>Anmeldung</h2>
+
+<span *ngIf="invalidLogin">Anmeldung fehlgeschlagen. Falscher Benutzername/Passwort.</span>
+
+<form class="login-form">
+  <mat-form-field appearance="outline">
+    <mat-label>Benutzername</mat-label>
+    <input
+      [(ngModel)]="username"
+      [ngModelOptions]="{ standalone: true }"
+      matInput
+      placeholder="Tobi"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Passwort</mat-label>
+    <input
+      [(ngModel)]="password"
+      [ngModelOptions]="{ standalone: true }"
+      matInput
+      placeholder="Alligator3"
+      type="password"
+    />
+  </mat-form-field>
+
+  <button class="mt-2" mat-raised-button color="primary" (click)="handleLogin()">Login</button>
+</form>

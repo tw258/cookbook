@@ -86,7 +86,7 @@ mat-card {
 }
 
 .mt-2 {
-  margin-top: 20px;
+  margin-top: 20px !important;
 }
 
 .mt-3 {
