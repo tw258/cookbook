@@ -80,7 +80,7 @@ export class RecipeFormComponent implements OnInit {
   handleDelete() {
     this.recipeservice
       .deleteRecipeById(this.recipe.id!)
-      .subscribe(() => this.router.navigate(['']));
+      .subscribe(() => this.router.navigate(['/recipes']));
   }
 
   handleImageAdd(base64string: string) {
