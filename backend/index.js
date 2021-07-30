@@ -3,14 +3,19 @@ const cors = require("cors");
 const userdb = require("./users.json");
 const fs = require("fs");
 const { nanoid } = require("nanoid");
-const recipePath = "./recipes2.json";
+const recipePath = "./recipes.json";
 
-function AuthenticationHandler(req, res, next) {
+function authHandler(req, res, next) {
   const authorization = req.header("Authorization");
 
-  //todo null value handler bzw split problem (any/string)
-  const [name, password] = authorization.split(":");
+  console.log(authorization);
 
+  if (!authorization) {
+    res.status(401).send("No Authorization Header was found");
+    return;
+  }
+
+  const [name, password] = authorization.split(":");
   const isAuthorized = userdb.some(
     (u) => u.name == name && u.password == password
   );
@@ -22,7 +27,8 @@ function AuthenticationHandler(req, res, next) {
 }
 
 const app = express();
-app.use(cors(), express.json());
+app.use(express.json({ limit: "10mb" }), cors(), authHandler);
+initRecipes();
 
 app.get("/recipes", (req, res) => {
   console.log("get recipes");
@@ -91,13 +97,21 @@ app.delete("/recipes/:id", (req, res) => {
   }
 });
 
-function loadRecipes() {
-  const file = fs.readFileSync(recipePath);
-  if (file) {
-    const recipes = JSON.parse(file);
-    return recipes;
+function initRecipes() {
+  if (!fs.existsSync(recipePath)) {
+    fs.writeFileSync(recipePath, "[]");
+  } else {
+    try {
+      JSON.parse(fs.readFileSync(recipePath));
+    } catch {
+      console.log("Invalid JSON structure!");
+    }
   }
-  return [];
+}
+
+function loadRecipes() {
+  const recipes = JSON.parse(fs.readFileSync(recipePath));
+  return recipes;
 }
 
 function storeRecipes(recipes) {
