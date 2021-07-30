@@ -10,7 +10,7 @@ import { LoginService } from '../login.service';
 export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
-  invalidLogin = false;
+  showInvalidLoginAlert = false;
 
   constructor(private login: LoginService, private router: Router) {}
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   handleLogin() {
     this.login.getLogin(this.username, this.password).subscribe(
       () => this.router.navigate(['/recipes']),
-      () => (this.invalidLogin = true),
+      () => (this.showInvalidLoginAlert = true),
     );
   }
 }
