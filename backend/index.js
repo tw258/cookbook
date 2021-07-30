@@ -3,7 +3,9 @@ const cors = require("cors");
 const userdb = require("./users.json");
 const fs = require("fs");
 const { nanoid } = require("nanoid");
-const recipePath = "./recipes.json";
+
+const RECIPES_PATH = "./recipes.json";
+const PORT = 3000;
 
 function authHandler(req, res, next) {
   const authorization = req.header("Authorization");
@@ -30,13 +32,13 @@ app.use(express.json({ limit: "10mb" }), cors(), authHandler);
 initRecipes();
 
 app.get("/login", (req, res) => {
-  console.log("get login");
+  console.log(`GET ${req.url}`);
 
   res.status(200).end();
 });
 
 app.get("/recipes", (req, res) => {
-  console.log("get recipes");
+  console.log(`GET ${req.url}`);
 
   const recipes = loadRecipes();
 
@@ -44,9 +46,10 @@ app.get("/recipes", (req, res) => {
 });
 
 app.get("/recipes/:id", (req, res) => {
-  console.log("get recipes by id");
+  console.log(`GET ${req.url}`);
 
   const recipes = loadRecipes();
+
   const foundRecipe = recipes.find((r) => r.id == req.params.id);
   if (foundRecipe != undefined) {
     res.send(foundRecipe);
@@ -56,15 +59,14 @@ app.get("/recipes/:id", (req, res) => {
 });
 
 app.post("/recipes", (req, res) => {
-  console.log("post recipe");
-  console.log(req.body);
+  console.log(`POST ${req.url}`);
 
   const newRecipe = {
     ...req.body,
     id: nanoid(),
   };
 
-  recipes = loadRecipes();
+  const recipes = loadRecipes();
   recipes.push(newRecipe);
 
   storeRecipes(recipes);
@@ -73,9 +75,10 @@ app.post("/recipes", (req, res) => {
 });
 
 app.put("/recipes/:id", (req, res) => {
-  console.log("put recipe by id");
+  console.log(`PUT ${req.url}`);
 
   const recipes = loadRecipes();
+
   const index = recipes.findIndex((r) => r.id == req.params.id);
   if (index != -1) {
     recipes[index] = req.body;
@@ -88,9 +91,10 @@ app.put("/recipes/:id", (req, res) => {
 });
 
 app.delete("/recipes/:id", (req, res) => {
-  console.log("delete recipe by id");
+  console.log(`DELETE ${req.url}`);
 
   const recipes = loadRecipes();
+
   const index = recipes.findIndex((r) => r.id == req.params.id);
   if (index != -1) {
     recipes.splice(index, 1);
@@ -103,11 +107,11 @@ app.delete("/recipes/:id", (req, res) => {
 });
 
 function initRecipes() {
-  if (!fs.existsSync(recipePath)) {
-    fs.writeFileSync(recipePath, "[]");
+  if (!fs.existsSync(RECIPES_PATH)) {
+    fs.writeFileSync(RECIPES_PATH, "[]");
   } else {
     try {
-      JSON.parse(fs.readFileSync(recipePath));
+      JSON.parse(fs.readFileSync(RECIPES_PATH));
     } catch {
       console.log("Invalid JSON structure!");
     }
@@ -115,12 +119,11 @@ function initRecipes() {
 }
 
 function loadRecipes() {
-  const recipes = JSON.parse(fs.readFileSync(recipePath));
-  return recipes;
+  return JSON.parse(fs.readFileSync(RECIPES_PATH));
 }
 
 function storeRecipes(recipes) {
-  fs.writeFileSync(recipePath, JSON.stringify(recipes));
+  fs.writeFileSync(RECIPES_PATH, JSON.stringify(recipes));
 }
 
-app.listen(3000, () => console.log("server running"));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
