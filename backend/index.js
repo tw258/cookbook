@@ -3,11 +3,12 @@ const cors = require("cors");
 const userdb = require("./users.json");
 const fs = require("fs");
 const { nanoid } = require("nanoid");
+const recipePath = "./recipes2.json";
 
 function AuthenticationHandler(req, res, next) {
   const authorization = req.header("Authorization");
 
-  //todo null value handler
+  //todo null value handler bzw split problem (any/string)
   const [name, password] = authorization.split(":");
 
   const isAuthorized = userdb.some(
@@ -21,7 +22,9 @@ function AuthenticationHandler(req, res, next) {
 }
 
 const app = express();
-app.use(cors(), express.json(), AuthenticationHandler);
+app.use(cors(), express.json());
+
+//TODO loadRecipes anpassen, wenn JSON leer.
 
 app.get("/recipes", (req, res) => {
   console.log("get recipes");
@@ -44,7 +47,8 @@ app.get("/recipes/:id", (req, res) => {
 });
 
 app.post("/recipes", (req, res) => {
-  console.log("post recipe by id");
+  console.log("post recipe");
+  console.log(req.body);
 
   const newRecipe = {
     ...req.body,
@@ -90,11 +94,16 @@ app.delete("/recipes/:id", (req, res) => {
 });
 
 function loadRecipes() {
-  return require("./recipes.json");
+  const file = fs.readFileSync(recipePath);
+  if (file) {
+    const recipes = JSON.parse(file);
+    return recipes;
+  }
+  return [];
 }
 
 function storeRecipes(recipes) {
-  fs.writeFileSync("./recipes.json", JSON.stringify(recipes));
+  fs.writeFileSync(recipePath, JSON.stringify(recipes));
 }
 
 app.listen(3000, () => console.log("server running"));
