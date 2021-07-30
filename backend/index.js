@@ -8,9 +8,8 @@ const recipePath = "./recipes.json";
 function authHandler(req, res, next) {
   const authorization = req.header("Authorization");
 
-  console.log(authorization);
-
   if (!authorization) {
+    console.log("No Authorization Header");
     res.status(401).send("No Authorization Header was found");
     return;
   }
@@ -29,6 +28,12 @@ function authHandler(req, res, next) {
 const app = express();
 app.use(express.json({ limit: "10mb" }), cors(), authHandler);
 initRecipes();
+
+app.get("/login", (req, res) => {
+  console.log("get login");
+
+  res.status(200).end();
+});
 
 app.get("/recipes", (req, res) => {
   console.log("get recipes");
