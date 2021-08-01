@@ -1,8 +1,8 @@
 <div class="navbar">
   <div class="navbar__content grid-auto-1fr-auto">
-    <a routerLink="/recipes" mat-icon-button>
+    <button (click)="handleCancel()" mat-icon-button>
       <mat-icon class="material-icons-outlined">close</mat-icon>
-    </a>
+    </button>
 
     <span class="navbar__content__title">
       {{ isEditMode ? 'Rezept bearbeiten' : 'Rezept erstellen' }}

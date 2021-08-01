@@ -77,6 +77,14 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
+  handleCancel() {
+    if (this.isEditMode) {
+      this.router.navigate(['/recipes', this.recipe.id]);
+    } else {
+      this.router.navigate(['/recipes']);
+    }
+  }
+
   handleDelete() {
     this.recipeservice
       .deleteRecipeById(this.recipe.id!)
