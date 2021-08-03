@@ -8,6 +8,14 @@ const RECIPES_PATH = "./recipes.json";
 const PORT = 3000;
 
 function authHandler(req, res, next) {
+  console.log(req.url);
+
+  //no authentication needed to view single recipe
+  if (req.method == "GET" && req.url.includes("/recipes/")) {
+    next();
+    return;
+  }
+
   const authorization = req.header("Authorization");
 
   if (!authorization) {
