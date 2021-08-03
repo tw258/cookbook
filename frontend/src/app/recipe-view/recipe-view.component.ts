@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap, delay } from 'rxjs/operators';
 import { Recipe } from '../models/Recipe';
 import { RecipeService } from '../recipe.service';
 
@@ -8,13 +10,14 @@ import { RecipeService } from '../recipe.service';
   templateUrl: './recipe-view.component.html',
   styleUrls: ['./recipe-view.component.css'],
 })
-export class RecipeViewComponent implements OnInit {
-  recipe!: Recipe;
+export class RecipeViewComponent {
+  recipe$: Observable<Recipe> = this.recipeService
+    .getRecipeById(this.route.snapshot.params.id)
+    .pipe(tap(() => (this.isLoading = false)));
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) {}
+  isLoading = false;
 
-  ngOnInit(): void {
-    const id = this.route.snapshot.params.id;
-    this.recipeService.getRecipeById(id).subscribe(r => (this.recipe = r));
+  constructor(private route: ActivatedRoute, private recipeService: RecipeService) {
+    this.isLoading = true;
   }
 }

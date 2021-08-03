@@ -1,44 +1,48 @@
-<div class="navbar">
-  <div class="navbar__content grid-auto-1fr-auto">
-    <a routerLink=".." mat-icon-button>
-      <mat-icon class="material-icons-outlined">arrow_back_ios_new</mat-icon>
-    </a>
-    <span class="navbar__content__title">{{ recipe.title }}</span>
-    <a routerLink="edit" mat-icon-button>
-      <mat-icon class="material-icons-outlined">edit</mat-icon>
-    </a>
+<ng-container *ngIf="recipe$ | async; let recipe">
+  <div class="navbar">
+    <div class="navbar__content grid-auto-1fr-auto">
+      <a routerLink=".." mat-icon-button>
+        <mat-icon class="material-icons-outlined">arrow_back_ios_new</mat-icon>
+      </a>
+      <span class="navbar__content__title">{{ recipe.title }}</span>
+      <a routerLink="edit" mat-icon-button>
+        <mat-icon class="material-icons-outlined">edit</mat-icon>
+      </a>
+    </div>
   </div>
-</div>
 
-<div class="pt-7"></div>
+  <div class="pt-7"></div>
 
-<div *ngIf="recipe.imagesAsBase64.length > 0" class="mb-1">
-  <slideshow
-    [height]="'225px'"
-    [showArrows]="false"
-    [showDots]="true"
-    [imageUrls]="recipe.imagesAsBase64"
-  ></slideshow>
-</div>
+  <div *ngIf="recipe.imagesAsBase64.length > 0" class="mb-1">
+    <slideshow
+      [height]="'225px'"
+      [showArrows]="false"
+      [showDots]="true"
+      [imageUrls]="recipe.imagesAsBase64"
+    ></slideshow>
+  </div>
 
-<mat-chip-list>
-  <mat-chip>
-    <div class="mr-05 fs-2" style="display: flex; align-items: center; justify-content: center">
-      <span class="material-icons-outlined">access_time</span>
-    </div>
-    {{ recipe.preparationTimeInMinutes }} min
-  </mat-chip>
-  <mat-chip *ngIf="recipe.author">
-    <div class="mr-05 fs-2" style="display: flex; align-items: center; justify-content: center">
-      <span class="material-icons-outlined">person</span>
-    </div>
-    {{ recipe.author }}
-  </mat-chip>
-</mat-chip-list>
+  <mat-chip-list>
+    <mat-chip>
+      <div class="mr-05 fs-2" style="display: flex; align-items: center; justify-content: center">
+        <span class="material-icons-outlined">access_time</span>
+      </div>
+      {{ recipe.preparationTimeInMinutes }} min
+    </mat-chip>
+    <mat-chip *ngIf="recipe.author">
+      <div class="mr-05 fs-2" style="display: flex; align-items: center; justify-content: center">
+        <span class="material-icons-outlined">person</span>
+      </div>
+      {{ recipe.author }}
+    </mat-chip>
+  </mat-chip-list>
 
-<app-ingredients [recipe]="recipe"></app-ingredients>
+  <app-ingredients [recipe]="recipe"></app-ingredients>
 
-<section class="mt-1">
-  <h2>Zubereitung</h2>
-  <p>{{ recipe.note }}</p>
-</section>
+  <section class="mt-1">
+    <h2>Zubereitung</h2>
+    <p>{{ recipe.note }}</p>
+  </section>
+</ng-container>
+
+<app-spinner *ngIf="isLoading"></app-spinner>
