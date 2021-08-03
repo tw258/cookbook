@@ -4,6 +4,7 @@ import { Measurement } from '../models/measurement';
 import { ParameterizedIngredient } from '../models/ParamterizedIngredient';
 import { Recipe } from '../models/Recipe';
 import { RecipeService } from '../recipe.service';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-form',
@@ -15,15 +16,7 @@ export class RecipeFormComponent implements OnInit {
 
   isEditMode = false;
 
-  recipe: Recipe = {
-    note: '',
-    portions: 1,
-    isFavorite: false,
-    parameterizedIngredients: [],
-    preparationTimeInMinutes: 0,
-    title: '',
-    imagesAsBase64: [],
-  };
+  recipe!: Recipe;
 
   currentParameterizedIngredient: ParameterizedIngredient = this.createParameterizedIngredient();
 
@@ -36,10 +29,21 @@ export class RecipeFormComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
     if (id) {
+      this.isEditMode = true;
+
       this.recipeservice.getRecipeById(id).subscribe(r => {
         this.recipe = r;
-        this.isEditMode = true;
       });
+    } else {
+      this.recipe = {
+        note: '',
+        portions: 2,
+        isFavorite: false,
+        parameterizedIngredients: [],
+        preparationTimeInMinutes: 0,
+        title: '',
+        imagesAsBase64: [],
+      };
     }
   }
 

@@ -1,161 +1,169 @@
-<div class="navbar">
-  <div class="navbar__content grid-auto-1fr-auto">
-    <button (click)="handleCancel()" mat-icon-button>
-      <mat-icon class="material-icons-outlined">close</mat-icon>
-    </button>
+<ng-container *ngIf="recipe; else loading">
+  <div class="navbar">
+    <div class="navbar__content grid-auto-1fr-auto">
+      <button (click)="handleCancel()" mat-icon-button>
+        <mat-icon class="material-icons-outlined">close</mat-icon>
+      </button>
 
-    <span class="navbar__content__title">
-      {{ isEditMode ? 'Rezept bearbeiten' : 'Rezept erstellen' }}
-    </span>
-
-    <button
-      [disabled]="!recipe.title || !recipe.note"
-      color="primary"
-      (click)="handleSave()"
-      mat-icon-button
-    >
-      <mat-icon class="material-icons-outlined">check</mat-icon>
-    </button>
-  </div>
-</div>
-
-<form class="pt-7 mb-3">
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input
-      [(ngModel)]="recipe.title"
-      [ngModelOptions]="{ standalone: true }"
-      matInput
-      placeholder="z.B. Spaghetti Bolognese"
-    />
-  </mat-form-field>
-
-  <div class="images-container mt-1">
-    <div *ngFor="let image of recipe.imagesAsBase64; let i = index">
-      <img [src]="image" />
-      <span
-        aria-label="Remove image"
-        class="material-icons-outlined images-container__icon-delete"
-        (click)="handleImageRemove(i)"
-        >remove_circle_outline</span
-      >
-    </div>
-    <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
-  </div>
-  <section class="mt-2">
-    <div class="ingredient-form">
-      <mat-form-field appearance="outline">
-        <mat-label>Menge</mat-label>
-        <input
-          [(ngModel)]="currentParameterizedIngredient.amount"
-          [ngModelOptions]="{ standalone: true }"
-          (focus)="$any($event.target).value = ''"
-          type="number"
-          min="0"
-          matInput
-          placeholder="0,1,..."
-          value="1"
-        />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Einheit</mat-label>
-        <mat-select
-          [(ngModel)]="currentParameterizedIngredient.measurement"
-          [ngModelOptions]="{ standalone: true }"
-          value="Stck"
-        >
-          <mat-option value="g">g</mat-option>
-          <mat-option value="kg">kg</mat-option>
-          <mat-option value="ml">ml</mat-option>
-          <mat-option value="l">l</mat-option>
-          <mat-option value="TL">TL</mat-option>
-          <mat-option value="EL">EL</mat-option>
-          <mat-option value="Prise">Prise</mat-option>
-          <mat-option value="Stck">Stck</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Zutat</mat-label>
-        <input
-          [(ngModel)]="currentParameterizedIngredient.ingredient"
-          (keyup.enter)="handleAddIngredient()"
-          [ngModelOptions]="{ standalone: true }"
-          matInput
-          placeholder="Eier, Mehl, ..."
-        />
-      </mat-form-field>
+      <span class="navbar__content__title">
+        {{ isEditMode ? 'Rezept bearbeiten' : 'Rezept erstellen' }}
+      </span>
 
       <button
-        type="button"
-        [disabled]="
-          !currentParameterizedIngredient.amount ||
-          !currentParameterizedIngredient.ingredient ||
-          !currentParameterizedIngredient.measurement
-        "
+        [disabled]="!recipe.title || !recipe.note"
+        color="primary"
+        (click)="handleSave()"
         mat-icon-button
-        (click)="handleAddIngredient()"
       >
-        <span class="material-icons-outlined">add</span>
+        <mat-icon class="material-icons-outlined">check</mat-icon>
       </button>
     </div>
-    <mat-list class="list-ingredient" role="list">
-      <mat-list-item
-        class="list-ingredient__item"
-        role="listitem"
-        *ngFor="let paramIngr of recipe.parameterizedIngredients"
-      >
-        <div class="list-ingredient__item__ingredient-details">
-          <span>{{ paramIngr.amount }} {{ paramIngr.measurement }} {{ paramIngr.ingredient }}</span>
-          <span
-            aria-label="Remove ingredient"
-            class="material-icons-outlined list-ingredient__item__ingredient-details__icon-delete"
-            (click)="handleRemoveIngredient(paramIngr)"
-            >remove</span
-          >
-        </div>
-      </mat-list-item>
-    </mat-list>
-  </section>
-
-  <mat-form-field class="mt-1" appearance="outline">
-    <mat-label>Zubereitung</mat-label>
-    <textarea
-      [(ngModel)]="recipe.note"
-      [ngModelOptions]="{ standalone: true }"
-      class="textarea-note"
-      matInput
-      placeholder="1. ...  2. ..."
-    ></textarea>
-  </mat-form-field>
-
-  <div class="mt-1 preparationtime-container">
-    <div>
-      <span class="mat-small">Zubereitungszeit: </span>
-      <span class="mat-small"
-        ><strong>{{ recipe.preparationTimeInMinutes }} Min</strong></span
-      >
-    </div>
-    <mat-slider
-      [(ngModel)]="recipe.preparationTimeInMinutes"
-      [ngModelOptions]="{ standalone: true }"
-      step="5"
-      min="0"
-      tickInterval="1"
-      [max]="60"
-      color="primary"
-    ></mat-slider>
   </div>
 
-  <button
-    *ngIf="isEditMode"
-    class="w-100"
-    (click)="handleDelete()"
-    type="button"
-    mat-stroked-button
-    color="warn"
-  >
-    Rezept löschen
-  </button>
-</form>
+  <form class="pt-7 mb-3">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input
+        [(ngModel)]="recipe.title"
+        [ngModelOptions]="{ standalone: true }"
+        matInput
+        placeholder="z.B. Spaghetti Bolognese"
+      />
+    </mat-form-field>
+
+    <div class="images-container mt-1">
+      <div *ngFor="let image of recipe.imagesAsBase64; let i = index">
+        <img [src]="image" />
+        <span
+          aria-label="Remove image"
+          class="material-icons-outlined images-container__icon-delete"
+          (click)="handleImageRemove(i)"
+          >remove_circle_outline</span
+        >
+      </div>
+      <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
+    </div>
+    <section class="mt-2">
+      <div class="ingredient-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Menge</mat-label>
+          <input
+            [(ngModel)]="currentParameterizedIngredient.amount"
+            [ngModelOptions]="{ standalone: true }"
+            (focus)="$any($event.target).value = ''"
+            type="number"
+            min="0"
+            matInput
+            placeholder="0,1,..."
+            value="1"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Einheit</mat-label>
+          <mat-select
+            [(ngModel)]="currentParameterizedIngredient.measurement"
+            [ngModelOptions]="{ standalone: true }"
+            value="Stck"
+          >
+            <mat-option value="g">g</mat-option>
+            <mat-option value="kg">kg</mat-option>
+            <mat-option value="ml">ml</mat-option>
+            <mat-option value="l">l</mat-option>
+            <mat-option value="TL">TL</mat-option>
+            <mat-option value="EL">EL</mat-option>
+            <mat-option value="Prise">Prise</mat-option>
+            <mat-option value="Stck">Stck</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Zutat</mat-label>
+          <input
+            [(ngModel)]="currentParameterizedIngredient.ingredient"
+            (keyup.enter)="handleAddIngredient()"
+            [ngModelOptions]="{ standalone: true }"
+            matInput
+            placeholder="Eier, Mehl, ..."
+          />
+        </mat-form-field>
+
+        <button
+          type="button"
+          [disabled]="
+            !currentParameterizedIngredient.amount ||
+            !currentParameterizedIngredient.ingredient ||
+            !currentParameterizedIngredient.measurement
+          "
+          mat-icon-button
+          (click)="handleAddIngredient()"
+        >
+          <span class="material-icons-outlined">add</span>
+        </button>
+      </div>
+      <mat-list class="list-ingredient" role="list">
+        <mat-list-item
+          class="list-ingredient__item"
+          role="listitem"
+          *ngFor="let paramIngr of recipe.parameterizedIngredients"
+        >
+          <div class="list-ingredient__item__ingredient-details">
+            <span
+              >{{ paramIngr.amount }} {{ paramIngr.measurement }} {{ paramIngr.ingredient }}</span
+            >
+            <span
+              aria-label="Remove ingredient"
+              class="material-icons-outlined list-ingredient__item__ingredient-details__icon-delete"
+              (click)="handleRemoveIngredient(paramIngr)"
+              >remove</span
+            >
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </section>
+
+    <mat-form-field class="mt-1" appearance="outline">
+      <mat-label>Zubereitung</mat-label>
+      <textarea
+        [(ngModel)]="recipe.note"
+        [ngModelOptions]="{ standalone: true }"
+        class="textarea-note"
+        matInput
+        placeholder="1. ...  2. ..."
+      ></textarea>
+    </mat-form-field>
+
+    <div class="mt-1 preparationtime-container">
+      <div>
+        <span class="mat-small">Zubereitungszeit: </span>
+        <span class="mat-small"
+          ><strong>{{ recipe.preparationTimeInMinutes }} Min</strong></span
+        >
+      </div>
+      <mat-slider
+        [(ngModel)]="recipe.preparationTimeInMinutes"
+        [ngModelOptions]="{ standalone: true }"
+        step="5"
+        min="0"
+        tickInterval="1"
+        [max]="60"
+        color="primary"
+      ></mat-slider>
+    </div>
+
+    <button
+      *ngIf="isEditMode"
+      class="w-100"
+      (click)="handleDelete()"
+      type="button"
+      mat-stroked-button
+      color="warn"
+    >
+      Rezept löschen
+    </button>
+  </form>
+</ng-container>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>
