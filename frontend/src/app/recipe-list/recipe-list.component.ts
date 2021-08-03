@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Recipe } from '../models/Recipe';
 import { RecipeService } from '../recipe.service';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-list',
@@ -9,7 +10,7 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = [];
+  recipes!: Recipe[];
   filteredRecipes: Recipe[] = [];
 
   constructor(private recipeservice: RecipeService, private login: LoginService) {}

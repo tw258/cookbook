@@ -1,41 +1,47 @@
-<div class="navbar">
-  <div class="navbar__content grid-auto-1fr-auto">
-    <button (click)="handleLogout()" mat-stroked-button color="warn">
-      <!-- <mat-icon class="material-icons-outlined">power_settings_new</mat-icon> -->
-      Logout
-    </button>
-    <span></span>
-    <div class="navbar__content">
-      <h1 class="logo-font">cookbook.</h1>
+<ng-container *ngIf="recipes; else loading">
+  <div class="navbar">
+    <div class="navbar__content grid-auto-1fr-auto">
+      <button (click)="handleLogout()" mat-stroked-button color="warn">
+        <!-- <mat-icon class="material-icons-outlined">power_settings_new</mat-icon> -->
+        Logout
+      </button>
+      <span></span>
+      <div class="navbar__content">
+        <h1 class="logo-font">cookbook.</h1>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="pt-7"></div>
-<app-recipe-filter (filterInput)="handleFilterInput($event)"></app-recipe-filter>
-<div *ngIf="recipes.length; else noRecipes">
-  <div *ngIf="filteredRecipes.length; else noRecipesWithFilter">
-    <a
-      *ngFor="let recipe of filteredRecipes | sortFavorites; let isFirst = first"
-      [routerLink]="['/recipes', recipe.id]"
-    >
-      <app-recipe-card [recipe]="recipe"> </app-recipe-card>
-    </a>
+  <div class="pt-7"></div>
+  <app-recipe-filter (filterInput)="handleFilterInput($event)"></app-recipe-filter>
+  <div *ngIf="recipes.length; else noRecipes">
+    <div *ngIf="filteredRecipes.length; else noRecipesWithFilter">
+      <a
+        *ngFor="let recipe of filteredRecipes | sortFavorites; let isFirst = first"
+        [routerLink]="['/recipes', recipe.id]"
+      >
+        <app-recipe-card [recipe]="recipe"> </app-recipe-card>
+      </a>
+    </div>
   </div>
-</div>
 
-<ng-template #noRecipes>
-  <div class="text-center mat-body-strong mt-2">
-    Noch keine Rezepte vorhanden. Erstelle
-    <a [routerLink]="['/new-recipe']">hier</a>
-    dein erstes 😉
-  </div>
+  <ng-template #noRecipes>
+    <div class="text-center mat-body-strong mt-2">
+      Noch keine Rezepte vorhanden. Erstelle
+      <a [routerLink]="['/new-recipe']">hier</a>
+      dein erstes 😉
+    </div>
+  </ng-template>
+
+  <ng-template #noRecipesWithFilter>
+    <div class="text-center mat-body-strong mt-2">Kein Rezept entspricht dem Filter 😢</div>
+  </ng-template>
+
+  <a class="btn-add-recipe" [routerLink]="['/new-recipe']" mat-fab color="primary">
+    <mat-icon>add</mat-icon>
+  </a>
+</ng-container>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
 </ng-template>
-
-<ng-template #noRecipesWithFilter>
-  <div class="text-center mat-body-strong mt-2">Kein Rezept entspricht dem Filter 😢</div>
-</ng-template>
-
-<a class="btn-add-recipe" [routerLink]="['/new-recipe']" mat-fab color="primary">
-  <mat-icon>add</mat-icon>
-</a>
