@@ -14,15 +14,14 @@ export class LoginComponent implements OnInit {
 
   constructor(private login: LoginService, private router: Router) {}
   ngOnInit(): void {
-    const username = localStorage.getItem('username');
-    const password = localStorage.getItem('password');
-    if (username && password) {
-      this.login.getLogin(username, password).subscribe(() => this.router.navigate(['/recipes']));
+    if (this.login.checkIfCredentialsStored()) {
+      const { username, password } = this.login.getStoredCredentials();
+      this.login.tryLogin(username, password).subscribe(() => this.router.navigate(['/recipes']));
     }
   }
 
   handleLogin() {
-    this.login.getLogin(this.username, this.password).subscribe(
+    this.login.tryLogin(this.username, this.password).subscribe(
       () => this.router.navigate(['/recipes']),
       () => (this.showInvalidLoginAlert = true),
     );
