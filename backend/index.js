@@ -1,11 +1,18 @@
 const express = require("express");
+const http = require("http");
+const https = require("https");
 const cors = require("cors");
 const userdb = require("./users.json");
 const fs = require("fs");
 const { nanoid } = require("nanoid");
 
+// var privateKey = fs.readFileSync("cert/privkey.pem", "utf8");
+// var certificate = fs.readFileSync("cert/cert.pem", "utf8");
+// var credentials = { key: privateKey, cert: certificate };
+
 const RECIPES_PATH = "./recipes.json";
-const PORT = 3000;
+const PORT_HTTP = 3000;
+const PORT_HTTPS = 3001;
 
 function authHandler(req, res, next) {
   console.log(req.url);
@@ -134,4 +141,14 @@ function storeRecipes(recipes) {
   fs.writeFileSync(RECIPES_PATH, JSON.stringify(recipes));
 }
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+const httpServer = http.createServer(app);
+// const httpsServer = https.createServer(credentials, app);
+
+httpServer.listen(PORT_HTTP, () =>
+  console.log(`HTTP Server: Listening on port ${PORT_HTTP}`)
+);
+
+// httpsServer.listen(
+//   PORT_HTTPS,
+//   () => `HTTPS Server: Listening on port ${PORT_HTTPS}`
+// );
