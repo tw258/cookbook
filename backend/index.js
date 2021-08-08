@@ -6,9 +6,9 @@ const userdb = require("./users.json");
 const fs = require("fs");
 const { nanoid } = require("nanoid");
 
-// var privateKey = fs.readFileSync("cert/privkey.pem", "utf8");
-// var certificate = fs.readFileSync("cert/cert.pem", "utf8");
-// var credentials = { key: privateKey, cert: certificate };
+var privateKey = fs.readFileSync("cert/privkey.pem", "utf8");
+var certificate = fs.readFileSync("cert/cert.pem", "utf8");
+var credentials = { key: privateKey, cert: certificate };
 
 const RECIPES_PATH = "./recipes.json";
 const PORT_HTTP = 3000;
@@ -18,7 +18,8 @@ function authHandler(req, res, next) {
   console.log(req.url);
 
   //no authentication needed to view single recipe
-  if (req.method == "GET" && req.url.includes("/recipes/")) {
+  const recipeViewPattern = /\/recipes\/.+/;
+  if (req.method == "GET" && recipeViewPattern.test(req.url)) {
     next();
     return;
   }
@@ -142,13 +143,12 @@ function storeRecipes(recipes) {
 }
 
 const httpServer = http.createServer(app);
-// const httpsServer = https.createServer(credentials, app);
+const httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(PORT_HTTP, () =>
-  console.log(`HTTP Server: Listening on port ${PORT_HTTP}`)
-);
-
-// httpsServer.listen(
-//   PORT_HTTPS,
-//   () => `HTTPS Server: Listening on port ${PORT_HTTPS}`
+// httpServer.listen(PORT_HTTP, () =>
+//   console.log(`HTTP Server: Listening on port ${PORT_HTTP}`)
 // );
+
+httpsServer.listen(PORT_HTTPS, () =>
+  console.log(`HTTPS Server: Listening on port ${PORT_HTTPS}`)
+);
