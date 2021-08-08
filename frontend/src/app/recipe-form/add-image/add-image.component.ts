@@ -32,7 +32,7 @@ export class AddImageComponent {
   }
 
   private async compressImage(file: File) {
-    return await imageCompression(file, { maxSizeMB: 0.2 });
+    return await imageCompression(file, { maxSizeMB: 0.05 });
   }
 
   private toBase64(file: File): Promise<any> {
