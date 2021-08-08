@@ -9,3 +9,5 @@
 6. `git reset --hard origin/master`
 7. `git merge my_feature`
 8. `git push origin`
+9. `git branch -d my_feature`
+10. `git push -d origin my_feature`
