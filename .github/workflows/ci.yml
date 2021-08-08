@@ -17,13 +17,15 @@ jobs:
 
       - name: Install npm packages
         run: npm i
+        working-directory: ${{env.working-directory}}
 
       - name: Build for production
         run: npm run build
+        working-directory: ${{env.working-directory}}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.4.9
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
-          folder: dist/cookbook
+          folder: frontend/dist/cookbook
