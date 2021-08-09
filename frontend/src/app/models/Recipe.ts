@@ -6,7 +6,6 @@ export interface Recipe {
   author?: string;
   note: string;
   imagesAsBase64: string[];
-  isFavorite: boolean;
   portions: number;
   parameterizedIngredients: ParameterizedIngredient[];
   creationDateAsIsoString?: string;

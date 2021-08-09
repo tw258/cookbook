@@ -8,8 +8,4 @@ import { Recipe } from '../models/Recipe';
 })
 export class RecipeCardComponent {
   @Input() recipe!: Recipe;
-
-  handleFavorite() {
-    this.recipe.isFavorite = !this.recipe.isFavorite;
-  }
 }

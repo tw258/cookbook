@@ -22,21 +22,12 @@
           ><strong>Hauptgericht</strong> von <strong>{{ recipe.author }}</strong> mit:
         </span>
       </div>
-      <div class="card-content__chips-container">
+      <div class="card-content__chips-container mt-1">
         <app-chip
           *ngFor="let ingr of recipe.parameterizedIngredients"
           [text]="ingr.ingredient"
         ></app-chip>
       </div>
     </div>
-
-    <button
-      class="card-content__button-favorite"
-      (click)="$event.stopPropagation(); $event.preventDefault(); handleFavorite()"
-      mat-icon-button
-    >
-      <mat-icon *ngIf="recipe.isFavorite">favorite</mat-icon>
-      <mat-icon *ngIf="!recipe.isFavorite">favorite_border</mat-icon>
-    </button>
   </mat-card-content>
 </mat-card>

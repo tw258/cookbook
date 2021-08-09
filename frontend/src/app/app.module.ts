@@ -15,7 +15,6 @@ import { IngredientsComponent } from './recipe-view/ingredients/ingredients.comp
 import { MultiplyPortionsPipe } from './recipe-view/ingredients/multiply-portions.pipe';
 import { ChipComponent } from './recipe-card/chip/chip.component';
 import { CommonModule } from '@angular/common';
-import { SortFavoritesPipe } from './recipe-list/sort-favorites.pipe';
 import { RecipeFilterComponent } from './recipe-list/recipe-filter/recipe-filter.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -45,7 +44,6 @@ const routes: Route[] = [
     IngredientsComponent,
     MultiplyPortionsPipe,
     ChipComponent,
-    SortFavoritesPipe,
     RecipeFilterComponent,
     LoginComponent,
   ],

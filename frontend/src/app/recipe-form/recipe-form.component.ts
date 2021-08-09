@@ -38,7 +38,6 @@ export class RecipeFormComponent implements OnInit {
       this.recipe = {
         note: '',
         portions: 2,
-        isFavorite: false,
         parameterizedIngredients: [],
         preparationTimeInMinutes: 0,
         title: '',
@@ -75,7 +74,7 @@ export class RecipeFormComponent implements OnInit {
         .updateRecipeById(this.recipe.id!, this.recipe)
         .subscribe(() => this.router.navigate(['/recipes', this.recipe.id]));
     } else {
-      this.recipe.author = localStorage.getItem("username")!;
+      this.recipe.author = localStorage.getItem('username')!;
 
       this.recipeservice
         .addRecipe(this.recipe)

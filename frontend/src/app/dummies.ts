@@ -4,7 +4,6 @@ import { Recipe } from './models/Recipe';
 export const dummyRecipes: Recipe[] = [
   {
     id: '1',
-    isFavorite: false,
     creationDateAsIsoString: '2021-06-29T19:20:11.643Z',
     title: 'Spaghetti Bolognese',
     author: 'Oscar96',
@@ -27,7 +26,6 @@ export const dummyRecipes: Recipe[] = [
     creationDateAsIsoString: '2021-06-29T19:20:11.643Z',
     title: 'Pizza',
     author: 'Tobi',
-    isFavorite: true,
     note: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum...',
     preparationTimeInMinutes: 40,
     imagesAsBase64: [
@@ -58,7 +56,6 @@ export const dummyRecipes: Recipe[] = [
     creationDateAsIsoString: '2021-06-29T19:20:11.643Z',
     title: 'Schnitzel',
     author: 'Tobi',
-    isFavorite: true,
     note: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum...',
     preparationTimeInMinutes: 20,
     imagesAsBase64: [],

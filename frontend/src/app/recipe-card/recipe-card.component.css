@@ -6,7 +6,7 @@ mat-card-content {
   display: grid;
   grid-template-columns: 100px 1fr;
   gap: 0 10px;
-  height: 80px;
+  height: 100px;
 }
 
 .card-content__thumbnail-container {
@@ -30,13 +30,6 @@ mat-card-content {
   margin: auto;
 }
 
-.card-content__button-favorite {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
 .card-content__chips-container {
   word-break: break-all;
-  margin-top: 5px;
 }

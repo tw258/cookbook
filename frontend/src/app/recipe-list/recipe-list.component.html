@@ -1,10 +1,7 @@
 <ng-container *ngIf="recipes; else loading">
   <div class="navbar">
     <div class="navbar__content grid-auto-1fr-auto">
-      <button (click)="handleLogout()" mat-stroked-button color="warn">
-        <!-- <mat-icon class="material-icons-outlined">power_settings_new</mat-icon> -->
-        Abmelden
-      </button>
+      <button (click)="handleLogout()" mat-button color="warn">Abmelden</button>
       <span></span>
       <div class="navbar__content">
         <h1 class="logo-font">cookbook.</h1>
@@ -17,7 +14,7 @@
   <div *ngIf="recipes.length; else noRecipes">
     <div *ngIf="filteredRecipes.length; else noRecipesWithFilter">
       <a
-        *ngFor="let recipe of filteredRecipes | sortFavorites; let isFirst = first"
+        *ngFor="let recipe of filteredRecipes; let isFirst = first"
         [routerLink]="['/recipes', recipe.id]"
       >
         <app-recipe-card [recipe]="recipe"> </app-recipe-card>
@@ -26,11 +23,7 @@
   </div>
 
   <ng-template #noRecipes>
-    <div class="text-center mat-body-strong mt-2">
-      Noch keine Rezepte vorhanden. Erstelle
-      <a [routerLink]="['/new-recipe']">hier</a>
-      dein erstes 😉
-    </div>
+    <div class="text-center mat-body-strong mt-2">Noch keine Rezepte vorhanden.</div>
   </ng-template>
 
   <ng-template #noRecipesWithFilter>
