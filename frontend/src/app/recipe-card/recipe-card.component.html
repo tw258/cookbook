@@ -22,7 +22,7 @@
           ><strong>Hauptgericht</strong> von <strong>{{ recipe.author }}</strong> mit:
         </span>
       </div>
-      <div class="mt-1">
+      <div class="card-content__chips-container">
         <app-chip
           *ngFor="let ingr of recipe.parameterizedIngredients"
           [text]="ingr.ingredient"

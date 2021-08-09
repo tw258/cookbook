@@ -35,3 +35,8 @@ mat-card-content {
   top: 10px;
   right: 10px;
 }
+
+.card-content__chips-container {
+  word-break: break-all;
+  margin-top: 5px;
+}
