@@ -12,6 +12,10 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
+body * {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
 /*Browser overwrites */
 a {
   color: var(--primary);
