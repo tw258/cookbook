@@ -75,6 +75,8 @@ export class RecipeFormComponent implements OnInit {
         .updateRecipeById(this.recipe.id!, this.recipe)
         .subscribe(() => this.router.navigate(['/recipes', this.recipe.id]));
     } else {
+      this.recipe.author = localStorage.getItem("username")!;
+
       this.recipeservice
         .addRecipe(this.recipe)
         .subscribe(r => this.router.navigate(['/recipes', r.id]));
