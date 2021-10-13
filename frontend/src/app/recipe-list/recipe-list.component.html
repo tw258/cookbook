@@ -1,33 +1,48 @@
 <ng-container *ngIf="recipes; else loading">
   <div class="navbar">
     <div class="navbar__content grid-auto-1fr-auto">
-      <button (click)="handleLogout()" mat-button color="warn">Abmelden</button>
+      <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button (click)="handleLogout()" mat-menu-item>
+            <mat-icon style="transform: rotate(180deg)">logout</mat-icon>
+            Abmelden
+          </button>
+
+          <a href="https://github.com/tw258/cookbook" target="blank" mat-menu-item>
+            <mat-icon>info_outline</mat-icon>
+            Über Cookbook
+          </a>
+        </mat-menu>
+      </div>
       <span></span>
       <div class="navbar__content">
-        <h1 class="logo-font">cookbook.</h1>
+        <h1 class="logo-font">Cookbook</h1>
       </div>
     </div>
   </div>
 
   <div class="pt-7"></div>
   <app-recipe-filter (filterInput)="handleFilterInput($event)"></app-recipe-filter>
-  <div *ngIf="recipes.length; else noRecipes">
-    <div *ngIf="filteredRecipes.length; else noRecipesWithFilter">
+  <ng-container *ngIf="recipes.length; else noRecipes">
+    <ng-container *ngIf="filteredRecipes.length; else noRecipesWithFilter">
       <a
         *ngFor="let recipe of filteredRecipes; let isFirst = first"
         [routerLink]="['/recipes', recipe.id]"
       >
         <app-recipe-card [recipe]="recipe"> </app-recipe-card>
       </a>
-    </div>
-  </div>
+    </ng-container>
+  </ng-container>
 
   <ng-template #noRecipes>
     <div class="text-center mat-body-strong mt-2">Noch keine Rezepte vorhanden.</div>
   </ng-template>
 
   <ng-template #noRecipesWithFilter>
-    <div class="text-center mat-body-strong mt-2">Kein Rezept entspricht dem Filter 😢</div>
+    <div class="text-center mat-body-strong mt-2">Kein Rezept entspricht dem Filter.</div>
   </ng-template>
 
   <a class="btn-add-recipe" [routerLink]="['/new-recipe']" mat-fab color="primary">

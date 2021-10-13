@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
   showInvalidLoginAlert = false;
+  isPasswordVisible = false;
 
   constructor(private login: LoginService, private router: Router) {}
   ngOnInit(): void {

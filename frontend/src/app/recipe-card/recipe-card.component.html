@@ -1,33 +1,30 @@
-<mat-card class="mt-2">
+<mat-card class="mt-1">
   <mat-card-content class="card-content">
-    <div class="card-content__thumbnail-container">
-      <img
-        class="card-content__thumbnail-container__thumbnail"
-        *ngIf="recipe.imagesAsBase64.length > 0; else NoImages"
-        [src]="recipe.imagesAsBase64[0]"
-      />
+    <!-- Thumbnail -->
+    <section *ngIf="recipe.imagesAsBase64.length > 0" class="card-content__thumbnail-container">
+      <img class="card-content__thumbnail-container__thumbnail" [src]="recipe.imagesAsBase64[0]" />
+    </section>
 
-      <ng-template #NoImages>
-        <img
-          class="card-content__thumbnail-container__thumbnail--no-image"
-          src="assets/images/recipe-thumbnail.png"
-        />
-      </ng-template>
-    </div>
+    <!-- Title, Type, and Ingredients -->
+    <section class="card-content__body">
+      <h2 class="card-content__body__title">
+        {{ recipe.title }}
+      </h2>
 
-    <div>
-      <div>
-        <mat-card-title>{{ recipe.title }}</mat-card-title>
-        <span class="mat-caption"
-          ><strong>Hauptgericht</strong> von <strong>{{ recipe.author }}</strong> mit:
-        </span>
-      </div>
-      <div class="card-content__chips-container mt-1">
-        <app-chip
-          *ngFor="let ingr of recipe.parameterizedIngredients"
-          [text]="ingr.ingredient"
-        ></app-chip>
-      </div>
-    </div>
+      <span class="mat-caption"
+        >Zubereitung in <strong>{{ recipe.preparationTimeInMinutes }}</strong> Minuten mit
+        <strong>{{ recipe.parameterizedIngredients.length }}</strong> Zutaten:</span
+      >
+
+      <ul>
+        <li *ngFor="let ingr of recipe.parameterizedIngredients.slice(0, 4)">
+          {{ ingr.ingredient }}
+        </li>
+        <li *ngIf="recipe.parameterizedIngredients.length === 5">
+          {{ recipe.parameterizedIngredients[4].ingredient }}
+        </li>
+        <li *ngIf="recipe.parameterizedIngredients.length > 5">...</li>
+      </ul>
+    </section>
   </mat-card-content>
 </mat-card>

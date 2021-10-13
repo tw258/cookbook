@@ -13,7 +13,6 @@ import { AddImageComponent } from './recipe-form/add-image/add-image.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 import { IngredientsComponent } from './recipe-view/ingredients/ingredients.component';
 import { MultiplyPortionsPipe } from './recipe-view/ingredients/multiply-portions.pipe';
-import { ChipComponent } from './recipe-card/chip/chip.component';
 import { CommonModule } from '@angular/common';
 import { RecipeFilterComponent } from './recipe-list/recipe-filter/recipe-filter.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -43,7 +42,6 @@ const routes: Route[] = [
     RecipeViewComponent,
     IngredientsComponent,
     MultiplyPortionsPipe,
-    ChipComponent,
     RecipeFilterComponent,
     LoginComponent,
   ],

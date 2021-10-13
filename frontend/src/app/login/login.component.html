@@ -1,6 +1,6 @@
 <div class="navbar">
   <div class="navbar__content">
-    <span class="logo-font">cookbook.</span>
+    <span class="logo-font">Cookbook</span>
   </div>
 </div>
 
@@ -31,8 +31,11 @@
       [ngModelOptions]="{ standalone: true }"
       matInput
       placeholder="Alligator3"
-      type="password"
+      [type]="isPasswordVisible ? 'text' : 'password'"
     />
+    <button mat-icon-button matSuffix (click)="isPasswordVisible = !isPasswordVisible">
+      <mat-icon>{{ !isPasswordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
   </mat-form-field>
 
   <button

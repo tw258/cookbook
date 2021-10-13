@@ -2,11 +2,11 @@
   display: grid;
   align-items: center;
   text-align: right;
-  padding: 0 15px;
+  padding: 0 10px;
 }
 
 .btn-add-recipe {
   position: fixed;
-  bottom: 40px;
-  right: 40px;
+  bottom: 30px;
+  right: 30px;
 }

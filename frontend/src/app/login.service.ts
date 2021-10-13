@@ -14,24 +14,28 @@ export class LoginService {
     localStorage.setItem('username', username);
     localStorage.setItem('password', password);
     const url = environment.apiUrl + `/login`;
+    
     return this.http.get<void>(url);
   }
 
   logout() {
     localStorage.removeItem('username');
     localStorage.removeItem('password');
+
     this.router.navigate(['/login']);
   }
 
   checkIfCredentialsStored(): boolean {
     const username = localStorage.getItem('username');
     const password = localStorage.getItem('password');
+
     return !!username && !!password;
   }
 
   getStoredCredentials(): { username: string; password: string } {
     const username = localStorage.getItem('username') || '';
     const password = localStorage.getItem('password') || '';
+    
     return {
       username,
       password,

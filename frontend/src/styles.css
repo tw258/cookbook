@@ -28,21 +28,15 @@ strong {
 
 /*Logo font */
 .logo-font {
-  font-family: 'Titillium Web', sans-serif !important;
-  font-style: italic !important;
-  font-size: 23px !important;
+  font-family: 'Dancing Script', sans-serif !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
   margin-bottom: 0 !important;
 }
 
 /* Material overwrites */
 .mat-form-field-wrapper {
   padding-bottom: 0 !important;
-}
-
-mat-card-title {
-  margin: 0 !important;
-  padding: 0 !important;
-  font-size: 17px !important;
 }
 
 mat-card {
@@ -139,7 +133,6 @@ mat-card {
 .navbar__content {
   max-width: 700px;
   margin: auto;
-  padding: 0 3px;
   height: 100%;
 }
 
