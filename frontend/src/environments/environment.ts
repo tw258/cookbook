@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://cloud.wt-its.de:3001',
+  apiUrl: 'http://localhost:3000',
 };
