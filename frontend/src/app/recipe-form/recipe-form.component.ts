@@ -4,7 +4,6 @@ import { Measurement } from '../models/measurement';
 import { ParameterizedIngredient } from '../models/ParamterizedIngredient';
 import { Recipe } from '../models/Recipe';
 import { RecipeService } from '../recipe.service';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-form',
@@ -79,6 +78,12 @@ export class RecipeFormComponent implements OnInit {
       this.recipeservice
         .addRecipe(this.recipe)
         .subscribe(r => this.router.navigate(['/recipes', r.id]));
+    }
+  }
+
+  handlePreparationTimeChange(newPreparationTime: number | null): void {
+    if (newPreparationTime) {
+      this.recipe.preparationTimeInMinutes = newPreparationTime;
     }
   }
 

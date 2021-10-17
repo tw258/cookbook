@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
-import imageCompression from 'browser-image-compression';
+import Compress from 'compress.js';
 
 @Component({
   selector: 'app-add-image',
@@ -7,35 +7,45 @@ import imageCompression from 'browser-image-compression';
   styleUrls: ['./add-image.component.css'],
 })
 export class AddImageComponent {
-  @Output() imageUpload = new EventEmitter<string>();
+  @Output() imageAdd = new EventEmitter<string>();
   @ViewChild('imageInput') imageInput: ElementRef<HTMLInputElement> | undefined;
 
   isLoading = false;
 
+  private compressor = new Compress();
+
   async handleImageSelect(images: FileList) {
     this.isLoading = true;
     for (let i = 0; i < images.length; i++) {
-      const image = images.item(i);
+      let image: any = images.item(i);
 
-      if (image === null) {
+      if (!image) {
         return;
       }
 
-      const compressedImage = await this.compressImage(image);
-      const imageAsBase64 = await this.toBase64(compressedImage);
+      let imageAsBase64;
+      if (image.size > 100000) {
+        // Image is bigger than 100 KB, so we compress it.
 
-      this.imageUpload.emit(imageAsBase64);
+        const compressOptions: any = {
+          size: 0.1, // The max size in MB.
+          // See https://www.npmjs.com/package/compress.js for more options.
+        };
+
+        image = (await this.compressor.compress([image], compressOptions))[0];
+        imageAsBase64 = `${image.prefix}${image.data}`;
+      } else {
+        imageAsBase64 = await this.imageToBase64(image);
+      }
+
+      this.imageAdd.emit(imageAsBase64);
     }
 
     this.isLoading = false;
     this.imageInput!.nativeElement.value = '';
   }
 
-  private async compressImage(file: File) {
-    return await imageCompression(file, { maxSizeMB: 0.05 });
-  }
-
-  private toBase64(file: File): Promise<any> {
+  private imageToBase64(file: File): Promise<any> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);

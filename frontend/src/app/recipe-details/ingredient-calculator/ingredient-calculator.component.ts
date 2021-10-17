@@ -41,7 +41,7 @@ export class IngredientCalculatorComponent {
         (acc += `- ${(curr.amount / this._recipe.portions) * this.currentPortions} ${
           curr.measurement
         } ${curr.ingredient}\n`),
-      `Einkaufsliste für ${this._recipe.title}:\n\n`,
+      `Einkaufsliste für "${this._recipe.title}" (${this.currentPortions} Pers.):\n\n`,
     );
 
     if (values.length == 0) {

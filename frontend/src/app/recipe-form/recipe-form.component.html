@@ -41,7 +41,7 @@
           >remove_circle_outline</span
         >
       </div>
-      <app-add-image (imageUpload)="handleImageAdd($event)"></app-add-image>
+      <app-add-image (imageAdd)="handleImageAdd($event)"></app-add-image>
     </div>
     <section class="mt-2">
       <div class="ingredient-form">
@@ -135,14 +135,14 @@
 
     <div class="mt-1 preparationtime-container">
       <div>
-        <span class="mat-small">Zubereitungszeit: </span>
-        <span class="mat-small"
-          ><strong>{{ recipe.preparationTimeInMinutes }} Min</strong></span
-        >
+        <span
+          >Zubereitungszeit:
+          <strong>{{ recipe.preparationTimeInMinutes }} Min</strong>
+        </span>
       </div>
       <mat-slider
-        [(ngModel)]="recipe.preparationTimeInMinutes"
-        [ngModelOptions]="{ standalone: true }"
+        [value]="recipe.preparationTimeInMinutes"
+        (input)="handlePreparationTimeChange($event.value)"
         step="5"
         min="0"
         tickInterval="1"

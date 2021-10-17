@@ -1,11 +1,8 @@
-<div class="navbar">
-  <div class="navbar__content">
-    <span class="logo-font">Cookbook</span>
-  </div>
+<div class="header-with-logo">
+  <span class="logo-font">Cookbook</span>
 </div>
 
-<h1>Anmeldung</h1>
-
+<h2>Anmeldung</h2>
 <app-alert
   type="error"
   text="Benutzername oder Passwort falsch."
@@ -40,7 +37,7 @@
 
   <button
     [disabled]="!password || !username"
-    class="mt-3"
+    class="mt-2"
     mat-raised-button
     color="primary"
     (click)="handleLogin()"
