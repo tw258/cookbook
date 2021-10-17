@@ -11,8 +11,8 @@ import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 import { FormsModule } from '@angular/forms';
 import { AddImageComponent } from './recipe-form/add-image/add-image.component';
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
-import { IngredientsComponent } from './recipe-details/ingredients/ingredients.component';
-import { MultiplyPortionsPipe } from './recipe-details/ingredients/multiply-portions.pipe';
+import { IngredientCalculatorComponent } from './recipe-details/ingredient-calculator/ingredient-calculator.component';
+import { MultiplyPortionsPipe } from './recipe-details/ingredient-calculator/multiply-portions.pipe';
 import { CommonModule } from '@angular/common';
 import { RecipeFilterComponent } from './recipe-list/recipe-filter/recipe-filter.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -40,7 +40,7 @@ const routes: Route[] = [
     RecipeCardComponent,
     AddImageComponent,
     RecipeDetailsComponent,
-    IngredientsComponent,
+    IngredientCalculatorComponent,
     MultiplyPortionsPipe,
     RecipeFilterComponent,
     LoginComponent,

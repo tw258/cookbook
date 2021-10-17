@@ -6,11 +6,11 @@ import { Recipe } from 'src/app/models/Recipe';
 import { ParameterizedIngredient } from 'src/app/models/ParamterizedIngredient';
 
 @Component({
-  selector: 'app-ingredients',
-  templateUrl: './ingredients.component.html',
-  styleUrls: ['./ingredients.component.css'],
+  selector: 'app-ingredient-calculator',
+  templateUrl: './ingredient-calculator.component.html',
+  styleUrls: ['./ingredient-calculator.component.css'],
 })
-export class IngredientsComponent {
+export class IngredientCalculatorComponent {
   _recipe!: Recipe;
   currentPortions!: number;
 
