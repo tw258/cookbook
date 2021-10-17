@@ -10,9 +10,9 @@ import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 import { FormsModule } from '@angular/forms';
 import { AddImageComponent } from './recipe-form/add-image/add-image.component';
-import { RecipeViewComponent } from './recipe-view/recipe-view.component';
-import { IngredientsComponent } from './recipe-view/ingredients/ingredients.component';
-import { MultiplyPortionsPipe } from './recipe-view/ingredients/multiply-portions.pipe';
+import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
+import { IngredientsComponent } from './recipe-details/ingredients/ingredients.component';
+import { MultiplyPortionsPipe } from './recipe-details/ingredients/multiply-portions.pipe';
 import { CommonModule } from '@angular/common';
 import { RecipeFilterComponent } from './recipe-list/recipe-filter/recipe-filter.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -27,7 +27,7 @@ const routes: Route[] = [
   { path: 'login', component: LoginComponent },
   { path: 'recipes', component: RecipeListComponent },
   { path: 'new-recipe', component: RecipeFormComponent },
-  { path: 'recipes/:id', component: RecipeViewComponent },
+  { path: 'recipes/:id', component: RecipeDetailsComponent },
   { path: 'recipes/:id/edit', component: RecipeFormComponent },
 ];
 
@@ -39,7 +39,7 @@ const routes: Route[] = [
     RecipeFormComponent,
     RecipeCardComponent,
     AddImageComponent,
-    RecipeViewComponent,
+    RecipeDetailsComponent,
     IngredientsComponent,
     MultiplyPortionsPipe,
     RecipeFilterComponent,

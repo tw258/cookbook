@@ -7,11 +7,11 @@ import { Recipe } from '../models/Recipe';
 import { RecipeService } from '../recipe.service';
 
 @Component({
-  selector: 'app-recipe-view',
-  templateUrl: './recipe-view.component.html',
-  styleUrls: ['./recipe-view.component.css'],
+  selector: 'app-recipe-details',
+  templateUrl: './recipe-details.component.html',
+  styleUrls: ['./recipe-details.component.css'],
 })
-export class RecipeViewComponent {
+export class RecipeDetailsComponent {
   recipe$: Observable<Recipe> = this.recipeService
     .getRecipeById(this.route.snapshot.params.id)
     .pipe(tap(() => (this.isLoading = false)));
