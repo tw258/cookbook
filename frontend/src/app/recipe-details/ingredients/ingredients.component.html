@@ -1,4 +1,4 @@
-<div class="mt-1">
+<div>
   <div class="ingredient-calculator">
     <div class="mat-h3 mb-0">
       <span>Zutaten für</span>
@@ -9,7 +9,7 @@
       <button color="primary" style="margin: 0 5px" (click)="handleAddPortion()" mat-icon-button>
         <mat-icon>add</mat-icon>
       </button>
-      <span>Personen</span>
+      <span>{{ currentPortions === 1 ? 'Person' : 'Personen' }}</span>
     </div>
     <div class="mr-05">
       <button mat-icon-button (click)="handleAddToClipboard(selectableIngredients)">

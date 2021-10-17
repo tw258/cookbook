@@ -12,36 +12,25 @@
   </div>
 
   <div class="pt-7"></div>
-
   <div *ngIf="recipe.imagesAsBase64.length > 0" class="mb-1">
     <slideshow
-      [height]="'225px'"
+      height="200px"
       [showArrows]="false"
-      [showDots]="true"
+      [showDots]="recipe.imagesAsBase64.length > 1"
       [imageUrls]="recipe.imagesAsBase64"
     ></slideshow>
   </div>
 
-  <mat-chip-list>
-    <mat-chip>
-      <div class="mr-05 fs-2" style="display: flex; align-items: center; justify-content: center">
-        <span class="material-icons-outlined">access_time</span>
-      </div>
-      {{ recipe.preparationTimeInMinutes }} min
-    </mat-chip>
-    <mat-chip *ngIf="recipe.author">
-      <div class="mr-05 fs-2" style="display: flex; align-items: center; justify-content: center">
-        <span class="material-icons-outlined">person</span>
-      </div>
-      {{ recipe.author }}
-    </mat-chip>
-  </mat-chip-list>
-
-  <app-ingredients [recipe]="recipe"></app-ingredients>
-
+  <!-- Ingredient Calculator -->
   <section class="mt-1">
-    <h2>Zubereitung</h2>
-    <pre>{{ recipe.note }}</pre>
+    <h2 style="margin: 0">Zutatenrechner</h2>
+    <app-ingredients [recipe]="recipe"></app-ingredients>
+  </section>
+
+  <!-- Preperation Steps -->
+  <section class="mt-1">
+    <h2 style="margin: 0">Zubereitung in {{ recipe.preparationTimeInMinutes }} Minuten:</h2>
+    <pre style="white-space: pre-wrap">{{ recipe.note }}</pre>
   </section>
 </ng-container>
 

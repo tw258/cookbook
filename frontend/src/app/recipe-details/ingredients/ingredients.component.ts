@@ -35,16 +35,20 @@ export class IngredientsComponent {
     const values: ParameterizedIngredient[] = selectionList.selectedOptions.selected.map(
       o => o.value,
     );
+
     const stringToCopy = values.reduce(
       (acc, curr) =>
-        (acc += `${curr.amount * this.currentPortions} ${curr.measurement} ${curr.ingredient}\n`),
-      '',
+        (acc += `- ${(curr.amount / this._recipe.portions) * this.currentPortions} ${
+          curr.measurement
+        } ${curr.ingredient}\n`),
+      `Einkaufsliste für ${this._recipe.title}:\n\n`,
     );
+
     if (values.length == 0) {
       this.snackBar.open('Keine Zutaten ausgewählt', 'OK', { duration: 2000 });
     } else {
       this.clipboard.copy(stringToCopy);
-      this.snackBar.open('Ausgewählte Zutaten kopiert', 'OK', { duration: 2000 });
+      this.snackBar.open(`${values.length} ausgewählte Zutaten kopiert`, 'OK', { duration: 2000 });
     }
   }
 }

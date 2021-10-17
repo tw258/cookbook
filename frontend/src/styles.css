@@ -16,6 +16,10 @@ body * {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
+h2 {
+  font-size: 18px !important;
+}
+
 /*Browser overwrites */
 a {
   color: var(--primary);
