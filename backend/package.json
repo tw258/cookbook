@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "pm2 start index.js --watch && pm2 logs",
+    "killwatch": "pm2 stop all"
   },
   "keywords": [],
   "author": "",
