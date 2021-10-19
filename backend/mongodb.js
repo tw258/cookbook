@@ -11,6 +11,20 @@ class Mongodb {
     return recipes;
   }
 
+  async getImages(imageIds) {
+    const collection = await this.connect("images");
+    const images = collection.find({ imageIds }).toArray();
+    return images;
+  }
+
+  async authenticateUser(name, password) {
+    const collection = await this.connect("users");
+    const foundUser = await collection.findOne({ name });
+    if (foundUser == null) return false;
+    if (foundUser.password == password) return true;
+    return false;
+  }
+
   async connect(collectionName) {
     await this.client.connect();
     console.log("Connected successfully to server");
