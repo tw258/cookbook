@@ -21,6 +21,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpProxyInterceptor } from './http-proxy.interceptor';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { ImageSliderComponent } from './recipe-details/image-slider/image-slider.component';
 
 const routes: Route[] = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -44,6 +45,7 @@ const routes: Route[] = [
     MultiplyPortionsPipe,
     RecipeFilterComponent,
     LoginComponent,
+    ImageSliderComponent,
   ],
   imports: [
     //eigene und Angular Module

@@ -1,0 +1,6 @@
+<div #imgContainer>
+  <img [src]="recipe!.imagesAsBase64[currentIndex]" />
+  <span class="current-index mat-caption">
+    {{ currentIndex + 1 }}/{{ recipe.imagesAsBase64.length }}
+  </span>
+</div>

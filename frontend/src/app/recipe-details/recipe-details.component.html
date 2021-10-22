@@ -13,12 +13,15 @@
 
   <div class="pt-7"></div>
   <div *ngIf="recipe.imagesAsBase64.length > 0" class="mb-1">
-    <slideshow
+    <app-image-slider [recipe]="recipe"></app-image-slider>
+    <!-- <slideshow
       height="200px"
       [showArrows]="false"
+      [fullscreen]="false"
+      [lazyLoad]="recipe.imagesAsBase64.length > 1"
       [showDots]="recipe.imagesAsBase64.length > 1"
       [imageUrls]="recipe.imagesAsBase64"
-    ></slideshow>
+    ></slideshow> -->
   </div>
 
   <!-- Ingredient Calculator -->

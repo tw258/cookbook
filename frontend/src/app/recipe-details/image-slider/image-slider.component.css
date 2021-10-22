@@ -1,0 +1,26 @@
+div {
+  height: 200px;
+  width: 100%;
+  position: relative;
+}
+
+img {
+  border-radius: 5px;
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+
+.current-index {
+  background-color: white;
+
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+
+  padding: 0px 3px;
+  opacity: 0.6;
+}
