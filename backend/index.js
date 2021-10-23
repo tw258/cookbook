@@ -4,54 +4,39 @@ const Mongodb = require("./mongodb");
 
 const mongodb = new Mongodb();
 
-// mongodb.getRecipes("6166ff1bc80994924974e755").then((r) => {
-//   console.log(r);
-// });
-
-// mongodb
-//   .authenticateUser("tobi", "cb2021")
-//   .then((r) => console.log(r))
-//   .catch((e) => console.log(e));
-
 const PORT_HTTP = 3000;
 
-// //init
 const app = express();
 app.use(express.json({ limit: "2mb" }), cors(), authHandler);
 
-function authHandler(req, res, next) {
-  console.log(req.url);
+async function authHandler(req, res, next) {
+  const authHeader = req.header("Authorization");
 
-  //no authentication needed to view single recipe
-  const recipeViewPattern = /\/recipes\/.+/;
-  if (req.method == "GET" && recipeViewPattern.test(req.url)) {
-    next();
-    return;
-  }
-
-  const authorization = req.header("Authorization");
-
-  if (!authorization) {
-    console.log("No Authorization Header");
+  if (!authHeader) {
     res.status(401).send("No Authorization Header was found");
     return;
   }
 
-  const [name, password] = authorization.split(":");
+  const [name, password] = authHeader.split(":");
 
-  //authentication via mongo
-  var isAuthorized = false;
-  mongodb
-    .authenticateUser(name, password)
-    .then((r) => (isAuthorized = r))
-    .catch((e) => console.log(e));
+  const isAuthenticated = await mongodb.checkIfUserAuthenticated(
+    name,
+    password
+  );
 
-  if (isAuthorized) {
+  if (isAuthenticated) {
     next();
   } else {
     res.status(401).end();
   }
 }
+
+// app.post("/recipes", (req, res) => {
+//   const recipe = req.body;
+//   console.log(recipe);
+
+//   res.send();
+// });
 
 // //Endpoints
 // app.get("/login", (req, res) => {
