@@ -1,10 +1,14 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
+const RECIPES_COLLECTION = "recipes";
+const IMAGES_COLLECTION = "images";
+const USERS_COLLECTION = "users";
+
 class Mongodb {
   async getRecipe(recipeId) {
     const _id = ObjectId.createFromHexString(recipeId);
 
-    const [collection, client] = await this.connect("recipes");
+    const [collection, client] = await this.connect(RECIPES_COLLECTION);
 
     const recipe = await collection.findOne({ _id });
     client.close();
@@ -13,7 +17,7 @@ class Mongodb {
   }
 
   async insertRecipe(recipe) {
-    const [collection, client] = await this.connect("recipes");
+    const [collection, client] = await this.connect(RECIPES_COLLECTION);
 
     const { insertedId } = await collection.insertOne(recipe);
     client.close();
@@ -25,7 +29,7 @@ class Mongodb {
 
   async updateRecipe(recipe) {
     const _id = ObjectId.createFromHexString(recipe._id);
-    const [collection, client] = await this.connect("recipes");
+    const [collection, client] = await this.connect(RECIPES_COLLECTION);
 
     await collection.replaceOne({ _id }, recipe);
 
@@ -33,7 +37,7 @@ class Mongodb {
   }
 
   async getRecipesByUserId(userId) {
-    const [collection, client] = await this.connect("recipes");
+    const [collection, client] = await this.connect(RECIPES_COLLECTION);
 
     const recipes = collection.find({ userId }).toArray();
     client.close();
@@ -44,7 +48,7 @@ class Mongodb {
   async getImage(imageId) {
     const _id = ObjectId.createFromHexString(imageId);
 
-    const [collection, client] = await this.connect("images");
+    const [collection, client] = await this.connect(IMAGES_COLLECTION);
 
     const image = await collection.findOne({ _id });
     client.close();
@@ -53,14 +57,19 @@ class Mongodb {
   }
 
   async insertImage(recipeId, image) {
-    // First, we insert the new image to get a foreign key.
-    const [imagesCollection, imagesClient] = await this.connect("images");
+    // First, we insert the new image.
+    const [imagesCollection, imagesClient] = await this.connect(
+      IMAGES_COLLECTION
+    );
     const { insertedId } = await imagesCollection.insertOne({ image });
     imagesClient.close();
 
-    // Now, we add the id of the newly created image to the existing recipe.
+    // Now, we add the id of the newly created image
+    // to the `images` array of the existing recipe.
     const recipeObjectId = ObjectId.createFromHexString(recipeId);
-    const [recipesCollection, recipesClient] = await this.connect("recipes");
+    const [recipesCollection, recipesClient] = await this.connect(
+      RECIPES_COLLECTION
+    );
 
     await recipesCollection.updateOne(
       { _id: recipeObjectId },
@@ -74,7 +83,9 @@ class Mongodb {
     // First, we delete the image id from the recipe.
     const recipeObjectId = ObjectId.createFromHexString(recipeId);
     const imageObjectId = ObjectId.createFromHexString(imageId);
-    const [recipesCollection, recipesClient] = await this.connect("recipes");
+    const [recipesCollection, recipesClient] = await this.connect(
+      RECIPES_COLLECTION
+    );
     await recipesCollection.updateOne(
       { _id: recipeObjectId },
       { $pull: { imageObjectId } }
@@ -83,13 +94,15 @@ class Mongodb {
     recipesClient.close();
 
     // Next, we delete the image itself.
-    const [imagesCollection, imagesClient] = await this.connect("images");
+    const [imagesCollection, imagesClient] = await this.connect(
+      IMAGES_COLLECTION
+    );
     await imagesCollection.deleteOne({ _id: imageObjectId });
     imagesClient.close();
   }
 
   async checkIfUserAuthenticated(name, password) {
-    const [collection, client] = await this.connect("users");
+    const [collection, client] = await this.connect(USERS_COLLECTION);
 
     const foundUser = await collection.findOne({ name });
     client.close();
