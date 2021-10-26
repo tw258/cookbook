@@ -4,6 +4,16 @@ const router = express.Router();
 const Mongodb = require('../mongodb');
 const mongodb = new Mongodb();
 
+//GET /recipes?userId=12345
+router.get('/', async (req, res) => {
+  console.log(`GET ${req.url}`);
+
+  const userId = req.query.userId;
+  const recipes = await mongodb.getRecipesByUserId(userId);
+
+  res.send(recipes);
+});
+
 router.get('/:id', (req, res) => {
   console.log(`GET ${req.url}`);
 });

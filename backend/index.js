@@ -12,10 +12,12 @@ app.use(authHandler);
 // Import routes.
 const recipeRouter = require('./routes/recipes');
 const imageRouter = require('./routes/images');
+const usersRouter = require('./routes/users');
 
 // Setup routes.
 app.use('/recipes', recipeRouter);
 app.use('/images', imageRouter);
+app.use('/users', usersRouter);
 
 // Start the server.
 const PORT_HTTP = 3000;
