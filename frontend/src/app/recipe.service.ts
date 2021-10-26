@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { nanoid } from 'nanoid';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { dummyRecipes } from './dummies';
 import { Recipe } from './models/Recipe';
 
 @Injectable({
@@ -13,8 +10,8 @@ import { Recipe } from './models/Recipe';
 export class RecipeService {
   constructor(private http: HttpClient) {}
 
-  getRecipes(): Observable<Recipe[]> {
-    const url = environment.apiUrl + '/recipes';
+  getRecipesByUserId(userId: string): Observable<Recipe[]> {
+    const url = `${environment.apiUrl}/recipes?userId=${userId}`;
     return this.http.get<Recipe[]>(url);
   }
 

@@ -16,13 +16,13 @@ export class LoginComponent implements OnInit {
   constructor(private login: LoginService, private router: Router) {}
   ngOnInit(): void {
     if (this.login.checkIfCredentialsStored()) {
-      const { username, password } = this.login.getStoredCredentials();
-      this.login.tryLogin(username, password).subscribe(() => this.router.navigate(['/recipes']));
+      this.login.getUser().subscribe(() => this.router.navigate(['/recipes']));
     }
   }
 
   handleLogin() {
-    this.login.tryLogin(this.username, this.password).subscribe(
+    this.login.addCredentialsToLocalStorage(this.username, this.password);
+    this.login.getUser().subscribe(
       () => this.router.navigate(['/recipes']),
       () => (this.showInvalidLoginAlert = true),
     );

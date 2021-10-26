@@ -3,6 +3,7 @@ import { LoginService } from '../login.service';
 import { Recipe } from '../models/Recipe';
 import { RecipeService } from '../recipe.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-list',
@@ -20,17 +21,20 @@ export class RecipeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipeservice.getRecipes().subscribe(
-      r => {
-        this.recipes = r;
-        this.filteredRecipes = r;
-      },
-      (err: HttpErrorResponse) => {
-        if (err.status == 401) {
-          this.login.logout();
-        }
-      },
-    );
+    this.login
+      .getUser()
+      .pipe(switchMap(user => this.recipeservice.getRecipesByUserId(user._id)))
+      .subscribe(
+        r => {
+          this.recipes = r;
+          this.filteredRecipes = r;
+        },
+        (err: HttpErrorResponse) => {
+          if (err.status == 401) {
+            this.login.logout();
+          }
+        },
+      );
   }
 
   handleLogout() {

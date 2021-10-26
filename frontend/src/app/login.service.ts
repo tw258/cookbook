@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from './models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -10,12 +11,9 @@ import { environment } from 'src/environments/environment';
 export class LoginService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  tryLogin(username: string, password: string): Observable<void> {
-    localStorage.setItem('username', username);
-    localStorage.setItem('password', password);
-    const url = environment.apiUrl + `/login`;
-    
-    return this.http.get<void>(url);
+  getUser(): Observable<User> {
+    const url = environment.apiUrl + `/users`;
+    return this.http.get<User>(url);
   }
 
   logout() {
@@ -32,13 +30,18 @@ export class LoginService {
     return !!username && !!password;
   }
 
-  getStoredCredentials(): { username: string; password: string } {
+  getCredentialsFromLocalStorage(): { username: string; password: string } {
     const username = localStorage.getItem('username') || '';
     const password = localStorage.getItem('password') || '';
-    
+
     return {
       username,
       password,
     };
+  }
+
+  addCredentialsToLocalStorage(username: string, password: string): void {
+    localStorage.setItem('username', username);
+    localStorage.setItem('password', password);
   }
 }
