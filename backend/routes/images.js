@@ -4,10 +4,33 @@ const router = express.Router();
 const Mongodb = require('../mongodb');
 const mongodb = new Mongodb();
 
-// Image routes here:
-// - GET      /images?recipe=<recipe-id>   Get all images of a recipe.
-// - GET      /images/<image-id>           Get an existing image.
-// - POST     /images?recipe=<recipe-id>   Insert a new image and add its ID to the existing recipe.
-// - DELETE   /images/<image-id>           Delete an image.
+// GET /images/<image-id>
+router.get('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  const image = await mongodb.getImageById(id);
+
+  res.send(image);
+});
+
+// POST /images?recipeId=<recipe-id>
+router.post('/', async (req, res) => {
+  const { recipeId } = req.query;
+  const imageToAdd = req.body;
+
+  const addedImage = await mongodb.insertImage(recipeId, imageToAdd);
+
+  res.send(addedImage);
+});
+
+// DELETE /images/<image-id>?recipeId=<recipe-id>
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  const { recipeId } = req.query;
+
+  await mongodb.deleteImage(recipeId, id);
+
+  res.end();
+});
 
 module.exports = router;

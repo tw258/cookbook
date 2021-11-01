@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Recipe } from './models/Recipe';
+import { Recipe } from './models/recipe';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class RecipeService {
     return this.http.put<Recipe>(url, recipe);
   }
 
-  deleteRecipeById(id: string): Observable<void> {
+  deleteRecipeBdyId(id: string): Observable<void> {
     const url = `${environment.apiUrl}/recipes/${id}`;
     return this.http.delete<void>(url);
   }

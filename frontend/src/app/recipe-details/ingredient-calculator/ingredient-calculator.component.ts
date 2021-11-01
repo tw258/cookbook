@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectionList } from '@angular/material/list/public-api';
-import { Recipe } from 'src/app/models/Recipe';
-import { ParameterizedIngredient } from 'src/app/models/ParamterizedIngredient';
+import { Recipe } from 'src/app/models/recipe';
+import { Ingredient } from 'src/app/models/ingredient';
 
 @Component({
   selector: 'app-ingredient-calculator',
@@ -32,15 +32,13 @@ export class IngredientCalculatorComponent {
   }
 
   handleAddToClipboard(selectionList: MatSelectionList) {
-    const values: ParameterizedIngredient[] = selectionList.selectedOptions.selected.map(
-      o => o.value,
-    );
+    const values: Ingredient[] = selectionList.selectedOptions.selected.map(o => o.value);
 
     const stringToCopy = values.reduce(
       (acc, curr) =>
         (acc += `- ${(curr.amount / this._recipe.portions) * this.currentPortions} ${
           curr.measurement
-        } ${curr.ingredient}\n`),
+        } ${curr.name}\n`),
       `Einkaufsliste für "${this._recipe.title}" (${this.currentPortions} Pers.):\n\n`,
     );
 

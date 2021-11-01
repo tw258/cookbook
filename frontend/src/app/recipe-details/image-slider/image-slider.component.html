@@ -1,6 +1,9 @@
 <div #imgContainer>
-  <img [src]="recipe!.imagesAsBase64[currentIndex]" />
-  <span class="current-index mat-caption">
-    {{ currentIndex + 1 }}/{{ recipe.imagesAsBase64.length }}
-  </span>
+  <img *ngIf="currentImage; else showImageLoading" [src]="currentImage.dataAsBase64" />
+
+  <ng-template #showImageLoading>
+    <app-spinner></app-spinner>
+  </ng-template>
+
+  <span class="current-index mat-caption"> {{ currentIndex + 1 }}/{{ imageIds.length }} </span>
 </div>

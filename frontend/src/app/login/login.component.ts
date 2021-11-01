@@ -1,30 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../login.service';
+import { LocalStorageService } from '../local-storage.service';
+import { Credentials } from '../models/credentials';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
-  username: string = '';
-  password: string = '';
-  showInvalidLoginAlert = false;
+export class LoginComponent {
+  credentials: Credentials = { username: '', password: '' };
+
+  isCredentialsAlertVisible = false;
   isPasswordVisible = false;
 
-  constructor(private login: LoginService, private router: Router) {}
-  ngOnInit(): void {
-    if (this.login.checkIfCredentialsStored()) {
-      this.login.getUser().subscribe(() => this.router.navigate(['/recipes']));
-    }
-  }
+  constructor(
+    private userService: UserService,
+    private localstorageService: LocalStorageService,
+    private router: Router,
+  ) {}
 
-  handleLogin() {
-    this.login.addCredentialsToLocalStorage(this.username, this.password);
-    this.login.getUser().subscribe(
-      () => this.router.navigate(['/recipes']),
-      () => (this.showInvalidLoginAlert = true),
-    );
+  handleLoginClick() {
+    this.userService.checkCredentials(this.credentials).subscribe(isAuthenticated => {
+      if (isAuthenticated) {
+        this.localstorageService.setCredentials(this.credentials);
+        this.router.navigateByUrl('/recipes');
+      } else {
+        this.isCredentialsAlertVisible = true;
+      }
+    });
   }
 }

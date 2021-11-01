@@ -1,7 +1,7 @@
 import { Measurement } from './measurement';
 
-export interface ParameterizedIngredient {
+export interface Ingredient {
+  name: string;
   amount: number;
   measurement?: Measurement;
-  ingredient: string;
 }

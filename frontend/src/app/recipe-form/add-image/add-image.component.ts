@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import Compress from 'compress.js';
+import { Image } from 'src/app/models/image';
 
 @Component({
   selector: 'app-add-image',
@@ -7,7 +8,7 @@ import Compress from 'compress.js';
   styleUrls: ['./add-image.component.css'],
 })
 export class AddImageComponent {
-  @Output() imageAdd = new EventEmitter<string>();
+  @Output() imageAdd = new EventEmitter<Image>();
   @ViewChild('imageInput') imageInput: ElementRef<HTMLInputElement> | undefined;
 
   isLoading = false;
@@ -38,7 +39,7 @@ export class AddImageComponent {
         imageAsBase64 = await this.imageToBase64(image);
       }
 
-      this.imageAdd.emit(imageAsBase64);
+      this.imageAdd.emit({ dataAsBase64: imageAsBase64 });
     }
 
     this.isLoading = false;

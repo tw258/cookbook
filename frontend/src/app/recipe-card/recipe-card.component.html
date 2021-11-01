@@ -1,11 +1,11 @@
 <mat-card class="mt-1">
   <mat-card-content class="card-content">
     <!-- Thumbnail -->
-    <section *ngIf="recipe.imagesAsBase64.length > 0" class="card-content__thumbnail-container">
-      <img class="card-content__thumbnail-container__thumbnail" [src]="recipe.imagesAsBase64[0]" />
+    <section *ngIf="recipe.thumbnailAsBase64" class="card-content__thumbnail-container">
+      <img class="card-content__thumbnail-container__thumbnail" [src]="recipe.thumbnailAsBase64" />
     </section>
 
-    <!-- Title, Type, and Ingredients -->
+    <!-- Title, Time, and Ingredients -->
     <section class="card-content__body">
       <h2 class="card-content__body__title">
         {{ recipe.title }}
@@ -13,17 +13,17 @@
 
       <span class="mat-caption"
         >Zubereitung in <strong>{{ recipe.preparationTimeInMinutes }}</strong> Minuten mit
-        <strong>{{ recipe.parameterizedIngredients.length }}</strong> Zutaten:</span
+        <strong>{{ recipe.ingredients.length }}</strong> Zutaten:</span
       >
 
       <ul>
-        <li *ngFor="let ingr of recipe.parameterizedIngredients.slice(0, 4)">
-          {{ ingr.ingredient }}
+        <li *ngFor="let ingredient of recipe.ingredients | slice: 0:4">
+          {{ ingredient.name }}
         </li>
-        <li *ngIf="recipe.parameterizedIngredients.length === 5">
-          {{ recipe.parameterizedIngredients[4].ingredient }}
+        <li *ngIf="recipe.ingredients.length === 5">
+          {{ recipe.ingredients[4].name }}
         </li>
-        <li *ngIf="recipe.parameterizedIngredients.length > 5">...</li>
+        <li *ngIf="recipe.ingredients.length > 5">...</li>
       </ul>
     </section>
   </mat-card-content>

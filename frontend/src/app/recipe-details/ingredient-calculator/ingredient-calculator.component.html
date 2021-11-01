@@ -19,12 +19,9 @@
   </div>
 
   <mat-selection-list #selectableIngredients color="primary">
-    <mat-list-option
-      *ngFor="let ingredient of this._recipe.parameterizedIngredients"
-      [value]="ingredient"
-    >
+    <mat-list-option *ngFor="let ingredient of this._recipe.ingredients" [value]="ingredient">
       {{ ingredient.amount | multiplyPortions: _recipe.portions:currentPortions }}
-      {{ ingredient.measurement }} {{ ingredient.ingredient }}
+      {{ ingredient.measurement }} {{ ingredient.name }}
     </mat-list-option>
   </mat-selection-list>
 </div>

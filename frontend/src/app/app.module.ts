@@ -8,23 +8,20 @@ import { Route, RouterModule } from '@angular/router';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
-import { FormsModule } from '@angular/forms';
 import { AddImageComponent } from './recipe-form/add-image/add-image.component';
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 import { IngredientCalculatorComponent } from './recipe-details/ingredient-calculator/ingredient-calculator.component';
 import { MultiplyPortionsPipe } from './recipe-details/ingredient-calculator/multiply-portions.pipe';
-import { CommonModule } from '@angular/common';
 import { RecipeFilterComponent } from './recipe-list/recipe-filter/recipe-filter.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpProxyInterceptor } from './http-proxy.interceptor';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { ImageSliderComponent } from './recipe-details/image-slider/image-slider.component';
 
 const routes: Route[] = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'recipes', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'recipes', component: RecipeListComponent },
   { path: 'new-recipe', component: RecipeFormComponent },
@@ -49,12 +46,10 @@ const routes: Route[] = [
   ],
   imports: [
     //eigene und Angular Module
-    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
     RouterModule.forRoot(routes),
-    FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -63,10 +58,7 @@ const routes: Route[] = [
     }),
     HttpClientModule,
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpProxyInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-  ],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

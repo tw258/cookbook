@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin, Observable } from 'rxjs';
+import { ImageService } from '../image.service';
+import { Image } from '../models/image';
 import { Measurement } from '../models/measurement';
-import { ParameterizedIngredient } from '../models/ParamterizedIngredient';
-import { Recipe } from '../models/Recipe';
+import { Ingredient } from '../models/ingredient';
+import { Recipe } from '../models/recipe';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -11,73 +14,99 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-form.component.css'],
 })
 export class RecipeFormComponent implements OnInit {
-  maxTime = 60;
-
-  isEditMode = false;
-
   recipe!: Recipe;
+  maxTime = 60;
+  isEditMode = false;
+  currentIngredient: Ingredient = this.createIngredient();
 
-  currentParameterizedIngredient: ParameterizedIngredient = this.createParameterizedIngredient();
+  imagesToDisplay: Image[] = [];
+  imagesToAdd: Image[] = [];
+  imagesToDelete: Image[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private recipeservice: RecipeService,
     private router: Router,
+    private imageService: ImageService,
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params.id;
-    if (id) {
-      this.isEditMode = true;
+    const recipeId = this.route.snapshot.paramMap.get('id');
 
-      this.recipeservice.getRecipeById(id).subscribe(r => {
-        this.recipe = r;
-      });
+    if (recipeId) {
+      // A recipe id was passed through the URL which
+      // means we're editing an existing recipe.
+      this.isEditMode = true;
+      this.recipeservice.getRecipeById(recipeId).subscribe(recipe => (this.recipe = recipe));
     } else {
+      // We are creating a new recipe so we fill it with dummy data.
       this.recipe = {
+        _id: '',
+        userId: '',
         note: '',
         portions: 2,
-        parameterizedIngredients: [],
+        ingredients: [],
         preparationTimeInMinutes: 0,
         title: '',
-        imagesAsBase64: [],
+        thumbnailAsBase64: '',
+        imageIds: [],
       };
     }
   }
 
-  handleAddIngredient() {
-    if (
-      !this.currentParameterizedIngredient.amount ||
-      !this.currentParameterizedIngredient.ingredient ||
-      !this.currentParameterizedIngredient.measurement
-    ) {
-      return;
-    }
+  handleSaveClick() {
+    let recipe$: Observable<Recipe>;
 
-    this.recipe.parameterizedIngredients.push(this.currentParameterizedIngredient);
-
-    // Reset input forms
-    this.currentParameterizedIngredient = this.createParameterizedIngredient();
-  }
-
-  handleRemoveIngredient(ingredientToDelete: ParameterizedIngredient) {
-    const indexToDelete = this.recipe.parameterizedIngredients.indexOf(ingredientToDelete, 0);
-    if (indexToDelete > -1) {
-      this.recipe.parameterizedIngredients.splice(indexToDelete, 1);
-    }
-  }
-
-  handleSave() {
     if (this.isEditMode) {
-      this.recipeservice
-        .updateRecipeById(this.recipe.id!, this.recipe)
-        .subscribe(() => this.router.navigate(['/recipes', this.recipe.id]));
+      recipe$ = this.recipeservice.updateRecipeById(this.recipe._id, this.recipe);
     } else {
-      this.recipe.author = localStorage.getItem('username')!;
+      recipe$ = this.recipeservice.addRecipe(this.recipe);
+    }
 
-      this.recipeservice
-        .addRecipe(this.recipe)
-        .subscribe(r => this.router.navigate(['/recipes', r.id]));
+    recipe$.subscribe(recipe => {
+      this.persistImages(recipe).subscribe(() =>
+        this.router.navigateByUrl(`/recipes/${recipe._id}`),
+      );
+    });
+  }
+
+  private persistImages(recipe: Recipe) {
+    const respones$: Observable<any>[] = [];
+
+    if (this.imagesToAdd.length) {
+      const imagesToAdd$ = this.imageService.addImages(this.imagesToAdd, recipe);
+      respones$.push(imagesToAdd$);
+    }
+
+    if (this.imagesToDelete.length) {
+      const imagesToDelete$ = this.imageService.deleteImages(this.imagesToDelete, recipe);
+      respones$.push(imagesToDelete$);
+    }
+
+    return forkJoin(respones$);
+  }
+
+  handleDeleteClick() {
+    this.recipeservice
+      .deleteRecipeBdyId(this.recipe._id!)
+      .subscribe(() => this.router.navigateByUrl('/recipes'));
+  }
+
+  handleAddIngredientClick() {
+    const { amount, name, measurement } = this.currentIngredient;
+
+    if (amount && name && measurement) {
+      this.recipe.ingredients.push(this.currentIngredient);
+
+      // Reset ingredient form.
+      this.currentIngredient = this.createIngredient();
+    }
+  }
+
+  handleRemoveIngredientClick(ingredientToDelete: Ingredient) {
+    const indexToDelete = this.recipe.ingredients.indexOf(ingredientToDelete, 0);
+    if (indexToDelete > -1) {
+      this.recipe.ingredients.splice(indexToDelete, 1);
     }
   }
 
@@ -87,32 +116,50 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
-  handleCancel() {
+  handleCancelClick() {
     if (this.isEditMode) {
-      this.router.navigate(['/recipes', this.recipe.id]);
+      this.router.navigateByUrl(`/recipes/${this.recipe._id}`);
     } else {
-      this.router.navigate(['/recipes']);
+      this.router.navigateByUrl('/recipes');
     }
   }
 
-  handleDelete() {
-    this.recipeservice
-      .deleteRecipeById(this.recipe.id!)
-      .subscribe(() => this.router.navigate(['/recipes']));
+  handleImageAdded(image: Image) {
+    this.imagesToAdd.push(image);
+    this.imagesToDisplay.push(image);
+
+    if (this.imagesToDisplay.length === 1) {
+      // The image that was just added, is the recipe's
+      // first image, so we set it as the recipe's thumbnail.
+      this.recipe.thumbnailAsBase64 = image.dataAsBase64;
+    }
   }
 
-  handleImageAdd(base64string: string) {
-    this.recipe.imagesAsBase64.push(base64string);
+  handleImageRemoveClick(image: Image) {
+    const indexOfImage = this.imagesToDisplay.indexOf(image);
+
+    if (image._id) {
+      // The image has an `_id` and therefore exists in the database.
+      // We have to mark it for deletion to delete it later.
+      this.imagesToDelete.push(image);
+    } else {
+      // We do nothing here.
+      // This image only exists in our local state and doesn't need
+      // to be deleted from the datatbase.
+    }
+
+    this.imagesToDisplay.splice(indexOfImage, 1);
+
+    if (this.imagesToDisplay.length === 0) {
+      // The last image was removed, so we also reset the recipe's thumbnail.
+      this.recipe.thumbnailAsBase64 = '';
+    }
   }
 
-  handleImageRemove(index: number) {
-    this.recipe.imagesAsBase64.splice(index, 1);
-  }
-
-  private createParameterizedIngredient(): ParameterizedIngredient {
+  private createIngredient(): Ingredient {
     return {
       amount: 1,
-      ingredient: '',
+      name: '',
       measurement: Measurement.Stck,
     };
   }

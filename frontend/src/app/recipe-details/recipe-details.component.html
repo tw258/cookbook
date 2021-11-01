@@ -1,27 +1,19 @@
-<ng-container *ngIf="recipe$ | async; let recipe">
+<ng-container *ngIf="recipe$ | async as recipe; else loadingTemplate">
   <div class="navbar">
     <div class="navbar__content grid-auto-1fr-auto">
-      <button [disabled]="!isAuthenticated" routerLink=".." mat-icon-button>
+      <button routerLink=".." mat-icon-button>
         <mat-icon class="material-icons-outlined">arrow_back_ios_new</mat-icon>
       </button>
       <span class="navbar__content__title">{{ recipe.title }}</span>
-      <button [disabled]="!isAuthenticated" routerLink="edit" mat-icon-button>
+      <button routerLink="edit" mat-icon-button>
         <mat-icon class="material-icons-outlined">edit</mat-icon>
       </button>
     </div>
   </div>
 
   <div class="pt-7"></div>
-  <div *ngIf="recipe.imagesAsBase64.length > 0" class="mb-1">
+  <div *ngIf="recipe.imageIds.length" class="mb-1">
     <app-image-slider [recipe]="recipe"></app-image-slider>
-    <!-- <slideshow
-      height="200px"
-      [showArrows]="false"
-      [fullscreen]="false"
-      [lazyLoad]="recipe.imagesAsBase64.length > 1"
-      [showDots]="recipe.imagesAsBase64.length > 1"
-      [imageUrls]="recipe.imagesAsBase64"
-    ></slideshow> -->
   </div>
 
   <!-- Ingredient Calculator -->
@@ -30,11 +22,13 @@
     <app-ingredient-calculator [recipe]="recipe"></app-ingredient-calculator>
   </section>
 
-  <!-- Preperation Steps -->
+  <!-- Preparation Steps -->
   <section class="mt-1">
     <h2 style="margin: 0">Zubereitung in {{ recipe.preparationTimeInMinutes }} Minuten:</h2>
     <pre style="white-space: pre-wrap">{{ recipe.note }}</pre>
   </section>
 </ng-container>
 
-<app-spinner *ngIf="isLoading"></app-spinner>
+<ng-template #loadingTemplate>
+  <app-spinner></app-spinner>
+</ng-template>

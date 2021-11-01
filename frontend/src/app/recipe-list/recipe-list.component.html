@@ -6,7 +6,7 @@
           <mat-icon>menu</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button (click)="handleLogout()" mat-menu-item>
+          <button (click)="handleLogoutClick()" mat-menu-item>
             <mat-icon style="transform: rotate(180deg)">logout</mat-icon>
             Abmelden
           </button>
@@ -15,6 +15,10 @@
             <mat-icon>info_outline</mat-icon>
             Über Cookbook
           </a>
+          <p mat-menu-item>
+            <mat-icon>user</mat-icon>
+            Angemeldet als: {{ user.name }}
+          </p>
         </mat-menu>
       </div>
       <span></span>
@@ -30,7 +34,7 @@
     <ng-container *ngIf="filteredRecipes.length; else noRecipesWithFilter">
       <a
         *ngFor="let recipe of filteredRecipes; let isFirst = first"
-        [routerLink]="['/recipes', recipe.id]"
+        [routerLink]="['/recipes', recipe._id]"
       >
         <app-recipe-card [recipe]="recipe"> </app-recipe-card>
       </a>

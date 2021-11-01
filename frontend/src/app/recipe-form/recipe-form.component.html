@@ -1,7 +1,7 @@
 <ng-container *ngIf="recipe; else loading">
   <div class="navbar">
     <div class="navbar__content grid-auto-1fr-auto">
-      <button (click)="handleCancel()" mat-icon-button>
+      <button (click)="handleCancelClick()" mat-icon-button>
         <mat-icon class="material-icons-outlined">close</mat-icon>
       </button>
 
@@ -12,7 +12,7 @@
       <button
         [disabled]="!recipe.title || !recipe.note"
         color="primary"
-        (click)="handleSave()"
+        (click)="handleSaveClick()"
         mat-icon-button
       >
         <mat-icon class="material-icons-outlined">check</mat-icon>
@@ -32,23 +32,23 @@
     </mat-form-field>
 
     <div class="images-container mt-1">
-      <div *ngFor="let image of recipe.imagesAsBase64; let i = index">
+      <div *ngFor="let image of imagesToDisplay">
         <img [src]="image" />
         <span
           aria-label="Remove image"
           class="material-icons-outlined images-container__icon-delete"
-          (click)="handleImageRemove(i)"
+          (click)="handleImageRemoveClick(image)"
           >remove_circle_outline</span
         >
       </div>
-      <app-add-image (imageAdd)="handleImageAdd($event)"></app-add-image>
+      <app-add-image (imageAdd)="handleImageAdded($event)"></app-add-image>
     </div>
     <section class="mt-2">
       <div class="ingredient-form">
         <mat-form-field appearance="outline">
           <mat-label>Menge</mat-label>
           <input
-            [(ngModel)]="currentParameterizedIngredient.amount"
+            [(ngModel)]="currentIngredient.amount"
             [ngModelOptions]="{ standalone: true }"
             (focus)="$any($event.target).value = ''"
             type="number"
@@ -62,7 +62,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Einheit</mat-label>
           <mat-select
-            [(ngModel)]="currentParameterizedIngredient.measurement"
+            [(ngModel)]="currentIngredient.measurement"
             [ngModelOptions]="{ standalone: true }"
             value="Stck"
           >
@@ -80,8 +80,8 @@
         <mat-form-field appearance="outline">
           <mat-label>Zutat</mat-label>
           <input
-            [(ngModel)]="currentParameterizedIngredient.ingredient"
-            (keyup.enter)="handleAddIngredient()"
+            [(ngModel)]="currentIngredient.name"
+            (keyup.enter)="handleAddIngredientClick()"
             [ngModelOptions]="{ standalone: true }"
             matInput
             placeholder="Eier, Mehl, ..."
@@ -91,12 +91,10 @@
         <button
           type="button"
           [disabled]="
-            !currentParameterizedIngredient.amount ||
-            !currentParameterizedIngredient.ingredient ||
-            !currentParameterizedIngredient.measurement
+            !currentIngredient.amount || !currentIngredient.name || !currentIngredient.measurement
           "
           mat-icon-button
-          (click)="handleAddIngredient()"
+          (click)="handleAddIngredientClick()"
         >
           <span class="material-icons-outlined">add</span>
         </button>
@@ -105,16 +103,14 @@
         <mat-list-item
           class="list-ingredient__item"
           role="listitem"
-          *ngFor="let paramIngr of recipe.parameterizedIngredients"
+          *ngFor="let ingredient of recipe.ingredients"
         >
           <div class="list-ingredient__item__ingredient-details">
-            <span
-              >{{ paramIngr.amount }} {{ paramIngr.measurement }} {{ paramIngr.ingredient }}</span
-            >
+            <span>{{ ingredient.amount }} {{ ingredient.measurement }} {{ ingredient.name }}</span>
             <span
               aria-label="Remove ingredient"
               class="material-icons-outlined list-ingredient__item__ingredient-details__icon-delete"
-              (click)="handleRemoveIngredient(paramIngr)"
+              (click)="handleRemoveIngredientClick(ingredient)"
               >remove</span
             >
           </div>
@@ -154,7 +150,7 @@
     <button
       *ngIf="isEditMode"
       class="w-100"
-      (click)="handleDelete()"
+      (click)="handleDeleteClick()"
       type="button"
       mat-stroked-button
       color="warn"

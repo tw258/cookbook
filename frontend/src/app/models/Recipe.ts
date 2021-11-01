@@ -1,13 +1,13 @@
-import { ParameterizedIngredient } from './ParamterizedIngredient';
+import { Ingredient } from './ingredient';
 
 export interface Recipe {
-  id?: string;
+  _id: string;
+  userId: string;
   title: string;
-  author?: string;
   note: string;
-  imagesAsBase64: string[];
+  thumbnailAsBase64: string;
+  imageIds: string[];
   portions: number;
-  parameterizedIngredients: ParameterizedIngredient[];
-  creationDateAsIsoString?: string;
+  ingredients: Ingredient[];
   preparationTimeInMinutes: number;
 }

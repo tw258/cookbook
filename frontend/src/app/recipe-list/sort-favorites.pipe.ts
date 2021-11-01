@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Recipe } from '../models/Recipe';
+import { Recipe } from '../models/recipe';
 
 @Pipe({
   name: 'sortFavorites',
