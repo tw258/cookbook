@@ -5,8 +5,6 @@ const Mongodb = require('../mongodb');
 const mongodb = new Mongodb();
 
 router.get('/', async (req, res) => {
-  console.log(`GET ${req.url}`);
-
   const authHeader = req.header('Authorization');
   const [name] = authHeader.split(':');
 
