@@ -2,10 +2,10 @@
   <span class="logo-font">Cookbook</span>
 </div>
 
-<h2>Anmeldung</h2>
+<h1>Anmeldung</h1>
 <app-alert
   type="error"
-  text="Benutzername oder Passwort falsch."
+  [text]="'Benutzername oder Passwort falsch (' + wrongCredentialsCount + 'x).'"
   *ngIf="isCredentialsAlertVisible"
   (close)="isCredentialsAlertVisible = false"
 ></app-alert>
@@ -28,12 +28,9 @@
       [ngModelOptions]="{ standalone: true }"
       matInput
       placeholder="Alligator3"
-      [type]="isPasswordVisible ? 'text' : 'password'"
+      type="password"
       (keyup.enter)="handleLoginClick()"
     />
-    <button mat-icon-button matSuffix (click)="isPasswordVisible = !isPasswordVisible">
-      <mat-icon>{{ !isPasswordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
-    </button>
   </mat-form-field>
 
   <button

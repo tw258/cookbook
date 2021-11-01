@@ -6,9 +6,9 @@ const mongodb = new Mongodb();
 
 router.get('/', async (req, res) => {
   const authHeader = req.header('Authorization');
-  const [name] = authHeader.split(':');
+  const [username] = authHeader.split(':');
 
-  const user = await mongodb.getUser(name);
+  const user = await mongodb.getUser(username);
 
   res.send(user);
 });

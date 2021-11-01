@@ -11,6 +11,8 @@ services:
       - ./docker-volumes/cb-backend:/usr/src/app/assets
     ports:
       - 3000:3000
+    environment:
+      NODE_ENV: production
 
   cb-db:
     restart: always

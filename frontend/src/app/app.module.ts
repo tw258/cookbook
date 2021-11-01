@@ -19,19 +19,20 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { ImageSliderComponent } from './recipe-details/image-slider/image-slider.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Route[] = [
   { path: '', redirectTo: 'recipes', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'recipes', component: RecipeListComponent },
-  { path: 'new-recipe', component: RecipeFormComponent },
-  { path: 'recipes/:id', component: RecipeDetailsComponent },
-  { path: 'recipes/:id/edit', component: RecipeFormComponent },
+  { path: 'recipes', component: RecipeListComponent, canActivate: [AuthGuard] },
+  { path: 'new-recipe', component: RecipeFormComponent, canActivate: [AuthGuard] },
+  { path: 'recipes/:id', component: RecipeDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'recipes/:id/edit', component: RecipeFormComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   declarations: [
-    //Eigene Komponenten, Pipes, Directives
+    // Our custom components, pipes, and directives.
     AppComponent,
     RecipeListComponent,
     RecipeFormComponent,

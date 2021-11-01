@@ -1,5 +1,19 @@
 const { MongoClient, ObjectId } = require('mongodb');
 
+/**
+ * When the backend (and the db) run in containers, the backend has to connect to the db
+ * via the db's container name which we defined in ./docker-compose.yml as "cb-db".
+ *
+ * The environment variable `NODE_ENV` is set during build time (see docker-compose.yml).
+ *
+ * Note that even though the db runs in a container, when connecting via. MongoDB Compass,
+ * we have to use 'mongodb://root:dbpassword@localhost:27017' to connect.
+ */
+const DB_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'mongodb://root:dbpassword@cb-db:27017' // Production (backend runs in container).
+    : 'mongodb://root:dbpassword@localhost:27017'; // Development.
+
 const DB_NAME = 'cookbook';
 const RECIPES_COLLECTION = 'recipes';
 const IMAGES_COLLECTION = 'images';
@@ -9,7 +23,9 @@ class Mongodb {
   async getUser(userName) {
     const [collection, client] = await this.connect(USERS_COLLECTION);
 
-    const user = await collection.findOne({ name: userName }).project({ password: 0 }); // Exclude the password from the result.
+    const user = await collection.findOne({ name: userName });
+    delete user.password; // Exclude the password from the result.
+
     client.close();
 
     return user;
@@ -152,7 +168,7 @@ class Mongodb {
    * myCollectionClient.close();
    */
   async connect(collectionName) {
-    const client = new MongoClient('mongodb://root:dbpassword@localhost:27017/?authSource=admin');
+    const client = new MongoClient(DB_URL);
 
     await client.connect();
     const db = client.db(DB_NAME);

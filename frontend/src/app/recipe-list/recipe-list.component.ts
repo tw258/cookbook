@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { RecipeService } from '../recipe.service';
 import { switchMap, tap } from 'rxjs/operators';
-import { LocalStorageService } from '../local-storage.service';
-import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { Recipe } from '../models/recipe';
+import { LocalStorageService } from '../local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,28 +14,22 @@ import { Recipe } from '../models/recipe';
 })
 export class RecipeListComponent implements OnInit {
   user!: User;
-  recipes!: Recipe[];
+  recipes: Recipe[] = [];
   filteredRecipes: Recipe[] = [];
 
   constructor(
     private recipeservice: RecipeService,
     private userService: UserService,
+    private localStorage: LocalStorageService,
     private router: Router,
-    private localstorageService: LocalStorageService,
   ) {}
 
   ngOnInit(): void {
-    if (!this.localstorageService.checkIfCredentialsExist()) {
-      // Missing credentials indicate an unauthenticated
-      // user, so we redirect to the `LoginComponent`.
-
-      this.router.navigateByUrl('/login');
-    }
-
-    this.userService.user$
+    this.userService
+      .getUser()
       .pipe(
         tap(user => (this.user = user)),
-        switchMap(user => this.recipeservice.getRecipesByUserId(user._id)),
+        switchMap(user => this.recipeservice.getRecipesByUser(user)),
       )
       .subscribe(recipes => {
         this.recipes = recipes;
@@ -48,6 +42,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   handleLogoutClick() {
-    this.userService.logout();
+    this.localStorage.clearCredentials();
+    this.router.navigateByUrl('/login');
   }
 }

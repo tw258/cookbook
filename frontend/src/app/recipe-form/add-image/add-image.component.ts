@@ -39,7 +39,7 @@ export class AddImageComponent {
         imageAsBase64 = await this.imageToBase64(image);
       }
 
-      this.imageAdd.emit({ dataAsBase64: imageAsBase64 });
+      this.imageAdd.emit({ dataAsBase64: imageAsBase64, _id: '' });
     }
 
     this.isLoading = false;

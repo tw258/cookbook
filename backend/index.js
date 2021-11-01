@@ -9,7 +9,6 @@ const app = express();
 app.use(express.json({ limit: '2mb' }));
 app.use(cors());
 app.use(logger);
-app.use(authHandler);
 
 // Import routes.
 const recipeRouter = require('./routes/recipes');

@@ -13,7 +13,7 @@ export class LoginComponent {
   credentials: Credentials = { username: '', password: '' };
 
   isCredentialsAlertVisible = false;
-  isPasswordVisible = false;
+  wrongCredentialsCount = 0;
 
   constructor(
     private userService: UserService,
@@ -28,6 +28,7 @@ export class LoginComponent {
         this.router.navigateByUrl('/recipes');
       } else {
         this.isCredentialsAlertVisible = true;
+        this.wrongCredentialsCount++;
       }
     });
   }

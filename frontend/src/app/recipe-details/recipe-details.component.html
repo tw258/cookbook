@@ -1,4 +1,4 @@
-<ng-container *ngIf="recipe$ | async as recipe; else loadingTemplate">
+<ng-container *ngIf="recipe$ | async as recipe; else loadingTmpl">
   <div class="navbar">
     <div class="navbar__content grid-auto-1fr-auto">
       <button routerLink=".." mat-icon-button>
@@ -13,22 +13,22 @@
 
   <div class="pt-7"></div>
   <div *ngIf="recipe.imageIds.length" class="mb-1">
-    <app-image-slider [recipe]="recipe"></app-image-slider>
+    <app-image-slider [imageIds]="recipe.imageIds"></app-image-slider>
   </div>
 
   <!-- Ingredient Calculator -->
   <section class="mt-1">
-    <h2 style="margin: 0">Zutatenrechner</h2>
+    <h2>Zutatenrechner</h2>
     <app-ingredient-calculator [recipe]="recipe"></app-ingredient-calculator>
   </section>
 
   <!-- Preparation Steps -->
   <section class="mt-1">
-    <h2 style="margin: 0">Zubereitung in {{ recipe.preparationTimeInMinutes }} Minuten:</h2>
-    <pre style="white-space: pre-wrap">{{ recipe.note }}</pre>
+    <h2>Zubereitung in {{ recipe.preparationTimeInMinutes }} Minuten:</h2>
+    <pre>{{ recipe.note }}</pre>
   </section>
 </ng-container>
 
-<ng-template #loadingTemplate>
+<ng-template #loadingTmpl>
   <app-spinner></app-spinner>
 </ng-template>

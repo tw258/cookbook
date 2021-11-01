@@ -1,59 +1,48 @@
-<ng-container *ngIf="recipes; else loading">
-  <div class="navbar">
-    <div class="navbar__content grid-auto-1fr-auto">
-      <div>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>menu</mat-icon>
+<div class="navbar">
+  <div class="navbar__content grid-auto-1fr-auto">
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="handleLogoutClick()" mat-menu-item>
+          <mat-icon style="transform: rotate(180deg)">logout</mat-icon>
+          Abmelden ({{ user?.name }})
         </button>
-        <mat-menu #menu="matMenu">
-          <button (click)="handleLogoutClick()" mat-menu-item>
-            <mat-icon style="transform: rotate(180deg)">logout</mat-icon>
-            Abmelden
-          </button>
 
-          <a href="https://github.com/tw258/cookbook" target="blank" mat-menu-item>
-            <mat-icon>info_outline</mat-icon>
-            Über Cookbook
-          </a>
-          <p mat-menu-item>
-            <mat-icon>user</mat-icon>
-            Angemeldet als: {{ user.name }}
-          </p>
-        </mat-menu>
-      </div>
-      <span></span>
-      <div class="navbar__content">
-        <h1 class="logo-font">Cookbook</h1>
-      </div>
+        <a href="https://github.com/tw258/cookbook" target="blank" mat-menu-item>
+          <mat-icon>info_outline</mat-icon>
+          Über Cookbook
+        </a>
+      </mat-menu>
+    </div>
+    <span></span>
+    <div class="navbar__content">
+      <h1 class="logo-font">Cookbook</h1>
     </div>
   </div>
+</div>
 
-  <div class="pt-7"></div>
-  <app-recipe-filter (filterInput)="handleFilterInput($event)"></app-recipe-filter>
-  <ng-container *ngIf="recipes.length; else noRecipes">
-    <ng-container *ngIf="filteredRecipes.length; else noRecipesWithFilter">
-      <a
-        *ngFor="let recipe of filteredRecipes; let isFirst = first"
-        [routerLink]="['/recipes', recipe._id]"
-      >
-        <app-recipe-card [recipe]="recipe"> </app-recipe-card>
-      </a>
-    </ng-container>
+<div class="pt-7"></div>
+
+<app-recipe-filter (filterInput)="handleFilterInput($event)"></app-recipe-filter>
+
+<ng-container *ngIf="recipes.length; else noRecipes">
+  <ng-container *ngIf="filteredRecipes.length; else noRecipesWithFilter">
+    <a *ngFor="let recipe of filteredRecipes" [routerLink]="['/recipes', recipe._id]">
+      <app-recipe-card [recipe]="recipe"> </app-recipe-card>
+    </a>
   </ng-container>
-
-  <ng-template #noRecipes>
-    <div class="text-center mat-body-strong mt-2">Noch keine Rezepte vorhanden.</div>
-  </ng-template>
-
-  <ng-template #noRecipesWithFilter>
-    <div class="text-center mat-body-strong mt-2">Kein Rezept entspricht dem Filter.</div>
-  </ng-template>
-
-  <a class="btn-add-recipe" [routerLink]="['/new-recipe']" mat-fab color="primary">
-    <mat-icon>add</mat-icon>
-  </a>
 </ng-container>
 
-<ng-template #loading>
-  <app-spinner></app-spinner>
+<ng-template #noRecipes>
+  <div class="text-center mat-body-strong mt-2">Noch keine Rezepte vorhanden.</div>
 </ng-template>
+
+<ng-template #noRecipesWithFilter>
+  <div class="text-center mat-body-strong mt-2">Kein Rezept entspricht dem Filter.</div>
+</ng-template>
+
+<a class="btn-add-recipe" [routerLink]="['/new-recipe']" mat-fab color="primary">
+  <mat-icon>add</mat-icon>
+</a>

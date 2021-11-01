@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
 });
 
 // DELETE /images/<image-id>?recipeId=<recipe-id>
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   const { recipeId } = req.query;
 
