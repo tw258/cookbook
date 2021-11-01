@@ -7,10 +7,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
@@ -18,7 +16,6 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatChipsModule,
     MatInputModule,
     MatSelectModule,
     MatIconModule,
@@ -27,7 +24,6 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonToggleModule,
     MatSliderModule,
     MatListModule,
-    MatSnackBarModule,
   ],
 })
 export class MaterialModule {}

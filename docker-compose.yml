@@ -1,6 +1,9 @@
 # Build and run the backend containers with:
 #   docker-compose build; docker-compose up
 
+# Connect to the mongodb via MongoDB Compass with:
+#   mongodb://root:dbpassword@localhost:27017
+
 version: "2"
 
 services:
