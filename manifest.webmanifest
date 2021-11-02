@@ -1,8 +1,8 @@
 {
   "name": "Cookbook",
   "short_name": "Cookbook",
-  "theme_color": "#FC6067",
-  "background_color": "#FC6067",
+  "theme_color": "#ffd13e",
+  "background_color": "#ffd13e",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
