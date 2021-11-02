@@ -10,8 +10,6 @@ services:
   cb-backend:
     restart: always
     build: backend
-    volumes:
-      - ./docker-volumes/cb-backend:/usr/src/app/assets
     ports:
       - 3000:3000
     environment:
