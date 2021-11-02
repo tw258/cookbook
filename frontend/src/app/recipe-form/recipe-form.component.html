@@ -33,7 +33,7 @@
 
     <div class="images-container mt-1">
       <div *ngFor="let image of imagesToDisplay">
-        <img [src]="image" />
+        <img [src]="image.dataAsBase64" />
         <span
           aria-label="Remove image"
           class="material-icons-outlined images-container__icon-delete"

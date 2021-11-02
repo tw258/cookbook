@@ -27,9 +27,10 @@ export class ImageSliderComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // We immediately load the first image.
     // This will be the only time where we don't lazy load.
-    this.imageService
-      .getImageById(this.imageIds[this.currentIndex])
-      .subscribe(image => this.lazyLoadedImages.push(image));
+    this.imageService.getImageById(this.imageIds[this.currentIndex]).subscribe(image => {
+      this.lazyLoadedImages.push(image);
+      this.currentImage = image;
+    });
   }
 
   ngAfterViewInit(): void {

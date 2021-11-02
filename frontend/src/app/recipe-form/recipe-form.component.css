@@ -21,17 +21,16 @@ mat-form-field {
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
-  box-shadow: var(--image-box-shadow);
 }
 
 .images-container__icon-delete {
   position: absolute;
-  top: -11px;
-  right: -11px;
+  top: -5px;
+  right: -5px;
   background-color: white;
   border-radius: 50px;
   cursor: pointer;
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .ingredient-form {

@@ -5,7 +5,7 @@
 }
 
 .header-with-logo {
-  width: 240px;
+  width: 200px;
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -17,5 +17,5 @@
 }
 
 .logo-font {
-  font-size: 40px !important;
+  font-size: 35px !important;
 }

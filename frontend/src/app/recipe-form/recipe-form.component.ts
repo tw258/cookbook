@@ -7,6 +7,8 @@ import { Measurement } from '../models/measurement';
 import { Ingredient } from '../models/ingredient';
 import { Recipe } from '../models/recipe';
 import { RecipeService } from '../recipe.service';
+import { UserService } from '../user.service';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-form',
@@ -27,6 +29,7 @@ export class RecipeFormComponent implements OnInit {
     private route: ActivatedRoute,
     private recipeservice: RecipeService,
     private router: Router,
+    private userService: UserService,
     private imageService: ImageService,
   ) {}
 
@@ -37,7 +40,13 @@ export class RecipeFormComponent implements OnInit {
       // A recipe id was passed through the URL which
       // means we're editing an existing recipe.
       this.isEditMode = true;
-      this.recipeservice.getRecipeById(recipeId).subscribe(recipe => (this.recipe = recipe));
+      this.recipeservice
+        .getRecipeById(recipeId)
+        .pipe(
+          tap(recipe => (this.recipe = recipe)),
+          switchMap(recipe => this.imageService.getImagesById(recipe.imageIds)),
+        )
+        .subscribe(images => (this.imagesToDisplay = images));
     } else {
       // We are creating a new recipe so we fill it with dummy data.
       this.recipe = {
@@ -60,14 +69,18 @@ export class RecipeFormComponent implements OnInit {
     if (this.isEditMode) {
       recipe$ = this.recipeservice.updateRecipeById(this.recipe._id, this.recipe);
     } else {
-      recipe$ = this.recipeservice.addRecipe(this.recipe);
+      recipe$ = this.userService
+        .getUser()
+        .pipe(
+          switchMap(user => this.recipeservice.addRecipe({ ...this.recipe, userId: user._id })),
+        );
     }
 
-    recipe$.subscribe(recipe => {
-      this.persistImages(recipe).subscribe(() =>
-        this.router.navigateByUrl(`/recipes/${recipe._id}`),
-      );
-    });
+    recipe$.subscribe(recipe =>
+      this.persistImages(recipe).subscribe({
+        complete: () => this.router.navigateByUrl(`/recipes/${recipe._id}`),
+      }),
+    );
   }
 
   private persistImages(recipe: Recipe) {
@@ -153,6 +166,8 @@ export class RecipeFormComponent implements OnInit {
     if (this.imagesToDisplay.length === 0) {
       // The last image was removed, so we also reset the recipe's thumbnail.
       this.recipe.thumbnailAsBase64 = '';
+    } else {
+      this.recipe.thumbnailAsBase64 = this.imagesToDisplay[0].dataAsBase64;
     }
   }
 

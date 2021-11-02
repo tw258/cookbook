@@ -1,4 +1,5 @@
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
+const { nanoid: createId } = require('nanoid');
 
 /**
  * When the backend (and the db) run in containers, the backend has to connect to the db
@@ -21,10 +22,10 @@ const IMAGES_COLLECTION = 'images';
 const USERS_COLLECTION = 'users';
 
 class Mongodb {
-  async getUser(userName) {
+  async getUserByName(username) {
     const [collection, client] = await this.connect(USERS_COLLECTION);
 
-    const user = await collection.findOne({ name: userName });
+    const user = await collection.findOne({ name: username });
     delete user.password; // Exclude the password from the result.
 
     client.close();
@@ -32,12 +33,10 @@ class Mongodb {
     return user;
   }
 
-  async getRecipe(recipeId) {
-    const _id = new ObjectId(recipeId);
-
+  async getRecipeById(recipeId) {
     const [collection, client] = await this.connect(RECIPES_COLLECTION);
 
-    const recipe = await collection.findOne({ _id });
+    const recipe = await collection.findOne({ _id: recipeId });
     client.close();
 
     return recipe;
@@ -46,56 +45,52 @@ class Mongodb {
   async insertRecipe(recipe) {
     const [collection, client] = await this.connect(RECIPES_COLLECTION);
 
-    const { insertedId } = await collection.insertOne(recipe);
+    recipe._id = createId();
+    await collection.insertOne(recipe);
     client.close();
-
-    recipe._id = insertedId;
 
     return recipe;
   }
 
-  async updateRecipe(recipe) {
-    const recipeObjectId = ObjectId.createFromHexString(recipe._id);
+  async updateRecipe(recipeId, updatedRecipe) {
     const [collection, client] = await this.connect(RECIPES_COLLECTION);
 
-    await collection.replaceOne({ _id: recipeObjectId }, recipe);
+    await collection.replaceOne({ _id: recipeId }, updatedRecipe);
 
     client.close();
+
+    return updatedRecipe;
   }
 
   async getRecipesByUserId(userId) {
     const [collection, client] = await this.connect(RECIPES_COLLECTION);
 
-    const userObjectId = ObjectId.createFromHexString(userId);
-
-    const recipes = await collection.find({ userId: userObjectId }).toArray();
+    const recipes = await collection.find({ userId }).toArray();
     client.close();
 
     return recipes;
   }
 
-  async deleteRecipe(recipeId) {
+  async deleteRecipeById(recipeId) {
     // First, we delete the recipe itself.
     const [recipeCollection, recipeClient] = await this.connect(RECIPES_COLLECTION);
-    const recipeObjectId = new ObjectId(recipeId);
+    const { value: deletedRecipe } = await recipeCollection.findOneAndDelete({ _id: recipeId });
 
-    const recipe = await recipeCollection.findOneAndDelete({ _id: recipeObjectId });
     recipeClient.close();
 
-    // Then, we delete all images of the recipe.
-    const [imagesCollection, imagesClient] = await this.connect(IMAGES_COLLECTION);
-    const imageObjectIds = recipe.imageIds.map(id => new ObjectId(id));
+    if (deletedRecipe.imageIds.length > 0) {
+      // Then, we delete all images of the deleted recipe (if it has any).
+      const [imagesCollection, imagesClient] = await this.connect(IMAGES_COLLECTION);
 
-    await imagesCollection.deleteMany({ _id: { $in: imageObjectIds } });
-    imagesClient.close();
+      await imagesCollection.deleteMany({ _id: { $in: deletedRecipe.imageIds } });
+      imagesClient.close();
+    }
   }
 
   async getImageById(imageId) {
-    const imageObjectId = ObjectId.createFromHexString(imageId);
-
     const [collection, client] = await this.connect(IMAGES_COLLECTION);
 
-    const image = await collection.findOne({ _id: imageObjectId });
+    const image = await collection.findOne({ _id: imageId });
     client.close();
 
     return image;
@@ -104,37 +99,29 @@ class Mongodb {
   async insertImage(recipeId, image) {
     // First, we insert the new image.
     const [imagesCollection, imagesClient] = await this.connect(IMAGES_COLLECTION);
-    const { insertedId: insertedImageId } = await imagesCollection.insertOne({ image });
+
+    image._id = createId();
+    await imagesCollection.insertOne(image);
     imagesClient.close();
 
     // Now, we add the id of the newly created image
     // to the `images` array of the existing recipe.
-    const recipeObjectId = ObjectId.createFromHexString(recipeId);
     const [recipesCollection, recipesClient] = await this.connect(RECIPES_COLLECTION);
 
-    await recipesCollection.updateOne(
-      { _id: recipeObjectId },
-      { $push: { imageIds: insertedImageId } },
-    );
+    await recipesCollection.updateOne({ _id: recipeId }, { $push: { imageIds: image._id } });
 
     recipesClient.close();
   }
 
   async deleteImage(recipeId, imageId) {
-    const recipeObjectId = ObjectId.createFromHexString(recipeId);
-    const imageObjectId = ObjectId.createFromHexString(imageId);
-
     // First, we delete the image id from the recipe.
     const [recipesCollection, recipesClient] = await this.connect(RECIPES_COLLECTION);
-    await recipesCollection.updateOne(
-      { _id: recipeObjectId },
-      { $pull: { imageIds: imageObjectId } },
-    );
+    await recipesCollection.updateOne({ _id: recipeId }, { $pull: { imageIds: imageId } });
     recipesClient.close();
 
     // Next, we delete the image itself.
     const [imagesCollection, imagesClient] = await this.connect(IMAGES_COLLECTION);
-    await imagesCollection.deleteOne({ _id: imageObjectId });
+    await imagesCollection.deleteOne({ _id: imageId });
     imagesClient.close();
   }
 

@@ -5,7 +5,7 @@
 #   docker-compose build; docker-compose up
 
 # Connect to the db via "MongoDB Compass" with:
-#   mongodb://root:dbpassword@localhost:27017
+#   mongodb://<username>:<password>@localhost:27017
 
 version: "2"
 

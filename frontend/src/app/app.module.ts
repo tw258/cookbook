@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { ImageSliderComponent } from './recipe-details/image-slider/image-slider.component';
 import { AuthGuard } from './auth.guard';
+import { ApostrophPipe } from './recipe-list/apostroph.pipe';
 
 const routes: Route[] = [
   { path: '', redirectTo: 'recipes', pathMatch: 'full' },
@@ -44,6 +45,7 @@ const routes: Route[] = [
     RecipeFilterComponent,
     LoginComponent,
     ImageSliderComponent,
+    ApostrophPipe,
   ],
   imports: [
     //eigene und Angular Module

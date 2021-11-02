@@ -12,11 +12,12 @@
 
 .navbar__content__logo-container {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 0 5px;
 }
 
-.navbar__content__logo-container img {
-  width: 30px;
+.logo-font-prefix {
+  text-decoration-color: transparent;
+  font-weight: 400 !important;
 }

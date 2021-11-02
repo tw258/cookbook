@@ -1,5 +1,5 @@
 <div class="header-with-logo" style="text-align: center">
-  <h1 class="logo-font">Cookbook</h1>
+  <h1 class="logo-font">cookbook</h1>
   <img src="assets/icons/icon-72x72.png" alt="Cookbook Logo" />
 </div>
 
@@ -29,6 +29,7 @@
       [ngModelOptions]="{ standalone: true }"
       matInput
       placeholder="Alligator3"
+      autocomplete="on"
       type="password"
       (keyup.enter)="handleLoginClick()"
     />
@@ -39,6 +40,7 @@
     class="mt-2"
     mat-raised-button
     color="primary"
+    type="button"
     (click)="handleLoginClick()"
   >
     Anmelden

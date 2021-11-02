@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   const authHeader = req.header('Authorization');
   const [username] = authHeader.split(':');
 
-  const user = await mongodb.getUser(username);
+  const user = await mongodb.getUserByName(username);
 
   res.send(user);
 });

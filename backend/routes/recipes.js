@@ -4,7 +4,6 @@ const router = express.Router();
 const Mongodb = require('../mongodb');
 const mongodb = new Mongodb();
 
-//GET /recipes?userId=12345
 router.get('/', async (req, res) => {
   const userId = req.query.userId;
   const recipes = await mongodb.getRecipesByUserId(userId);
@@ -12,12 +11,37 @@ router.get('/', async (req, res) => {
   res.send(recipes);
 });
 
-router.get('/:id', (req, res) => {});
+router.get('/:id', async (req, res) => {
+  const recipeId = req.params.id;
 
-router.post('/', (req, res) => {});
+  const recipe = await mongodb.getRecipeById(recipeId);
 
-router.put('/:id', (req, res) => {});
+  res.send(recipe);
+});
 
-router.delete('/:id', (req, res) => {});
+router.post('/', async (req, res) => {
+  const recipe = req.body;
+
+  const newRecipe = await mongodb.insertRecipe(recipe);
+
+  res.send(newRecipe);
+});
+
+router.put('/:id', async (req, res) => {
+  const recipeId = req.params.id;
+  const recipe = req.body;
+
+  const updatedRecipe = await mongodb.updateRecipe(recipeId, recipe);
+
+  res.send(updatedRecipe);
+});
+
+router.delete('/:id', async (req, res) => {
+  const recipeId = req.params.id;
+
+  await mongodb.deleteRecipeById(recipeId);
+
+  res.end();
+});
 
 module.exports = router;
