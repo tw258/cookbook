@@ -1,7 +1,10 @@
-# Build and run the backend containers with:
+# Copy this file and rename the copy to "docker-compose.yml".
+# Then, replace the placeholders with your credentials.
+
+# Build and run both containers with:
 #   docker-compose build; docker-compose up
 
-# Connect to the mongodb via MongoDB Compass with:
+# Connect to the db via "MongoDB Compass" with:
 #   mongodb://root:dbpassword@localhost:27017
 
 version: "2"
@@ -14,6 +17,8 @@ services:
       - 3000:3000
     environment:
       NODE_ENV: production
+      MONGO_INITDB_ROOT_USERNAME: <username>
+      MONGO_INITDB_ROOT_PASSWORD: <password>
 
   cb-db:
     restart: always
@@ -23,5 +28,5 @@ services:
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: dbpassword
+      MONGO_INITDB_ROOT_USERNAME: <username>
+      MONGO_INITDB_ROOT_PASSWORD: <password>

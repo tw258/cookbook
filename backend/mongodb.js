@@ -9,12 +9,13 @@ const { MongoClient, ObjectId } = require('mongodb');
  * Note that even though the db runs in a container, when connecting via. MongoDB Compass,
  * we have to use 'mongodb://root:dbpassword@localhost:27017' to connect.
  */
+const DB_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
+const DB_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
 const DB_URL =
   process.env.NODE_ENV === 'production'
-    ? 'mongodb://root:dbpassword@cb-db:27017' // Production (backend runs in container).
-    : 'mongodb://root:dbpassword@localhost:27017'; // Development.
+    ? `mongodb://${DB_USERNAME}:${DB_PASSWORD}@cb-db:27017/cookbook?authSource=admin` // Production (backend runs in container).
+    : `mongodb://${DB_USERNAME}:${DB_PASSWORD}@localhost:27017/cookbook?authSource=admin`; // Development.
 
-const DB_NAME = 'cookbook';
 const RECIPES_COLLECTION = 'recipes';
 const IMAGES_COLLECTION = 'images';
 const USERS_COLLECTION = 'users';
@@ -171,7 +172,7 @@ class Mongodb {
     const client = new MongoClient(DB_URL);
 
     await client.connect();
-    const db = client.db(DB_NAME);
+    const db = client.db();
     const collection = db.collection(collectionName);
 
     return [collection, client];

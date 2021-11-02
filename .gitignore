@@ -16,5 +16,7 @@
 !.vscode/extensions.json
 .history/*
 
+docker-compose.yml
+
 #docker-volumes
 /docker-volumes
