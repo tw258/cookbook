@@ -31,4 +31,8 @@ export class UserService {
     const url = `${environment.apiUrl}/users`;
     return this.http.get<User>(url).pipe(tap(user => (this.user = user)));
   }
+
+  deleteUser(): void {
+    this.user = null;
+  }
 }

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent implements OnInit {
-  user!: User;
+  user?: User;
   recipes: Recipe[] = [];
   filteredRecipes: Recipe[] = [];
 
@@ -43,6 +43,7 @@ export class RecipeListComponent implements OnInit {
 
   handleLogoutClick() {
     this.localStorage.clearCredentials();
+    this.userService.deleteUser();
     this.router.navigateByUrl('/login');
   }
 }

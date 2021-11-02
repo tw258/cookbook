@@ -2,11 +2,21 @@
   display: grid;
   align-items: center;
   text-align: right;
-  padding: 0 10px;
 }
 
 .btn-add-recipe {
   position: fixed;
   bottom: 30px;
   right: 30px;
+}
+
+.navbar__content__logo-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0 5px;
+}
+
+.navbar__content__logo-container img {
+  width: 30px;
 }

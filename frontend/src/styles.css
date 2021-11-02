@@ -32,8 +32,8 @@ strong {
 
 /*Logo font */
 .logo-font {
-  font-family: 'Dancing Script', sans-serif !important;
-  font-size: 32px !important;
+  font-family: 'Roboto Condensed', sans-serif !important;
+  font-size: 25px !important;
   font-weight: 700 !important;
   margin-bottom: 0 !important;
 }
@@ -138,6 +138,7 @@ mat-card {
   max-width: 700px;
   margin: auto;
   height: 100%;
+  padding: 0 5px;
 }
 
 .navbar__content__title {
