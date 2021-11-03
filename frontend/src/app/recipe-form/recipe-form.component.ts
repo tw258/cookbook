@@ -9,6 +9,8 @@ import { Recipe } from '../models/recipe';
 import { RecipeService } from '../recipe.service';
 import { UserService } from '../user.service';
 import { switchMap, tap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmRecipeDeleteDialogComponent } from './confirm-recipe-delete-dialog/confirm-recipe-delete-dialog.component';
 
 @Component({
   selector: 'app-recipe-form',
@@ -31,6 +33,7 @@ export class RecipeFormComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private imageService: ImageService,
+    private matDialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -100,9 +103,18 @@ export class RecipeFormComponent implements OnInit {
   }
 
   handleDeleteClick() {
-    this.recipeservice
-      .deleteRecipeBdyId(this.recipe._id!)
-      .subscribe(() => this.router.navigateByUrl('/recipes'));
+    this.matDialog.open(ConfirmRecipeDeleteDialogComponent, {
+      data: {
+        recipeTitle: this.recipe.title,
+        onConfirm: () =>
+          this.recipeservice
+            .deleteRecipeBdyId(this.recipe._id!)
+            .subscribe(() => this.router.navigateByUrl('/recipes')),
+        onCancel: () => {
+          // We ignore the cancel.
+        },
+      },
+    });
   }
 
   handleAddIngredientClick() {

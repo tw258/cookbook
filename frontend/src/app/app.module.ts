@@ -21,6 +21,7 @@ import { AuthInterceptor } from './auth.interceptor';
 import { ImageSliderComponent } from './recipe-details/image-slider/image-slider.component';
 import { AuthGuard } from './auth.guard';
 import { ApostrophPipe } from './recipe-list/apostroph.pipe';
+import { ConfirmRecipeDeleteDialogComponent } from './recipe-form/confirm-recipe-delete-dialog/confirm-recipe-delete-dialog.component';
 
 const routes: Route[] = [
   { path: '', redirectTo: 'recipes', pathMatch: 'full' },
@@ -46,6 +47,7 @@ const routes: Route[] = [
     LoginComponent,
     ImageSliderComponent,
     ApostrophPipe,
+    ConfirmRecipeDeleteDialogComponent,
   ],
   imports: [
     //eigene und Angular Module
