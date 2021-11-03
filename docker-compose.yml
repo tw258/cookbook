@@ -33,5 +33,5 @@ services:
       # Environment variables are automatically read from '.env'.
       MONGO_INITDB_ROOT_USERNAME: "${MONGO_INITDB_ROOT_USERNAME}"
       MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INITDB_ROOT_PASSWORD}"
-    # Silence mongodb stdout output (it's very verbose).
+    # Silence mongodb stdout output.
     command: mongod --quiet --logpath /dev/null
