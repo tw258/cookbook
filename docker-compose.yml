@@ -1,5 +1,5 @@
 # Build and run both containers with:
-#   docker-compose build; docker-compose up
+#   docker-compose build up
 
 # Connect to the db via "MongoDB Compass" with:
 #   mongodb://<username>:<password>@localhost:27017
@@ -16,17 +16,22 @@ services:
     ports:
       - 3000:3000
     environment:
+      # Environment variables are automatically read from '.env'
       NODE_ENV: "${NODE_ENV}"
       MONGO_INITDB_ROOT_USERNAME: "${MONGO_INITDB_ROOT_USERNAME}"
       MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INITDB_ROOT_PASSWORD}"
 
   cb-db:
-    restart: always
     image: mongo
+    restart: always
     volumes:
+      # This volume will be automatically created if it doesn't exist.
       - ./docker-volumes/db:/data/db
     ports:
       - 27017:27017
     environment:
+      # Environment variables are automatically read from '.env'.
       MONGO_INITDB_ROOT_USERNAME: "${MONGO_INITDB_ROOT_USERNAME}"
       MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INITDB_ROOT_PASSWORD}"
+    # Silence mongodb stdout output (it's very verbose).
+    command: mongod --quiet --logpath /dev/null
