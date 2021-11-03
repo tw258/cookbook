@@ -1,12 +1,23 @@
 $greenCheck = @{
-    Object = [Char]8730
+    Object = [char]8730
     ForegroundColor = 'Green'
 }
 
-Write-Host -NoNewline "(1/3) Creating docker-compose file..."
-Copy-Item docker-compose.example.yml "docker-compose.yml" *>$null
-Write-Host @greenCheck
+$orangeCheck = @{
+    Object = [char]8730
+    ForegroundColor = 'Yellow'
+}
 
+Write-Host -NoNewline "(1/3) Creating '.env' file..."
+
+if (!(Test-Path -Path ".env")) {
+    Copy-Item .env.example ".env" *>$null
+    Write-Host @greenCheck
+    Write-Host -ForegroundColor Yellow "      - Please add your MongoDB credentials to '.env'!"
+} else {
+    Write-Host @orangeCheck
+    Write-Host "      - file already exists, skipping this step"
+}
 
 Write-Host -NoNewline "(2/3) Installing backend dependencies..."
 Set-Location backend
@@ -19,5 +30,6 @@ Set-Location ../frontend
 npm install --force --silent *>$null
 Write-Host @greenCheck
 
+Write-Host ""
 
 Set-Location ..

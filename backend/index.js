@@ -3,6 +3,9 @@ const cors = require('cors');
 const authHandler = require('./middleware/auth-handler');
 const logger = require('./middleware/logger');
 
+// Load and initialize environment variables.
+require('./setup-environment');
+
 const app = express();
 
 // Add middleware.

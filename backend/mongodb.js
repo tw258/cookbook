@@ -14,8 +14,8 @@ const DB_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
 const DB_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
 const DB_URL =
   process.env.NODE_ENV === 'production'
-    ? `mongodb://${DB_USERNAME}:${DB_PASSWORD}@cb-db:27017/cookbook?authSource=admin` // Production (backend runs in container).
-    : `mongodb://${DB_USERNAME}:${DB_PASSWORD}@localhost:27017/cookbook?authSource=admin`; // Development.
+    ? `mongodb://${DB_USERNAME}:${DB_PASSWORD}@cb-db:27017/cookbook?authSource=admin` // Production: backend runs in container.
+    : `mongodb://${DB_USERNAME}:${DB_PASSWORD}@localhost:27017/cookbook?authSource=admin`; // Development: backend runs directly on host machine.
 
 const RECIPES_COLLECTION = 'recipes';
 const IMAGES_COLLECTION = 'images';
