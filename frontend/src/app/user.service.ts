@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -15,9 +15,13 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   checkCredentials({ username, password }: Credentials): Observable<boolean> {
-    const url = `${environment.apiUrl}/check-credentials?username=${username}&password=${password}`;
+    const url = `${environment.apiUrl}/check-credentials`;
 
-    return this.http.get<boolean>(url);
+    let params = new HttpParams();
+    params = params.set('username', username);
+    params = params.set('password', password);
+
+    return this.http.get<boolean>(url, { params });
   }
 
   getUser(): Observable<User> {

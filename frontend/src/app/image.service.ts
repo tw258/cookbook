@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -24,9 +24,12 @@ export class ImageService {
   }
 
   addImage(image: Image, recipe: Recipe): Observable<Image> {
-    const url = `${environment.apiUrl}/images?recipeId=${recipe._id}`;
+    const url = `${environment.apiUrl}/images`;
 
-    return this.http.post<Image>(url, image);
+    let params = new HttpParams();
+    params = params.set('recipeId', recipe._id);
+
+    return this.http.post<Image>(url, image, { params });
   }
 
   addImages(images: Image[], recipe: Recipe): Observable<Image[]> {
@@ -36,9 +39,12 @@ export class ImageService {
   }
 
   deleteImage(image: Image, recipe: Recipe): Observable<void> {
-    const url = `${environment.apiUrl}/images/${image._id}?recipeId=${recipe._id}`;
+    const url = `${environment.apiUrl}/images/${image._id}`;
 
-    return this.http.delete<void>(url);
+    let params = new HttpParams();
+    params = params.set('recipeId', recipe._id);
+
+    return this.http.delete<void>(url, { params });
   }
 
   deleteImages(images: Image[], recipe: Recipe): Observable<void[]> {
