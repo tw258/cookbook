@@ -4,6 +4,10 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'apostroph',
 })
 export class ApostrophPipe implements PipeTransform {
+  /**
+   * tobi -> tobi's,
+   * andreas -> andreas'
+   */
   transform(text: string | undefined): string {
     if (!text) {
       return '';

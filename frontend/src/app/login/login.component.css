@@ -7,15 +7,15 @@
 .header-with-logo {
   width: 200px;
   margin: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 10px;
-  align-items: center;
-  margin-top: 80px;
-  margin-bottom: 90px;
+  margin-top: 50px;
+  margin-bottom: 40px;
   text-align: center;
 }
 
+.header-with-logo img {
+  width: 100px;
+}
+
 .logo-font {
-  font-size: 35px !important;
+  font-size: 33px !important;
 }
