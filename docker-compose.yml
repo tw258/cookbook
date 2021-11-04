@@ -26,7 +26,7 @@ services:
     restart: always
     volumes:
       # This volume will be automatically created if it doesn't exist.
-      - ./docker-volumes/db:/data/db
+      - ./volumes/db:/data/db
     ports:
       - 27017:27017
     environment:
