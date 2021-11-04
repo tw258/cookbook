@@ -3,13 +3,14 @@
   "name": "cookbook.",
   "icons": [
     {
-      "src": "assets/icons/rabbit-1.svg",
+      "src": "assets/icons/rabbit-in-circle.svg",
       "sizes": "any",
+      "purpose": "maskable any",
       "type": "image/svg+xml"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#000000"
 }
