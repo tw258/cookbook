@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1636039927463,
+  "timestamp": 1636040951490,
   "index": "https://tw258.github.io/cookbook/index.html",
   "assetGroups": [
     {
@@ -12,7 +12,7 @@
       },
       "urls": [
         "https://tw258.github.io/cookbook/index.html",
-        "https://tw258.github.io/cookbook/main.d71586acb0489606229c.js",
+        "https://tw258.github.io/cookbook/main.f702f4accfcdec6a1a4c.js",
         "https://tw258.github.io/cookbook/manifest.webmanifest",
         "https://tw258.github.io/cookbook/polyfills.00096ed7d93ed26ee6df.js",
         "https://tw258.github.io/cookbook/runtime.7b63b9fd40098a2e8207.js",
@@ -40,8 +40,8 @@
     "https://tw258.github.io/cookbook/assets/icons/rabbit-1.svg": "b0628027a564b5f0510a5d13767ff745e3edd2d6",
     "https://tw258.github.io/cookbook/assets/icons/rabbit-blue.svg": "9724b538b19c20303ce57a6be8b5a5f33b8dfd0e",
     "https://tw258.github.io/cookbook/assets/icons/rabbit-in-circle.svg": "fe02cf0ed97ef5e906efe9f1b018d1380b5490f6",
-    "https://tw258.github.io/cookbook/index.html": "e28341efa6a458118a4359df12d0358ddb3a8df0",
-    "https://tw258.github.io/cookbook/main.d71586acb0489606229c.js": "c22b538a8ba52628a0d940a7ac477214e5cde8bf",
+    "https://tw258.github.io/cookbook/index.html": "b719c1acdf0b8b483fee74873998b019c35a2a05",
+    "https://tw258.github.io/cookbook/main.f702f4accfcdec6a1a4c.js": "21358666065f20956a5a803afb61150d575c587d",
     "https://tw258.github.io/cookbook/manifest.webmanifest": "b6eba849095b18a27c1cc618aa01ac3126b4c958",
     "https://tw258.github.io/cookbook/polyfills.00096ed7d93ed26ee6df.js": "cfe7b0b53e96bff9ba384b4d497c08475a617d62",
     "https://tw258.github.io/cookbook/runtime.7b63b9fd40098a2e8207.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
