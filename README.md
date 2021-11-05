@@ -1,14 +1,21 @@
 ![example workflow](https://github.com/tw258/cookbook/actions/workflows/ci.yml/badge.svg)
 
+
+
 # Cookbook
 
 <div align="center">
     <img src="documentation/marketing-images/rabbit.svg" width=150px>
     <br>
-    <i><strong>Create, manage and share your recipes - nobody does it better than cookbook.</strong></i>
+    <i><strong>Create, manage, and share your recipes.</strong></i>
+    <br>
+    <u><i><strong>https://tw258.github.io/cookbook</strong></i></u>
+    
 </div>
 
 ## Local Setup
+
+
 
 0. Make sure you have [NodeJS](https://nodejs.org/en/) and [Docker](https://www.docker.com/) installed
 1. Clone the repository and navigate into the root directory
