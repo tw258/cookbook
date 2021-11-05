@@ -17,6 +17,6 @@
 .history/*
 
 #docker-volumes
-/docker-volumes
+/volumes
 
 .env

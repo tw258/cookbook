@@ -1,5 +1,5 @@
 # Build and run both containers with:
-#   docker-compose build up
+#   docker-compose up --build
 
 # Connect to the db via "MongoDB Compass" with:
 #   mongodb://<username>:<password>@localhost:27017
