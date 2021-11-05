@@ -42,7 +42,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   handleLogoutClick() {
-    this.localStorage.clearCredentials();
+    this.localStorage.clearAuthToken();
     this.userService.deleteUser();
     this.router.navigateByUrl('/login');
   }

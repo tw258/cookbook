@@ -18,6 +18,7 @@ services:
     environment:
       # Environment variables are automatically read from '.env'
       NODE_ENV: "${NODE_ENV}"
+      JWT_SECRET: "${JWT_SECRET}"
       MONGO_INITDB_ROOT_USERNAME: "${MONGO_INITDB_ROOT_USERNAME}"
       MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INITDB_ROOT_PASSWORD}"
 

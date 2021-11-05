@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Credentials } from './models/credentials';
 import { User } from './models/user';
 
 @Injectable({
@@ -14,14 +13,16 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  checkCredentials({ username, password }: Credentials): Observable<boolean> {
-    const url = `${environment.apiUrl}/check-credentials`;
+  getAuthToken(username: string, password: string): Observable<string | null> {
+    const url = `${environment.apiUrl}/auth-token`;
 
     let params = new HttpParams();
     params = params.set('username', username);
     params = params.set('password', password);
 
-    return this.http.get<boolean>(url, { params });
+    // The backend returns the auth token as a plain string.
+    // We need to adjust the `responseType`, which expects JSON as default.
+    return this.http.get(url, { responseType: 'text', params });
   }
 
   getUser(): Observable<User> {

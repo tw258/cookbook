@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
   constructor(private localstorageService: LocalStorageService, private router: Router) {}
 
   canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): boolean | UrlTree {
-    if (this.localstorageService.checkIfCredentialsExist()) {
+    if (this.localstorageService.checkIfAuthTokenExists()) {
       // Credentials exist so we assume an authenticated user.
       return true;
     } else {

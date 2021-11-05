@@ -15,7 +15,7 @@
   <mat-form-field appearance="outline">
     <mat-label>Benutzername</mat-label>
     <input
-      [(ngModel)]="credentials.username"
+      [(ngModel)]="username"
       [ngModelOptions]="{ standalone: true }"
       matInput
       placeholder="Tobi"
@@ -25,7 +25,7 @@
   <mat-form-field appearance="outline">
     <mat-label>Passwort</mat-label>
     <input
-      [(ngModel)]="credentials.password"
+      [(ngModel)]="password"
       [ngModelOptions]="{ standalone: true }"
       matInput
       placeholder="Alligator3"
@@ -36,7 +36,7 @@
   </mat-form-field>
 
   <button
-    [disabled]="!credentials.password || !credentials.username"
+    [disabled]="!password || !username"
     class="mt-2"
     mat-raised-button
     color="primary"

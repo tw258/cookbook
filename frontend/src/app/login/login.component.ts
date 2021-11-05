@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../local-storage.service';
-import { Credentials } from '../models/credentials';
 import { UserService } from '../user.service';
 
 @Component({
@@ -10,7 +9,8 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  credentials: Credentials = { username: '', password: '' };
+  username = '';
+  password = '';
 
   isCredentialsAlertVisible = false;
   wrongCredentialsCount = 0;
@@ -22,9 +22,9 @@ export class LoginComponent {
   ) {}
 
   handleLoginClick() {
-    this.userService.checkCredentials(this.credentials).subscribe(isAuthenticated => {
-      if (isAuthenticated) {
-        this.localstorageService.setCredentials(this.credentials);
+    this.userService.getAuthToken(this.username, this.password).subscribe(authToken => {
+      if (authToken) {
+        this.localstorageService.setAuthToken(authToken);
         this.router.navigateByUrl('/recipes');
       } else {
         this.isCredentialsAlertVisible = true;

@@ -8,14 +8,14 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private localStorage: LocalStorageService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<any> {
-    if (!this.localStorage.checkIfCredentialsExist()) {
+    if (!this.localStorage.checkIfAuthTokenExists()) {
       return next.handle(request);
     }
 
-    const { username, password } = this.localStorage.getCredentials();
+    const authToken = this.localStorage.getAuthToken();
 
     const requestWithAuthHeader = request.clone({
-      setHeaders: { Authorization: `${username}:${password}` },
+      setHeaders: { Authorization: authToken },
     });
 
     return next.handle(requestWithAuthHeader);
