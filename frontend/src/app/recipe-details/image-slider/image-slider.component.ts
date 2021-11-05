@@ -1,13 +1,23 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { fromEvent } from 'rxjs';
 import { ImageService } from 'src/app/image.service';
 import { Image } from 'src/app/models/image';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-image-slider',
   templateUrl: './image-slider.component.html',
   styleUrls: ['./image-slider.component.css'],
 })
-export class ImageSliderComponent implements OnInit, AfterViewInit {
+export class ImageSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() imageIds: string[] = [];
 
   // This array is empty first and will be
@@ -22,6 +32,8 @@ export class ImageSliderComponent implements OnInit, AfterViewInit {
   private touchStartX = 0;
   private touchEndX = 0;
 
+  private subs = new SubSink();
+
   constructor(private imageService: ImageService) {}
 
   ngOnInit() {
@@ -35,17 +47,23 @@ export class ImageSliderComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.imgContainer) {
-      this.imgContainer.nativeElement.addEventListener('touchstart', e => {
+      this.subs.sink = fromEvent(this.imgContainer.nativeElement, 'touchstart').subscribe(
         // The swipe has started so we save the starting position.
-        this.touchStartX = e.touches.item(0)!.clientX;
-      });
+        (e: any) => (this.touchStartX = e.touches.item(0).clientX),
+      );
 
-      this.imgContainer.nativeElement.addEventListener('touchend', e => {
-        this.touchEndX = e.changedTouches.item(0)!.clientX;
+      this.subs.sink = fromEvent(this.imgContainer.nativeElement, 'touchend').subscribe(
+        (e: any) => {
+          this.touchEndX = e.changedTouches.item(0)!.clientX;
 
-        this.handleSwipe();
-      });
+          this.handleSwipe();
+        },
+      );
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
   private handleSwipe() {
