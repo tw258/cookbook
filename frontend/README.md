@@ -1,3 +1,0 @@
-# Cookbook
-
-Recipes and Ingredients.
