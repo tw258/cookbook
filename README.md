@@ -1,6 +1,4 @@
-![example workflow](https://github.com/tw258/cookbook/actions/workflows/ci.yml/badge.svg)
-
-
+![example workflow](https://github.com/tw258/cookbook/actions/workflows/ci.yml/badge.svg) ![text](https://img.shields.io/static/v1?label=Angular&message=PWA&color=8e44ad&logo=angular)
 
 # Cookbook
 
