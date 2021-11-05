@@ -10,7 +10,7 @@
       </span>
 
       <button
-        [disabled]="!recipe.title || !recipe.note"
+        [disabled]="!recipe.title || !recipe.note || isLoading"
         color="primary"
         (click)="handleSaveClick()"
         mat-icon-button

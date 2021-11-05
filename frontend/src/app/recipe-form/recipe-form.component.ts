@@ -18,6 +18,7 @@ import { ConfirmRecipeDeleteDialogComponent } from './confirm-recipe-delete-dial
   styleUrls: ['./recipe-form.component.css'],
 })
 export class RecipeFormComponent implements OnInit {
+  isLoading = false;
   recipe!: Recipe;
   maxTime = 60;
   isEditMode = false;
@@ -67,6 +68,7 @@ export class RecipeFormComponent implements OnInit {
   }
 
   handleSaveClick() {
+    this.isLoading = true;
     let recipe$: Observable<Recipe>;
 
     if (this.isEditMode) {
@@ -81,7 +83,10 @@ export class RecipeFormComponent implements OnInit {
 
     recipe$.subscribe(recipe =>
       this.persistImages(recipe).subscribe({
-        complete: () => this.router.navigateByUrl(`/recipes/${recipe._id}`),
+        complete: () => {
+          this.router.navigateByUrl(`/recipes/${recipe._id}`);
+          this.isLoading = false;
+        },
       }),
     );
   }
