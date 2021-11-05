@@ -4,11 +4,8 @@
   "author": "Tobi and Oscar",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "test": "ng test",
-    "lint": "ng lint",
-    "build": "ng build --configuration production --base-href \"https://tw258.github.io/cookbook/\"",
-    "e2e": "ng e2e"
+    "start": "ng serve -o",
+    "build": "ng build --configuration production --base-href \"https://tw258.github.io/cookbook/\""
   },
   "private": true,
   "dependencies": {
