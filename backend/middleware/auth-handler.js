@@ -1,24 +1,23 @@
-const Mongodb = require('../mongodb');
-
-const mongodb = new Mongodb();
+const jwt = require('jsonwebtoken');
 
 async function authHandler(req, res, next) {
-  const authHeader = req.header('Authorization');
+  const authToken = req.header('Authorization');
 
-  if (!authHeader) {
-    res.status(401).send('No Authorization Header was found');
+  if (!authToken) {
+    res.status(400).send('Authorization header did not exist or held an empty value');
     return;
   }
 
-  // We expect the auth header to have this format "<username>:<password>"
-  const [name, password] = authHeader.split(':');
+  try {
+    const decodedToken = jwt.verify(authToken, process.env.JWT_SECRET);
 
-  const isAuthenticated = await mongodb.checkIfUserAuthenticated(name, password);
-
-  if (isAuthenticated) {
+    // `verify` didn't throw, so the auth token is
+    // valid and the user is authenticated.
+    // We pass the username along to the next handler.
+    res.locals.username = decodedToken.username;
     next();
-  } else {
-    res.status(401).end();
+  } catch (err) {
+    res.status(401).send('Invalid auth token');
   }
 }
 

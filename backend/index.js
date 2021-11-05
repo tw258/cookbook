@@ -17,10 +17,10 @@ app.use(logger);
 const recipeRouter = require('./routes/recipes');
 const imageRouter = require('./routes/images');
 const usersRouter = require('./routes/users');
-const checkCredentialsRouter = require('./routes/check-credentials');
+const authTokenRouter = require('./routes/auth-token');
 
 // Setup routes.
-app.use('/check-credentials', checkCredentialsRouter);
+app.use('/auth-token', authTokenRouter);
 app.use('/recipes', authHandler, recipeRouter);
 app.use('/images', authHandler, imageRouter);
 app.use('/users', authHandler, usersRouter);
