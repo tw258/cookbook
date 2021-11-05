@@ -2,7 +2,7 @@
 
 # Cookbook
 
-<div style="text-align:center">
+<div align="center">
     <img src="documentation/marketing-images/rabbit.svg" width=150px>
     <br>
     <i><strong>Create, manage and share your recipes - nobody does it better than cookbook.</strong></i>
