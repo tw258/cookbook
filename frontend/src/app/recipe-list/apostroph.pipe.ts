@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ApostrophPipe implements PipeTransform {
   /**
-   * tobi -> tobi's,
-   * andreas -> andreas'
+   * tobi -> Tobi's,
+   * andreas -> Andreas'
    */
   transform(text: string | undefined): string {
     if (!text) {
@@ -15,6 +15,6 @@ export class ApostrophPipe implements PipeTransform {
 
     const suffix = text.endsWith('s') ? "'" : "'s";
 
-    return `${text}${suffix}`;
+    return `${text[0].toUpperCase()}${text.slice(1)}${suffix}`;
   }
 }

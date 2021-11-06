@@ -32,10 +32,8 @@ strong {
 
 /*Logo font */
 .logo-font {
-  font-family: 'Roboto Condensed', sans-serif !important;
-  font-size: 23px !important;
-  text-decoration: underline;
-  font-weight: 700 !important;
+  font-family: 'Caveat', cursive !important;
+  font-weight: 600 !important;
   margin-bottom: 0 !important;
 }
 

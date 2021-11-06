@@ -17,7 +17,12 @@
   gap: 0 5px;
 }
 
+.logo-font {
+  font-weight: 700 !important;
+  font-size: 25px;
+}
+
 .logo-font-prefix {
   text-decoration-color: transparent;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
 }
