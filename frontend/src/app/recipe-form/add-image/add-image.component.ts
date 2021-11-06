@@ -1,6 +1,9 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
-import Compress from 'compress.js';
 import { Image } from 'src/app/models/image';
+import { compressAccurately } from 'image-conversion';
+
+const MAX_IMAGE_SIZE_KB = 100;
+const MAX_IMAGE_SIZE_BYTES = MAX_IMAGE_SIZE_KB * 1000;
 
 @Component({
   selector: 'app-add-image',
@@ -13,40 +16,26 @@ export class AddImageComponent {
 
   isLoading = false;
 
-  private compressor = new Compress();
-
-  async handleImageSelect(images: FileList) {
+  async handleImageSelect(blobs: any) {
     this.isLoading = true;
-    for (let i = 0; i < images.length; i++) {
-      let image: any = images.item(i);
+    for (let i = 0; i < blobs.length; i++) {
+      let blob: Blob = blobs.item(i);
 
-      if (!image) {
-        return;
+      if (blob.size > MAX_IMAGE_SIZE_BYTES) {
+        // Image is bigger than 100 KB so we compress it.
+
+        blob = await compressAccurately(blob, MAX_IMAGE_SIZE_KB);
       }
 
-      let imageAsBase64;
-      if (image.size > 100000) {
-        // Image is bigger than 100 KB, so we compress it.
-
-        const compressOptions: any = {
-          size: 0.1, // The max size in MB.
-          // See https://www.npmjs.com/package/compress.js for more options.
-        };
-
-        image = (await this.compressor.compress([image], compressOptions))[0];
-        imageAsBase64 = `${image.prefix}${image.data}`;
-      } else {
-        imageAsBase64 = await this.imageToBase64(image);
-      }
-
-      this.imageAdd.emit({ dataAsBase64: imageAsBase64, _id: '' });
+      const dataAsBase64 = await this.imageToBase64(blob);
+      this.imageAdd.emit({ _id: '', dataAsBase64 });
     }
 
     this.isLoading = false;
     this.imageInput!.nativeElement.value = '';
   }
 
-  private imageToBase64(file: File): Promise<any> {
+  private imageToBase64(file: Blob): Promise<any> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
