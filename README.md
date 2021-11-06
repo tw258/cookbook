@@ -1,6 +1,6 @@
 ![](https://github.com/tw258/cookbook/actions/workflows/ci.yml/badge.svg)
 
-![](https://img.shields.io/badge/Angular-e74c3c?style=flat&logo=angular) ![](https://img.shields.io/badge/Docker%20Compose-blue?style=flat&logo=docker&logoColor=white) ![](https://img.shields.io/badge/Express-16a085?style=flat&logo=express&logoColor=white) ![](https://img.shields.io/badge/MongoDB-9b59b6?style=flat&logo=mongodb&logoColor=white)
+![](https://img.shields.io/badge/Angular-ecf0f1?style=flat&logo=angular&logoColor=2c3e50)   ![](https://img.shields.io/badge/Docker%20Compose-ecf0f1?style=flat&logo=docker&logoColor=2c3e50) ![](https://img.shields.io/badge/NodeJS-ecf0f1?style=flat&logo=nodedotjs&logoColor=2c3e50) ![](https://img.shields.io/badge/MongoDB-ecf0f1?style=flat&logo=mongodb&logoColor=2c3e50)
 
 # Cookbook
 
@@ -25,9 +25,6 @@
 ```console
 $ docker-compose up --build
 ```
-
-Or...
-
 ```console
 $ docker-compose up --build --detach # Run containers in the background.
 ```
