@@ -192,7 +192,7 @@ export class RecipeFormComponent implements OnInit {
     return {
       amount: 1,
       name: '',
-      measurement: Measurement.Stck,
+      measurement: Measurement.Stk,
     };
   }
 }

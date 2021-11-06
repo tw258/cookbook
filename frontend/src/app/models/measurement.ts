@@ -6,5 +6,5 @@ export enum Measurement {
   TL = 'TL',
   EL = 'EL',
   Prise = 'Prise',
-  Stck = 'Stck',
+  Stk = 'Stk',
 }
