@@ -125,7 +125,7 @@ class Mongodb {
     imagesClient.close();
   }
 
-  async checkIfUserAuthenticated(name, password) {
+  async checkIfUserAuthenticated(name, hashedPassword) {
     const [collection, client] = await this.connect(USERS_COLLECTION);
 
     const foundUser = await collection.findOne({ name });
@@ -135,7 +135,7 @@ class Mongodb {
       return false;
     }
 
-    if (foundUser.password !== password) {
+    if (foundUser.password !== hashedPassword) {
       return false;
     }
 
