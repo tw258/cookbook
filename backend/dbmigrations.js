@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb');
 require('./setup-environment');
+const hashPassword = require('./utils/crypto');
 
 const DB_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
 const DB_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
@@ -14,19 +15,19 @@ async function migrateDB() {
 
   await client.connect();
   const db = client.db();
-  const collection = db.collection(RECIPES_COLLECTION);
+  const collection = db.collection(USERS_COLLECTION);
 
   //Do stuff here
-  // const allRecipes = await collection.find().toArray();
+  const allUsers = await collection.find().toArray();
 
-  // for (const recipe of allRecipes) {
-  //   for (const ingredient of recipe.ingredients) {
-  //     if (ingredient.measurement === 'Stck') {
-  //       ingredient.measurement = 'Stk';
-  //     }
-  //   }
-  //   await collection.replaceOne({ _id: recipe._id }, recipe);
-  // }
+  for (const user of allUsers) {
+    //hash password
+    user.password = hashPassword(user.password);
+
+    console.log(user);
+
+    await collection.replaceOne({ _id: user._id }, user);
+  }
 
   client.close();
 }
