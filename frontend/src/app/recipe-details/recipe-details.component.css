@@ -28,3 +28,7 @@ h2 {
 pre {
   white-space: pre-wrap;
 }
+
+.container-date {
+  text-align: right;
+}

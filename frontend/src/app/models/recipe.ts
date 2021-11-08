@@ -10,4 +10,6 @@ export interface Recipe {
   portions: number;
   ingredients: Ingredient[];
   preparationTimeInMinutes: number;
+  dateCreatedAsISOString: string;
+  dateUpdatedAsISOString?: string;
 }

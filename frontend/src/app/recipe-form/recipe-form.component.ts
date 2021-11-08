@@ -60,6 +60,7 @@ export class RecipeFormComponent implements OnInit {
         portions: 2,
         ingredients: [],
         preparationTimeInMinutes: 0,
+        dateCreatedAsISOString: '',
         title: '',
         thumbnailAsBase64: '',
         imageIds: [],
@@ -72,8 +73,10 @@ export class RecipeFormComponent implements OnInit {
     let recipe$: Observable<Recipe>;
 
     if (this.isEditMode) {
+      this.recipe.dateUpdatedAsISOString = new Date().toISOString();
       recipe$ = this.recipeservice.updateRecipeById(this.recipe._id, this.recipe);
     } else {
+      this.recipe.dateCreatedAsISOString = new Date().toISOString();
       recipe$ = this.userService
         .getUser()
         .pipe(

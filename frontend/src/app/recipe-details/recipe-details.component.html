@@ -12,12 +12,27 @@
   </div>
 
   <div class="pt-7"></div>
+
+  <!-- Images -->
   <div *ngIf="recipe.imageIds.length" class="mb-1">
     <app-image-slider [imageIds]="recipe.imageIds"></app-image-slider>
   </div>
 
+  <!-- Recipe Creation or Modification Date -->
+  <div
+    class="container-date"
+    *ngIf="recipe.dateCreatedAsISOString || recipe.dateUpdatedAsISOString"
+  >
+    <span *ngIf="recipe.dateUpdatedAsISOString; else dateCreatedTempl" class="mat-caption"
+      >Aktualisiert am: {{ recipe.dateUpdatedAsISOString | germanDate }}</span
+    >
+    <ng-template #dateCreatedTempl>
+      <span class="mat-caption">Erstellt am: {{ recipe.dateCreatedAsISOString | germanDate }}</span>
+    </ng-template>
+  </div>
+
   <!-- Ingredient Calculator -->
-  <section class="mt-1">
+  <section>
     <h2>Zutatenrechner</h2>
     <app-ingredient-calculator [recipe]="recipe"></app-ingredient-calculator>
   </section>

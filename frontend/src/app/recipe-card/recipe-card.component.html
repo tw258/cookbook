@@ -7,6 +7,19 @@
 
     <!-- Title, Time, and Ingredients -->
     <section class="card-content__body">
+      <div
+        [class.mt-1]="!recipe.thumbnailAsBase64"
+        *ngIf="recipe.dateCreatedAsISOString || recipe.dateUpdatedAsISOString"
+      >
+        <span *ngIf="recipe.dateUpdatedAsISOString; else dateCreatedTempl" class="mat-caption"
+          >Aktualisiert am: {{ recipe.dateUpdatedAsISOString | germanDate }}</span
+        >
+        <ng-template #dateCreatedTempl>
+          <span class="mat-caption"
+            >Erstellt am: {{ recipe.dateCreatedAsISOString | germanDate }}</span
+          >
+        </ng-template>
+      </div>
       <h2 class="card-content__body__title">
         {{ recipe.title }}
       </h2>
