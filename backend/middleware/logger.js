@@ -1,11 +1,5 @@
-const chalk = require('chalk');
-
 function logger(req, _, next) {
-  console.log(
-    `${chalk.italic(parseDate(new Date()))}   ${chalk.bold(chalk.white(req.method))} ${chalk.bold(
-      chalk.white(req.originalUrl),
-    )}`,
-  );
+  console.log(`${parseDate(new Date())}   ${req.method} ${req.originalUrl}`);
 
   next();
 }
