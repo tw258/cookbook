@@ -33,6 +33,7 @@ $ docker-compose up --build --detach # Run containers in the background.
 ### Run Express Backend in Watch Mode (Hot Reload)
 
 ```console
+$ docker-compose stop cb-backend # Stop backend container (if running).
 $ npm install pm2 -g # Install PM2 globally.
 $ cd backend
 $ npm run watch
