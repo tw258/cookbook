@@ -16,8 +16,10 @@ export class UserService {
   getAuthToken(username: string, password: string): Observable<string | null> {
     const url = `${environment.apiUrl}/auth-token`;
 
+    const cleanUsername = username.toLocaleLowerCase().trim();
+
     let params = new HttpParams();
-    params = params.set('username', username);
+    params = params.set('username', cleanUsername);
     params = params.set('password', password);
 
     // The backend returns the auth token as a plain string.
