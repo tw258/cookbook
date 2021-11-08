@@ -30,9 +30,13 @@
       matInput
       placeholder="Alligator3"
       autocomplete="on"
-      type="password"
+      [type]="isPasswordVisible ? 'text' : 'password'"
       (keyup.enter)="handleLoginClick()"
     />
+
+    <button type="button" (click)="onToggleVisibility()" mat-icon-button matSuffix>
+      <mat-icon>{{ isPasswordVisible ? 'visibility' : 'visibility_off' }}</mat-icon>
+    </button>
   </mat-form-field>
 
   <button

@@ -11,6 +11,7 @@ import { UserService } from '../user.service';
 export class LoginComponent {
   username = '';
   password = '';
+  isPasswordVisible = false;
 
   isCredentialsAlertVisible = false;
   wrongCredentialsCount = 0;
@@ -22,6 +23,10 @@ export class LoginComponent {
   ) {}
 
   handleLoginClick() {
+    if (!this.username || !this.password) {
+      return;
+    }
+
     this.userService.getAuthToken(this.username, this.password).subscribe(authToken => {
       if (authToken) {
         this.localstorageService.setAuthToken(authToken);
@@ -31,5 +36,9 @@ export class LoginComponent {
         this.wrongCredentialsCount++;
       }
     });
+  }
+
+  onToggleVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 }
