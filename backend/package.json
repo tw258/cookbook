@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "watch": "pm2 start index.js --watch && pm2 logs",
-    "killwatch": "pm2 stop all"
+    "killwatch": "pm2 stop all",
+    "hash": "node utils/create-hash.js"
   },
   "keywords": [],
   "author": "Tobi & Oscar",
