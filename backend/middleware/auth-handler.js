@@ -4,7 +4,7 @@ async function authHandler(req, res, next) {
   const authToken = req.header('Authorization');
 
   if (!authToken) {
-    res.status(400).send('Authorization header did not exist or held an empty value');
+    res.status(400).send('Authorization header did not exist or was empty');
     return;
   }
 
