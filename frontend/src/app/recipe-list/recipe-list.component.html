@@ -10,6 +10,10 @@
           Abmelden ({{ user?.name }})
         </button>
 
+        <a [routerLink]="['/change-password']" mat-menu-item>
+          <mat-icon>password</mat-icon> Passwort ändern
+        </a>
+
         <a href="https://github.com/tw258/cookbook" target="blank" mat-menu-item>
           <mat-icon>info_outline</mat-icon>
           Über Cookbook

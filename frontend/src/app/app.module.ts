@@ -22,6 +22,7 @@ import { ImageSliderComponent } from './recipe-details/image-slider/image-slider
 import { AuthGuard } from './auth.guard';
 import { ApostrophPipe } from './recipe-list/apostroph.pipe';
 import { ConfirmRecipeDeleteDialogComponent } from './recipe-form/confirm-recipe-delete-dialog/confirm-recipe-delete-dialog.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Route[] = [
   { path: '', redirectTo: 'recipes', pathMatch: 'full' },
@@ -30,6 +31,7 @@ const routes: Route[] = [
   { path: 'new-recipe', component: RecipeFormComponent, canActivate: [AuthGuard] },
   { path: 'recipes/:id', component: RecipeDetailsComponent, canActivate: [AuthGuard] },
   { path: 'recipes/:id/edit', component: RecipeFormComponent, canActivate: [AuthGuard] },
+  { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -48,6 +50,7 @@ const routes: Route[] = [
     ImageSliderComponent,
     ApostrophPipe,
     ConfirmRecipeDeleteDialogComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     //eigene und Angular Module
