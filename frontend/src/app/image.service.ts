@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Image } from './models/image';
 import { Recipe } from './models/recipe';
@@ -51,5 +51,11 @@ export class ImageService {
     const responses$: Observable<void>[] = images.map(i => this.deleteImage(i, recipe));
 
     return forkJoin(responses$);
+  }
+
+  setThumbnail(imageId: string, isThumbnail: boolean): Observable<void> {
+    const url = `${environment.apiUrl}/images/set-thumbnail`;
+
+    return this.http.patch<void>(url, { imageId, isThumbnail });
   }
 }

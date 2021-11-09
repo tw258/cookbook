@@ -22,6 +22,7 @@ import { ImageSliderComponent } from './recipe-details/image-slider/image-slider
 import { AuthGuard } from './auth.guard';
 import { ApostrophPipe } from './recipe-list/apostroph.pipe';
 import { ConfirmRecipeDeleteDialogComponent } from './recipe-form/confirm-recipe-delete-dialog/confirm-recipe-delete-dialog.component';
+import { ImageClickDialogComponent } from './recipe-form/image-click-dialog/image-click-dialog.component';
 
 const routes: Route[] = [
   { path: '', redirectTo: 'recipes', pathMatch: 'full' },
@@ -48,6 +49,7 @@ const routes: Route[] = [
     ImageSliderComponent,
     ApostrophPipe,
     ConfirmRecipeDeleteDialogComponent,
+    ImageClickDialogComponent,
   ],
   imports: [
     //eigene und Angular Module

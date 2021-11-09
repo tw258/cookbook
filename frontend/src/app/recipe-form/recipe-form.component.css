@@ -7,7 +7,7 @@ mat-form-field {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 130px;
-  gap: 15px;
+  gap: 5px;
   align-items: center;
 }
 
@@ -23,27 +23,38 @@ mat-form-field {
   border-radius: 5px;
 }
 
-.images-container__icon-delete {
+.images-container__icon-thumbnail {
   position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: white;
+  left: 5px;
+  top: 3px;
+  background: white;
   border-radius: 50px;
-  cursor: pointer;
-  font-size: 30px;
+  opacity: 0.9;
 }
 
-.ingredient-form {
+.ingredient-form__inputs {
   display: grid;
-  grid-template-columns: 2fr 2fr 4fr auto;
+  grid-template-columns: 1.5fr 2fr 4fr;
+  gap: 0 10px;
+}
+
+.ingredients__header {
+  display: grid;
   align-items: center;
-  gap: 10px;
+  grid-template-columns: auto 1fr auto;
+}
+
+h2 {
+  margin: 0;
+  font-size: 15px !important;
 }
 
 .list-ingredient__item {
   padding: 7px 0px !important;
   height: auto !important;
-  background-color: rgb(250, 250, 250);
+  font-size: 14px;
+  font-weight: 500;
+  background-color: rgb(245, 245, 245);
 }
 
 .list-ingredient__item__ingredient-details {
@@ -68,4 +79,8 @@ mat-form-field {
 
 .preparationtime-container {
   display: grid;
+}
+
+mat-hint.small {
+  font-size: 12px;
 }

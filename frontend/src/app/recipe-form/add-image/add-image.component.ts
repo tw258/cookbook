@@ -28,7 +28,7 @@ export class AddImageComponent {
       }
 
       const dataAsBase64 = await this.imageToBase64(blob);
-      this.imageAdd.emit({ _id: '', dataAsBase64 });
+      this.imageAdd.emit({ _id: '', dataAsBase64, sizeInBytes: blob.size });
     }
 
     this.isLoading = false;

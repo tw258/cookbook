@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Aktion auswählen</h2>
+<mat-dialog-content
+  >Welche Aktion wollen Sie für dieses Bild
+  <mat-hint *ngIf="imageSizeInBytes"> ({{ imageSizeInBytes | to: 'kb' }}) </mat-hint>
+  ausführen?</mat-dialog-content
+>
+<mat-dialog-actions align="center">
+  <button [disabled]="isThumbnail" (click)="onMakeThumbnail()" mat-button>
+    Zu Thumbnail machen
+  </button>
+  <button style="margin-top: 5px" (click)="onDelete()" mat-button color="warn">Löschen</button>
+</mat-dialog-actions>

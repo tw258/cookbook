@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, Observable } from 'rxjs';
+import { EMPTY, forkJoin, Observable, of } from 'rxjs';
 import { ImageService } from '../image.service';
 import { Image } from '../models/image';
 import { Measurement } from '../models/measurement';
@@ -11,6 +11,7 @@ import { UserService } from '../user.service';
 import { switchMap, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmRecipeDeleteDialogComponent } from './confirm-recipe-delete-dialog/confirm-recipe-delete-dialog.component';
+import { ImageClickDialogComponent } from './image-click-dialog/image-click-dialog.component';
 
 @Component({
   selector: 'app-recipe-form',
@@ -28,6 +29,9 @@ export class RecipeFormComponent implements OnInit {
   imagesToAdd: Image[] = [];
   imagesToDelete: Image[] = [];
 
+  private initialThumbnailId = '';
+  private currentThumbnailId = '';
+
   constructor(
     private route: ActivatedRoute,
     private recipeservice: RecipeService,
@@ -44,15 +48,24 @@ export class RecipeFormComponent implements OnInit {
       // A recipe id was passed through the URL which
       // means we're editing an existing recipe.
       this.isEditMode = true;
+      this.isLoading = true;
       this.recipeservice
         .getRecipeById(recipeId)
         .pipe(
           tap(recipe => (this.recipe = recipe)),
           switchMap(recipe => this.imageService.getImagesById(recipe.imageIds)),
         )
-        .subscribe(images => (this.imagesToDisplay = images));
+        .subscribe({
+          next: images => {
+            this.imagesToDisplay = images;
+            this.initialThumbnailId = this.imagesToDisplay.find(i => i.isThumbnail)?._id || '';
+            this.currentThumbnailId = this.initialThumbnailId;
+          },
+          complete: () => (this.isLoading = false),
+        });
     } else {
-      // We are creating a new recipe so we fill it with dummy data.
+      // We are creating a new recipe so
+      // we fill a new one with dummy data.
       this.recipe = {
         _id: '',
         userId: '',
@@ -68,8 +81,15 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
-  handleSaveClick() {
+  /**
+   * Saves the newly created or updated
+   * recipe with all its dependencies.
+   * This is the most important method in this component.
+   */
+  onSave() {
     this.isLoading = true;
+
+    const user$ = this.userService.getUser();
     let recipe$: Observable<Recipe>;
 
     if (this.isEditMode) {
@@ -77,37 +97,76 @@ export class RecipeFormComponent implements OnInit {
       recipe$ = this.recipeservice.updateRecipeById(this.recipe._id, this.recipe);
     } else {
       this.recipe.dateCreatedAsISOString = new Date().toISOString();
-      recipe$ = this.userService
-        .getUser()
-        .pipe(
-          switchMap(user => this.recipeservice.addRecipe({ ...this.recipe, userId: user._id })),
-        );
+      recipe$ = user$.pipe(
+        switchMap(({ _id: userId }) => this.recipeservice.addRecipe({ ...this.recipe, userId })),
+      );
     }
 
-    recipe$.subscribe(recipe =>
-      this.persistImages(recipe).subscribe({
+    let recipeIdToRedirect = '';
+    recipe$
+      .pipe(
+        tap(({ _id }) => (recipeIdToRedirect = _id)),
+        switchMap(recipe => this.persistImages(recipe)),
+        switchMap(() => this.updateThumbnail()),
+      )
+      .subscribe({
         complete: () => {
-          this.router.navigateByUrl(`/recipes/${recipe._id}`);
           this.isLoading = false;
+          this.router.navigateByUrl(`/recipes/${recipeIdToRedirect}`);
         },
-      }),
-    );
+      });
   }
 
   private persistImages(recipe: Recipe) {
-    const respones$: Observable<any>[] = [];
+    const responses: Observable<any>[] = [];
 
     if (this.imagesToAdd.length) {
       const imagesToAdd$ = this.imageService.addImages(this.imagesToAdd, recipe);
-      respones$.push(imagesToAdd$);
+      responses.push(imagesToAdd$);
     }
 
     if (this.imagesToDelete.length) {
       const imagesToDelete$ = this.imageService.deleteImages(this.imagesToDelete, recipe);
-      respones$.push(imagesToDelete$);
+      responses.push(imagesToDelete$);
     }
 
-    return forkJoin(respones$);
+    if (!responses.length) {
+      return of(null);
+    }
+
+    return forkJoin(responses);
+  }
+
+  private updateThumbnail(): Observable<any> {
+    if (!this.isEditMode) {
+      return EMPTY;
+    }
+
+    if (!this.initialThumbnailId) {
+      // We're editing an existing recipe without any images.
+      // We can proceed as if we weren't in edit mode.
+
+      return EMPTY;
+    }
+
+    if (this.initialThumbnailId == this.currentThumbnailId) {
+      return EMPTY;
+    }
+
+    if (!this.currentThumbnailId) {
+      // New image was added and made thumbnail.
+      // We just need to remove the flag from the previous one.
+      // The new one already has the flag set to `true`.
+
+      return this.imageService.setThumbnail(this.initialThumbnailId, false);
+    }
+
+    // We remove the flag the previous
+    // image and add it to the current one.
+    return forkJoin([
+      this.imageService.setThumbnail(this.initialThumbnailId, false),
+      this.imageService.setThumbnail(this.currentThumbnailId, true),
+    ]);
   }
 
   handleDeleteClick() {
@@ -164,31 +223,54 @@ export class RecipeFormComponent implements OnInit {
     if (this.imagesToDisplay.length === 1) {
       // The image that was just added, is the recipe's
       // first image, so we set it as the recipe's thumbnail.
+      image.isThumbnail = true;
       this.recipe.thumbnailAsBase64 = image.dataAsBase64;
     }
   }
 
-  handleImageRemoveClick(image: Image) {
-    const indexOfImage = this.imagesToDisplay.indexOf(image);
+  onImageClick(image: Image) {
+    this.matDialog.open(ImageClickDialogComponent, {
+      data: {
+        isThumbnail: image.isThumbnail,
+        size: image.sizeInBytes,
+        onDelete: () => {
+          if (image._id) {
+            // The image has an `_id` and therefore exists in the database.
+            // We have to mark it for deletion to delete it later.
+            this.imagesToDelete.push(image);
+          } else {
+            // We do nothing here.
+            // This image only exists in our local state and doesn't need
+            // to be deleted from the datatbase.
+          }
 
-    if (image._id) {
-      // The image has an `_id` and therefore exists in the database.
-      // We have to mark it for deletion to delete it later.
-      this.imagesToDelete.push(image);
-    } else {
-      // We do nothing here.
-      // This image only exists in our local state and doesn't need
-      // to be deleted from the datatbase.
-    }
+          let indexOfImage = this.imagesToDisplay.indexOf(image);
+          this.imagesToDisplay.splice(indexOfImage, 1);
 
-    this.imagesToDisplay.splice(indexOfImage, 1);
+          indexOfImage = this.imagesToAdd.indexOf(image);
+          this.imagesToAdd.splice(indexOfImage, 1);
 
-    if (this.imagesToDisplay.length === 0) {
-      // The last image was removed, so we also reset the recipe's thumbnail.
-      this.recipe.thumbnailAsBase64 = '';
-    } else {
-      this.recipe.thumbnailAsBase64 = this.imagesToDisplay[0].dataAsBase64;
-    }
+          if (image.isThumbnail && this.imagesToDisplay.length > 0) {
+            // The image was the thumbnail and there are images left.
+            // So we make the image at position 0 the new thumnail.
+
+            this.imagesToDisplay[0].isThumbnail = true;
+            this.recipe.thumbnailAsBase64 = this.imagesToDisplay[0].dataAsBase64;
+            this.currentThumbnailId = this.imagesToDisplay[0]._id;
+          }
+        },
+        onMakeThumbnail: () => {
+          const prevThumbnail = this.imagesToDisplay.find(i => i.isThumbnail);
+          if (prevThumbnail) {
+            prevThumbnail.isThumbnail = false;
+          }
+
+          image.isThumbnail = true;
+          this.recipe.thumbnailAsBase64 = image.dataAsBase64;
+          this.currentThumbnailId = image._id;
+        },
+      },
+    });
   }
 
   private createIngredient(): Ingredient {

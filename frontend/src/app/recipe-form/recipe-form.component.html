@@ -1,4 +1,4 @@
-<ng-container *ngIf="recipe; else loading">
+<ng-container *ngIf="!isLoading; else spinnerTmpl">
   <div class="navbar">
     <div class="navbar__content grid-auto-1fr-auto">
       <button (click)="handleCancelClick()" mat-icon-button>
@@ -12,7 +12,7 @@
       <button
         [disabled]="!recipe.title || !recipe.note || isLoading"
         color="primary"
-        (click)="handleSaveClick()"
+        (click)="onSave()"
         mat-icon-button
       >
         <mat-icon class="material-icons-outlined">check</mat-icon>
@@ -20,32 +20,59 @@
     </div>
   </div>
 
-  <form class="pt-7 mb-3">
-    <mat-form-field appearance="outline">
+  <div class="pt-7"></div>
+
+  <form>
+    <h2>Wie heißt's?</h2>
+    <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
       <input
+        required
         [(ngModel)]="recipe.title"
         [ngModelOptions]="{ standalone: true }"
         matInput
         placeholder="z.B. Spaghetti Bolognese"
       />
+      <mat-error align="end">Benötigtes Feld</mat-error>
     </mat-form-field>
 
-    <div class="images-container mt-1">
+    <!-- Images -->
+    <h2>Wie sieht's aus?</h2>
+    <div class="images-container">
       <div *ngFor="let image of imagesToDisplay">
-        <img [src]="image.dataAsBase64" />
+        <img (click)="onImageClick(image)" [src]="image.dataAsBase64" />
         <span
-          aria-label="Remove image"
-          class="material-icons-outlined images-container__icon-delete"
-          (click)="handleImageRemoveClick(image)"
-          >remove_circle_outline</span
+          *ngIf="image.isThumbnail"
+          class="material-icons-outlined images-container__icon-thumbnail"
         >
+          star_outline
+        </span>
       </div>
-      <app-add-image (imageAdd)="handleImageAdded($event)"></app-add-image>
+      <div [ngStyle]="{ 'grid-column': imagesToDisplay.length === 0 ? '1/3' : 'auto' }">
+        <app-add-image (imageAdd)="handleImageAdded($event)"></app-add-image>
+      </div>
     </div>
+
+    <!-- Ingredients -->
     <section class="mt-2">
-      <div class="ingredient-form">
-        <mat-form-field appearance="outline">
+      <div style="margin-bottom: 5px" class="ingredients__header">
+        <h2>Was ist drin?</h2>
+        <span></span>
+        <button
+          [disabled]=""
+          color="primary"
+          mat-icon-button
+          [disabled]="
+            !currentIngredient.amount || !currentIngredient.name || !currentIngredient.measurement
+          "
+          mat-icon-button
+          (click)="handleAddIngredientClick()"
+        >
+          <mat-icon class="material-icons-outlined">check</mat-icon>
+        </button>
+      </div>
+      <div class="ingredient-form__inputs">
+        <mat-form-field appearance="fill">
           <mat-label>Menge</mat-label>
           <input
             [(ngModel)]="currentIngredient.amount"
@@ -59,7 +86,7 @@
           />
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Einheit</mat-label>
           <mat-select
             [(ngModel)]="currentIngredient.measurement"
@@ -71,13 +98,14 @@
             <mat-option value="ml">ml</mat-option>
             <mat-option value="l">l</mat-option>
             <mat-option value="TL">TL</mat-option>
+            <mat-option value="Bund">Bund</mat-option>
             <mat-option value="EL">EL</mat-option>
             <mat-option value="Prise">Prise</mat-option>
             <mat-option value="Stk">Stk</mat-option>
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Zutat</mat-label>
           <input
             [(ngModel)]="currentIngredient.name"
@@ -87,19 +115,10 @@
             placeholder="Eier, Mehl, ..."
           />
         </mat-form-field>
-
-        <button
-          type="button"
-          [disabled]="
-            !currentIngredient.amount || !currentIngredient.name || !currentIngredient.measurement
-          "
-          mat-icon-button
-          (click)="handleAddIngredientClick()"
-        >
-          <span class="material-icons-outlined">add</span>
-        </button>
       </div>
-      <mat-list class="list-ingredient" role="list">
+
+      <mat-list *ngIf="recipe.ingredients.length > 0" class="list-ingredient mb-1" role="list">
+        <div mat-subheader>Zutaten ({{ recipe.ingredients.length }})</div>
         <mat-list-item
           class="list-ingredient__item"
           role="listitem"
@@ -118,31 +137,34 @@
       </mat-list>
     </section>
 
-    <mat-form-field class="mt-1" appearance="outline">
+    <h2>Wie wird's gemacht?</h2>
+    <mat-form-field appearance="fill">
       <mat-label>Zubereitung</mat-label>
       <textarea
+        required
         [(ngModel)]="recipe.note"
         [ngModelOptions]="{ standalone: true }"
         class="textarea-note"
         matInput
-        placeholder="1. ...  2. ..."
+        placeholder="- Gemüse schneiden"
       ></textarea>
+      <mat-error align="end">Benötigtes Feld</mat-error>
     </mat-form-field>
 
-    <div class="mt-1 preparationtime-container">
-      <div>
-        <span
-          >Zubereitungszeit:
-          <strong>{{ recipe.preparationTimeInMinutes }} Min</strong>
-        </span>
-      </div>
+    <!-- Preparation Time -->
+    <div class="preparationtime-container">
+      <h2>Wie lange dauert's?</h2>
+      <span>
+        Zubereitungszeit:
+        <strong> {{ recipe.preparationTimeInMinutes }} Minuten</strong>
+      </span>
       <mat-slider
         [value]="recipe.preparationTimeInMinutes"
         (input)="handlePreparationTimeChange($event.value)"
         step="5"
         min="0"
         tickInterval="1"
-        [max]="60"
+        [max]="90"
         color="primary"
       ></mat-slider>
     </div>
@@ -160,6 +182,6 @@
   </form>
 </ng-container>
 
-<ng-template #loading>
-  <app-spinner></app-spinner>
+<ng-template #spinnerTmpl>
+  <app-spinner text="Rezept wird geladen..."></app-spinner>
 </ng-template>

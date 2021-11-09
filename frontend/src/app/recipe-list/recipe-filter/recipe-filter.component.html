@@ -1,4 +1,4 @@
-<mat-form-field class="w-100" appearance="outline">
+<mat-form-field class="w-100" appearance="fill">
   <mat-label>Filter mit Rezeptname</mat-label>
   <input (input)="handleInput()" matInput type="text" [(ngModel)]="filter" autocomplete="off" />
   <button *ngIf="filter" matSuffix mat-icon-button (click)="filter = ''; handleInput()">

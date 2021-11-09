@@ -37,11 +37,6 @@ strong {
   margin-bottom: 0 !important;
 }
 
-/* Material overwrites */
-.mat-form-field-wrapper {
-  padding-bottom: 0 !important;
-}
-
 mat-card {
   box-shadow: var(--card-box-shadow) !important;
 }
@@ -80,6 +75,10 @@ mat-card {
 
 .m-0 {
   margin: 0 !important;
+}
+
+.mt-05 {
+  margin-top: 5px;
 }
 
 .mt-1 {
@@ -142,7 +141,7 @@ mat-card {
 
 .navbar__content__title {
   margin: 0;
-  font-size: 17px;
+  font-size: 18px;
   text-align: center;
   font-weight: 400;
 }

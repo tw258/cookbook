@@ -4,6 +4,7 @@ export enum Measurement {
   ml = 'ml',
   l = 'l',
   TL = 'TL',
+  Bund = 'Bund',
   EL = 'EL',
   Prise = 'Prise',
   Stk = 'Stk',

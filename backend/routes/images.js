@@ -30,4 +30,12 @@ router.delete('/:id', async (req, res) => {
   res.end();
 });
 
+router.patch('/set-thumbnail', async (req, res) => {
+  const { imageId, isThumbnail } = req.body;
+
+  await mongodb.patchImage(imageId, { isThumbnail });
+
+  res.end();
+});
+
 module.exports = router;

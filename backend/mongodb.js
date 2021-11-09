@@ -96,6 +96,27 @@ class Mongodb {
     return image;
   }
 
+  async getImagesById(imageIds) {
+    const [collection, client] = await this.connect(IMAGES_COLLECTION);
+    const images = await collection.find({ _id: { $in: imageIds } }).toArray();
+    client.close();
+
+    return images;
+  }
+
+  /**
+   * Updates an image with the given payload.
+   *
+   * @example
+   * mongodb.updateImage(12321, { myProperty: 'new-value' });
+   */
+  async patchImage(imageId, payload) {
+    const [collection, client] = await this.connect(IMAGES_COLLECTION);
+
+    await collection.updateOne({ _id: imageId }, { $set: payload });
+    client.close();
+  }
+
   async insertImage(recipeId, image) {
     // First, we insert the new image.
     const [imagesCollection, imagesClient] = await this.connect(IMAGES_COLLECTION);
@@ -140,6 +161,12 @@ class Mongodb {
     }
 
     return true;
+  }
+
+  async setImageIsThumbnail(imageId, isThumbnail) {
+    const [collection, client] = await this.connect(IMAGES_COLLECTION);
+    await collection.updateOne({ _id: imageId }, { $set: { isThumbnail } });
+    client.close();
   }
 
   /**
