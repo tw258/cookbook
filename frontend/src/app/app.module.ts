@@ -23,6 +23,7 @@ import { AuthGuard } from './auth.guard';
 import { ApostrophPipe } from './recipe-list/apostroph.pipe';
 import { ConfirmRecipeDeleteDialogComponent } from './recipe-form/confirm-recipe-delete-dialog/confirm-recipe-delete-dialog.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ConfirmPasswordChangeDialogComponent } from './change-password/confirm-password-change-dialog/confirm-password-change-dialog.component';
 import { ImageClickDialogComponent } from './recipe-form/image-click-dialog/image-click-dialog.component';
 
 const routes: Route[] = [
@@ -51,6 +52,8 @@ const routes: Route[] = [
     ImageSliderComponent,
     ApostrophPipe,
     ConfirmRecipeDeleteDialogComponent,
+    ChangePasswordComponent,
+    ConfirmPasswordChangeDialogComponent,
   ],
   imports: [
     //eigene und Angular Module
