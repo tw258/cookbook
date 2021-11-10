@@ -42,4 +42,10 @@ export class UserService {
   deleteUser(): void {
     this.user = null;
   }
+
+  updatePassword(newPassword: string): Observable<void> {
+    const url = `${environment.apiUrl}/users/update-password`;
+
+    return this.http.patch<void>(url, { password: newPassword });
+  }
 }

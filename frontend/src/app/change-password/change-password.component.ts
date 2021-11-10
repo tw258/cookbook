@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-change-password',
@@ -8,5 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class ChangePasswordComponent {
   newPassword = '';
 
-  constructor() {}
+  constructor(private userService: UserService) {}
+
+  handleChangePassword() {
+    this.userService.updatePassword(this.newPassword).subscribe(
+      x => console.log('sucessfully changed'),
+      err => console.log(err),
+    );
+  }
 }
