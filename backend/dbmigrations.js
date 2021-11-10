@@ -4,23 +4,26 @@ const hashPassword = require('./utils/crypto');
 
 const DB_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
 const DB_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
-const DB_URL = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@192.168.2.5:27017/cookbook?authSource=admin`; // Development: backend runs directly on host machine.
+const DB_URL = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@localhost:27017/cookbook?authSource=admin`; // Development: backend runs directly on host machine.
 
 const RECIPES_COLLECTION = 'recipes';
 const IMAGES_COLLECTION = 'images';
 const USERS_COLLECTION = 'users';
-const recipesCollection = db.collection(RECIPES_COLLECTION);
-const imageCollection = db.collection(IMAGES_COLLECTION);
-const usersCollection = db.collection(USERS_COLLECTION);
+var recipesCollection = null;
+var imageCollection = null;
+var usersCollection = null;
 
 async function migrateDB() {
   const client = new MongoClient(DB_URL);
 
   await client.connect();
   const db = client.db();
+  recipesCollection = db.collection(RECIPES_COLLECTION);
+  imageCollection = db.collection(IMAGES_COLLECTION);
+  usersCollection = db.collection(USERS_COLLECTION);
 
   //Do stuff here
-  //await migrate2();
+  await migrate3();
 
   client.close();
 }
@@ -50,4 +53,11 @@ async function migrate2() {
       );
     }
   }
+}
+
+//10.11.2021 reset pw tobi
+async function migrate3() {
+  const newPassword = hashPassword('cb2021');
+  console.log(newPassword);
+  await usersCollection.updateOne({ name: 'tobi' }, { $set: { password: newPassword } });
 }
