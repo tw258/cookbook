@@ -14,8 +14,9 @@ router.get('/', async (_, res) => {
   res.send(user);
 });
 
-router.post('/change-password', async (req, res) => {
-  const name = req.body.name;
+router.patch('/update-password', async (req, res) => {
+  const name = res.locals.username;
+  console.log(name);
   const newPassword = req.body.password;
   const newHashedPassword = hashPassword(newPassword);
 

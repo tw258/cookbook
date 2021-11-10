@@ -149,12 +149,8 @@ class Mongodb {
   async updatePassword(name, newHashedPassword) {
     const [collection, client] = await this.connect(USERS_COLLECTION);
 
-    const foundUser = await collection.findOne({ name });
+    await collection.updateOne({ name }, { $set: { password: newHashedPassword } });
 
-    if (foundUser) {
-      foundUser.password = newHashedPassword;
-      await collection.replaceOne({ _id: foundUser._id }, foundUser);
-    }
     client.close();
   }
 
