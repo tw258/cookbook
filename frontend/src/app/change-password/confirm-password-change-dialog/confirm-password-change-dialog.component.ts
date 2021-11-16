@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirm-password-change-dialog',
@@ -6,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./confirm-password-change-dialog.component.css'],
 })
 export class ConfirmPasswordChangeDialogComponent {
-  constructor() {}
+  constructor(
+    private matDialogRef: MatDialogRef<ConfirmPasswordChangeDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: { onCancel: () => void; onConfirm: () => void },
+  ) {}
 
-  onCancel() {}
+  onCancel() {
+    this.data.onCancel();
+    this.matDialogRef.close();
+  }
 
-  onConfirm() {}
+  onConfirm() {
+    this.data.onConfirm();
+    this.matDialogRef.close();
+  }
 }
