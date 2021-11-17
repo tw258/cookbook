@@ -14,6 +14,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   exports: [
@@ -32,6 +33,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSliderModule,
     MatListModule,
     MatSidenavModule,
+    ReactiveFormsModule,
   ],
 })
 export class MaterialModule {}
