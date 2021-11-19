@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1637340033206,
+  "timestamp": 1637341233833,
   "index": "https://tw258.github.io/cookbook/index.html",
   "assetGroups": [
     {
@@ -12,11 +12,11 @@
       },
       "urls": [
         "https://tw258.github.io/cookbook/index.html",
-        "https://tw258.github.io/cookbook/main.213a04023eb2231a.js",
+        "https://tw258.github.io/cookbook/main.e048e8ba4b649034.js",
         "https://tw258.github.io/cookbook/manifest.webmanifest",
         "https://tw258.github.io/cookbook/polyfills.b374eabad3913285.js",
         "https://tw258.github.io/cookbook/runtime.abd50cd0d1603ffd.js",
-        "https://tw258.github.io/cookbook/styles.f89ad6bddc375e6d.css"
+        "https://tw258.github.io/cookbook/styles.378043c10597e0cc.css"
       ],
       "patterns": []
     },
@@ -64,12 +64,12 @@
     "https://tw258.github.io/cookbook/assets/icons/rabbit-1.svg": "b0628027a564b5f0510a5d13767ff745e3edd2d6",
     "https://tw258.github.io/cookbook/assets/icons/rabbit-blue.svg": "9724b538b19c20303ce57a6be8b5a5f33b8dfd0e",
     "https://tw258.github.io/cookbook/assets/icons/rabbit-in-circle.svg": "fe02cf0ed97ef5e906efe9f1b018d1380b5490f6",
-    "https://tw258.github.io/cookbook/index.html": "3f965a7ee6205f8158ff0f6391ccea4267bc764e",
-    "https://tw258.github.io/cookbook/main.213a04023eb2231a.js": "414e6dca97a8535e6b440dff000bd0aacf115f62",
+    "https://tw258.github.io/cookbook/index.html": "9ce5337e0fe979dc9eaaca50e97bedaf8a73e707",
+    "https://tw258.github.io/cookbook/main.e048e8ba4b649034.js": "2150a0a14dfd3cf57ac428b6d0a14faefd885ef3",
     "https://tw258.github.io/cookbook/manifest.webmanifest": "d2fb741877bec4f788bba0325ca3512e44583cc9",
     "https://tw258.github.io/cookbook/polyfills.b374eabad3913285.js": "33d89f530080e3a9eeb75b41e6c9894fdeb62bf8",
     "https://tw258.github.io/cookbook/runtime.abd50cd0d1603ffd.js": "764e7bcbc371c88e1dd7adcf2df55c9978c18c3c",
-    "https://tw258.github.io/cookbook/styles.f89ad6bddc375e6d.css": "172544c438e5f328250a6c970655c3a0c8767fd6"
+    "https://tw258.github.io/cookbook/styles.378043c10597e0cc.css": "8ad4888575fa92c6e549faafe1bef1c5110ca212"
   },
   "navigationUrls": [
     {
