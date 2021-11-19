@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1636400686482,
+  "timestamp": 1637309412051,
   "index": "https://tw258.github.io/cookbook/index.html",
   "assetGroups": [
     {
@@ -28,6 +28,18 @@
         "ignoreVary": true
       },
       "urls": [
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-114x114.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-120x120.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-128x128.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-144x144.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-152x152.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-180x180.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-57x57.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-60x60.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-72x72.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-76x76.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-precomposed.png",
+        "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon.png",
         "https://tw258.github.io/cookbook/assets/icons/rabbit-1.svg",
         "https://tw258.github.io/cookbook/assets/icons/rabbit-blue.svg",
         "https://tw258.github.io/cookbook/assets/icons/rabbit-in-circle.svg"
@@ -37,10 +49,22 @@
   ],
   "dataGroups": [],
   "hashTable": {
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-114x114.png": "e6ac54937ddd9ee2905b49ae7749b359d08b93f2",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-120x120.png": "9baf89bb8afddc3656a02438d638ccf80d08bb20",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-128x128.png": "88ec3439393b9aec0d93c1b03f8a9dcd0da422ee",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-144x144.png": "55e358f4f2109f58cd7570cba1f845d2a9bc4839",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-152x152.png": "e00232e39417f19c62f1c3d0dd12dddcab8dee95",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-180x180.png": "89efb32c894735e821083930ccefc89e8b61999d",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-57x57.png": "a059b37097765f4280450836495e3c172c82b937",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-60x60.png": "eb86df2c51a423caf501a86621190b417bbbdb3e",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-72x72.png": "f6bdf0e05d0f692413af8f68a0420e6053cd0497",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-76x76.png": "5b4e96855aa1983ba5663557152f4463088b55a6",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon-precomposed.png": "a059b37097765f4280450836495e3c172c82b937",
+    "https://tw258.github.io/cookbook/assets/icons/apple-touch-icon.png": "eb86df2c51a423caf501a86621190b417bbbdb3e",
     "https://tw258.github.io/cookbook/assets/icons/rabbit-1.svg": "b0628027a564b5f0510a5d13767ff745e3edd2d6",
     "https://tw258.github.io/cookbook/assets/icons/rabbit-blue.svg": "9724b538b19c20303ce57a6be8b5a5f33b8dfd0e",
     "https://tw258.github.io/cookbook/assets/icons/rabbit-in-circle.svg": "fe02cf0ed97ef5e906efe9f1b018d1380b5490f6",
-    "https://tw258.github.io/cookbook/index.html": "f64ee68dd35e2aac0458822b94b5f49195c34110",
+    "https://tw258.github.io/cookbook/index.html": "9ce5337e0fe979dc9eaaca50e97bedaf8a73e707",
     "https://tw258.github.io/cookbook/main.e048e8ba4b649034.js": "2150a0a14dfd3cf57ac428b6d0a14faefd885ef3",
     "https://tw258.github.io/cookbook/manifest.webmanifest": "d2fb741877bec4f788bba0325ca3512e44583cc9",
     "https://tw258.github.io/cookbook/polyfills.b374eabad3913285.js": "33d89f530080e3a9eeb75b41e6c9894fdeb62bf8",
