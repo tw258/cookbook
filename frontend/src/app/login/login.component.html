@@ -1,52 +1,54 @@
-<div class="header-with-logo">
-  <img src="assets/icons/rabbit-1.svg" alt="Cookbook Logo" />
-  <h1 class="logo-font" style="margin-top: 10px">Cookbook</h1>
-</div>
+<div class="p-1">
+  <div class="header-with-logo">
+    <img src="assets/icons/rabbit-1.svg" alt="Cookbook Logo" />
+    <h1 class="logo-font" style="margin-top: 10px">Cookbook</h1>
+  </div>
 
-<h2>Anmeldung</h2>
-<app-alert
-  type="error"
-  [text]="'Benutzername oder Passwort falsch (' + wrongCredentialsCount + 'x).'"
-  *ngIf="isCredentialsAlertVisible"
-  (close)="isCredentialsAlertVisible = false"
-></app-alert>
+  <h2>Anmeldung</h2>
+  <app-alert
+    type="error"
+    [text]="'Benutzername oder Passwort falsch (' + wrongCredentialsCount + 'x).'"
+    *ngIf="isCredentialsAlertVisible"
+    (close)="isCredentialsAlertVisible = false"
+  ></app-alert>
 
-<form class="login-form">
-  <mat-form-field appearance="outline">
-    <mat-label>Benutzername</mat-label>
-    <input
-      [(ngModel)]="username"
-      [ngModelOptions]="{ standalone: true }"
-      matInput
-      placeholder="Tobi"
-    />
-  </mat-form-field>
+  <form class="login-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Benutzername</mat-label>
+      <input
+        [(ngModel)]="username"
+        [ngModelOptions]="{ standalone: true }"
+        matInput
+        placeholder="Tobi"
+      />
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Passwort</mat-label>
-    <input
-      [(ngModel)]="password"
-      [ngModelOptions]="{ standalone: true }"
-      matInput
-      placeholder="Alligator3"
-      autocomplete="on"
-      [type]="isPasswordVisible ? 'text' : 'password'"
-      (keyup.enter)="handleLoginClick()"
-    />
+    <mat-form-field appearance="outline">
+      <mat-label>Passwort</mat-label>
+      <input
+        [(ngModel)]="password"
+        [ngModelOptions]="{ standalone: true }"
+        matInput
+        placeholder="Alligator3"
+        autocomplete="on"
+        [type]="isPasswordVisible ? 'text' : 'password'"
+        (keyup.enter)="handleLoginClick()"
+      />
 
-    <button type="button" (click)="onToggleVisibility()" mat-icon-button matSuffix>
-      <mat-icon>{{ isPasswordVisible ? 'visibility' : 'visibility_off' }}</mat-icon>
+      <button type="button" (click)="onToggleVisibility()" mat-icon-button matSuffix>
+        <mat-icon>{{ isPasswordVisible ? 'visibility' : 'visibility_off' }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button
+      [disabled]="!password || !username"
+      class="mt-2"
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="handleLoginClick()"
+    >
+      Anmelden
     </button>
-  </mat-form-field>
-
-  <button
-    [disabled]="!password || !username"
-    class="mt-2"
-    mat-raised-button
-    color="primary"
-    type="button"
-    (click)="handleLoginClick()"
-  >
-    Anmelden
-  </button>
-</form>
+  </form>
+</div>

@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { Recipe } from '../models/recipe';
 import { LocalStorageService } from '../local-storage.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-recipe-list',
@@ -13,6 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent implements OnInit {
+  version = `v${environment.version}`;
+
   user?: User;
   recipes: Recipe[] = [];
   filteredRecipes: Recipe[] = [];

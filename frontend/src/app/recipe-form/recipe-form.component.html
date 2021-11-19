@@ -1,4 +1,4 @@
-<ng-container *ngIf="recipe; else loading">
+<div class="p-1" *ngIf="recipe; else loading">
   <div class="navbar">
     <div class="navbar__content grid-auto-1fr-auto">
       <button (click)="handleCancelClick()" mat-icon-button>
@@ -158,7 +158,7 @@
       Rezept löschen
     </button>
   </form>
-</ng-container>
+</div>
 
 <ng-template #loading>
   <app-spinner></app-spinner>

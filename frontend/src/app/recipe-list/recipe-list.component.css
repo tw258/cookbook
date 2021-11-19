@@ -26,3 +26,18 @@
   text-decoration-color: transparent;
   font-weight: 500 !important;
 }
+
+mat-drawer {
+  padding: 70px 10px;
+}
+
+.mat-drawer__logo-container {
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  left: 30%;
+}
+
+.mat-drawer__logo-container img {
+  height: 75px;
+}

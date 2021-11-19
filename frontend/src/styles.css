@@ -63,7 +63,16 @@ mat-card {
 .container {
   max-width: 700px;
   margin: auto;
-  padding: 10px;
+  height: 100%;
+}
+
+mat-drawer-container {
+  height: 100% !important;
+  background-color: white !important;
+}
+
+.mat-drawer-backdrop {
+  background-color: transparent !important;
 }
 
 .w-100 {
@@ -116,6 +125,18 @@ mat-card {
 
 .mr-1 {
   margin-right: 10px;
+}
+
+.p-1 {
+  padding: 10px;
+}
+
+.pr-1 {
+  padding-right: 10px;
+}
+
+.pl-1 {
+  padding-left: 10px;
 }
 
 .pt-7 {

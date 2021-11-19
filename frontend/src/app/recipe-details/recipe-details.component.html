@@ -1,4 +1,4 @@
-<ng-container *ngIf="recipe$ | async as recipe; else loadingTmpl">
+<div *ngIf="recipe$ | async as recipe; else loadingTmpl" class="p-1">
   <div class="navbar">
     <div class="navbar__content grid-auto-1fr-auto">
       <button routerLink=".." mat-icon-button>
@@ -42,7 +42,7 @@
     <h2>Zubereitung in {{ recipe.preparationTimeInMinutes }} Minuten:</h2>
     <pre>{{ recipe.note }}</pre>
   </section>
-</ng-container>
+</div>
 
 <ng-template #loadingTmpl>
   <app-spinner></app-spinner>
