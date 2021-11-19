@@ -27,14 +27,14 @@ export class ChangePasswordComponent {
     if (this.password.hasError('minlength')) {
       return 'Passwort muss mindestens 6 Zeichen lang sein!';
     }
-    return '';
+    return 'Passwort muss gesetzt werden';
   }
 
   getErrorMessageConfirmPassword() {
     if (this.confirmPassword.hasError('minlength')) {
       return 'Passwort muss mindestens 6 Zeichen lang sein!';
     }
-    return '';
+    return 'Passwort muss gesetzt werden';
   }
 
   onToggleVisibility() {
