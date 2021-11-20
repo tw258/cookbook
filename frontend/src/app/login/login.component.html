@@ -13,23 +13,20 @@
   ></app-alert>
 
   <form class="login-form">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="fill">
       <mat-label>Benutzername</mat-label>
-      <input
-        [(ngModel)]="username"
-        [ngModelOptions]="{ standalone: true }"
-        matInput
-        placeholder="Tobi"
-      />
+      <input required [(ngModel)]="username" [ngModelOptions]="{ standalone: true }" matInput />
+      <mat-error align="end">Bitte Benutzernamen eingeben</mat-error>
+      <mat-hint align="end"><strong>Groß und Kleinschreibung wird ignoriert</strong></mat-hint>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field class="mt-05" appearance="fill">
       <mat-label>Passwort</mat-label>
       <input
+        required
         [(ngModel)]="password"
         [ngModelOptions]="{ standalone: true }"
         matInput
-        placeholder="Alligator3"
         autocomplete="on"
         [type]="isPasswordVisible ? 'text' : 'password'"
         (keyup.enter)="handleLoginClick()"
@@ -38,6 +35,7 @@
       <button type="button" (click)="onToggleVisibility()" mat-icon-button matSuffix>
         <mat-icon>{{ isPasswordVisible ? 'visibility' : 'visibility_off' }}</mat-icon>
       </button>
+      <mat-error align="end">Bitte Passwort eingeben</mat-error>
     </mat-form-field>
 
     <button

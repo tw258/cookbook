@@ -7,6 +7,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: 1fr auto 1fr;
+  padding: 0 10px;
 }
 
 .add-image-container__content {
@@ -19,4 +20,8 @@
 
 .add-image-container--not-loading:hover {
   background-color: rgb(240, 240, 240);
+}
+
+mat-hint {
+  font-size: 13px;
 }

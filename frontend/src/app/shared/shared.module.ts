@@ -5,6 +5,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { AlertComponent } from './alert/alert.component';
 import { FormsModule } from '@angular/forms';
 import { GermanDatePipe } from './german-date.pipe';
+import { ToPipe } from './to.pipe';
 
 @NgModule({
   exports: [
@@ -12,10 +13,11 @@ import { GermanDatePipe } from './german-date.pipe';
     GermanDatePipe,
     FormsModule,
     CommonModule,
+    ToPipe,
     SpinnerComponent,
     AlertComponent,
   ],
-  imports: [MaterialModule],
-  declarations: [SpinnerComponent, AlertComponent, GermanDatePipe],
+  imports: [MaterialModule, CommonModule],
+  declarations: [SpinnerComponent, AlertComponent, GermanDatePipe, ToPipe],
 })
 export class SharedModule {}

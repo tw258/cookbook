@@ -1,3 +1,11 @@
 <div class="spinner">
-  <mat-spinner [diameter]="25"></mat-spinner>
+  <div style="display: grid; grid-template-columns: 1fr auto 1fr">
+    <span></span>
+    <mat-spinner [diameter]="35"></mat-spinner>
+    <span></span>
+  </div>
+
+  <p *ngIf="text" class="mt-2">
+    <strong>{{ text }}</strong>
+  </p>
 </div>

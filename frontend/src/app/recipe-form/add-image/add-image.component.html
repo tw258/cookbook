@@ -4,13 +4,17 @@
   [class.add-image-container--not-loading]="!isLoading"
 >
   <span></span>
-  <div class="add-image-container__content">
-    <span *ngIf="!isLoading; else showLoading" class="material-icons-outlined">
-      add_photo_alternate
-    </span>
+  <div class="add-image-container__content" style="text-align: center">
+    <div *ngIf="!isLoading; else showLoading">
+      <span class="material-icons-outlined"> add_photo_alternate </span>
+      <br />
+      <mat-hint class="mt-1">Klicken und Bilder auswählen</mat-hint>
+    </div>
+
     <ng-template #showLoading>
       <mat-spinner [diameter]="25"></mat-spinner>
     </ng-template>
+
     <input
       #imageInput
       type="file"
