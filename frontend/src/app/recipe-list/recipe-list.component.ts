@@ -6,7 +6,7 @@ import { User } from '../models/user';
 import { Recipe } from '../models/recipe';
 import { LocalStorageService } from '../local-storage.service';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { version } from '../version';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent implements OnInit {
-  version = `v${environment.version}`;
+  version = `v${version}`;
 
   user?: User;
   recipes: Recipe[] = [];
