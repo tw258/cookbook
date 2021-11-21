@@ -23,11 +23,46 @@ async function migrateDB() {
   usersCollection = db.collection(USERS_COLLECTION);
 
   //Do stuff here
-  await migrate3();
+  await migrate4();
 
   client.close();
 }
 migrateDB();
+
+//21.11.2021 set timestamp for every recipe
+async function migrate4() {
+  const allRecipes = await recipesCollection.find().toArray();
+  for (const currentRezept of allRecipes) {
+    if (!currentRezept.dateUpdatedAsISOString) {
+      var today = new Date().toISOString();
+      console.log(today);
+      await recipesCollection.updateOne(
+        { _id: currentRezept._id },
+        { $set: { dateUpdatedAsISOString: today } },
+      );
+    }
+  }
+}
+
+//10.11.2021 reset pw tobi
+async function migrate3() {
+  const newPassword = hashPassword('cb2021');
+  console.log(newPassword);
+  await usersCollection.updateOne({ name: 'tobi' }, { $set: { password: newPassword } });
+}
+
+//10.11.2021 add isThumbnail property to first images
+async function migrate2() {
+  const allRecipes = await recipesCollection.find().toArray();
+  for (const currentRezept of allRecipes) {
+    if (currentRezept.imageIds.length > 0) {
+      await imageCollection.updateOne(
+        { _id: currentRezept.imageIds[0] },
+        { $set: { isThumbnail: true } },
+      );
+    }
+  }
+}
 
 //10.11.2021 hash passwords of all users
 async function migrate1() {
@@ -40,24 +75,4 @@ async function migrate1() {
 
     await collection.replaceOne({ _id: user._id }, user);
   }
-}
-
-//10.11.2021 add isThumbnail property to first images
-async function migrate2() {
-  const allRecipes = await collection.find().toArray();
-  for (const currentRezept of allRecipes) {
-    if (currentRezept.imageIds.length > 0) {
-      await imageCollection.updateOne(
-        { _id: currentRezept.imageIds[0] },
-        { $set: { isThumbnail: true } },
-      );
-    }
-  }
-}
-
-//10.11.2021 reset pw tobi
-async function migrate3() {
-  const newPassword = hashPassword('cb2021');
-  console.log(newPassword);
-  await usersCollection.updateOne({ name: 'tobi' }, { $set: { password: newPassword } });
 }
