@@ -45,6 +45,8 @@
         <a *ngFor="let recipe of filteredRecipes" [routerLink]="['/recipes', recipe._id]">
           <app-recipe-card [recipe]="recipe"> </app-recipe-card>
         </a>
+
+        <div class="pb-2"></div>
       </ng-container>
     </ng-container>
 

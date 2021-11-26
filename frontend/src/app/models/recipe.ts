@@ -12,4 +12,5 @@ export interface Recipe {
   preparationTimeInMinutes: number;
   dateCreatedAsISOString: string;
   dateUpdatedAsISOString?: string;
+  isPublic?: boolean;
 }

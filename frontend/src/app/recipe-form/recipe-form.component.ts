@@ -70,6 +70,7 @@ export class RecipeFormComponent implements OnInit {
         _id: '',
         userId: '',
         note: '',
+        isPublic: true,
         portions: 2,
         ingredients: [],
         preparationTimeInMinutes: 0,
