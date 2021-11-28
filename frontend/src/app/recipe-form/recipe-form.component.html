@@ -68,7 +68,7 @@
           mat-icon-button
           (click)="handleAddIngredientClick()"
         >
-          <mat-icon class="material-icons-outlined">check</mat-icon>
+          <mat-icon class="material-icons-outlined">add</mat-icon>
         </button>
       </div>
       <div class="ingredient-form__inputs">
@@ -77,7 +77,7 @@
           <input
             [(ngModel)]="currentIngredient.amount"
             [ngModelOptions]="{ standalone: true }"
-            (focus)="$any($event.target).value = ''"
+            appClearOnFocus
             type="number"
             min="0"
             matInput
@@ -136,13 +136,32 @@
         </mat-list-item>
       </mat-list>
       <!-- Portions -->
-      <mat-form-field appearance="fill">
+      <div>
+        <mat-checkbox
+          [(ngModel)]="isPortionsChecked"
+          [ngModelOptions]="{ standalone: true }"
+          color="primary"
+          >Portionenbezogene Mengenangaben</mat-checkbox
+        >
+      </div>
+      <mat-hint>
+        <small>Die Zutatenmengen beziehen sich auf eine bestimmte Anzahl von Portionen</small>
+      </mat-hint>
+      <mat-form-field *ngIf="isPortionsChecked" appearance="fill" class="mt-1">
         <mat-label>Portionen (mit o.g. Zutaten)</mat-label>
-        <input [(ngModel)]="recipe.portions" [ngModelOptions]="{ standalone: true }" matInput />
+        <input
+          type="number"
+          min="1"
+          appClearOnFocus
+          [(ngModel)]="recipe.portions"
+          [ngModelOptions]="{ standalone: true }"
+          matInput
+        />
+        <mat-error align="end">Portionen müssen mindestens für eine Person sein!</mat-error>
       </mat-form-field>
     </section>
 
-    <h2>Wie wird's gemacht?</h2>
+    <h2 class="mt-1">Wie wird's gemacht?</h2>
     <mat-form-field appearance="fill">
       <mat-label>Zubereitung</mat-label>
       <textarea
@@ -182,7 +201,6 @@
         <mat-checkbox
           [(ngModel)]="recipe.isPublic"
           [ngModelOptions]="{ standalone: true }"
-          class="example-margin"
           color="primary"
           >Öffentlich</mat-checkbox
         >

@@ -6,6 +6,7 @@ import { AlertComponent } from './alert/alert.component';
 import { FormsModule } from '@angular/forms';
 import { GermanDatePipe } from './german-date.pipe';
 import { ToPipe } from './to.pipe';
+import { ClearOnFocusDirective } from './clear-on-focus.directive';
 
 @NgModule({
   exports: [
@@ -16,8 +17,9 @@ import { ToPipe } from './to.pipe';
     ToPipe,
     SpinnerComponent,
     AlertComponent,
+    ClearOnFocusDirective,
   ],
   imports: [MaterialModule, CommonModule],
-  declarations: [SpinnerComponent, AlertComponent, GermanDatePipe, ToPipe],
+  declarations: [SpinnerComponent, AlertComponent, GermanDatePipe, ToPipe, ClearOnFocusDirective],
 })
 export class SharedModule {}

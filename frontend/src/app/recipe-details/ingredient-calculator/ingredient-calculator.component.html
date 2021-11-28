@@ -1,15 +1,23 @@
 <div>
   <div class="ingredient-calculator">
     <div class="mat-h3 mb-0">
-      <span>Zutaten für</span>
-      <button color="primary" style="margin: 0 5px" (click)="handleRemovePortion()" mat-icon-button>
-        <mat-icon>remove</mat-icon>
-      </button>
-      <strong> {{ currentPortions }}</strong>
-      <button color="primary" style="margin: 0 5px" (click)="handleAddPortion()" mat-icon-button>
-        <mat-icon>add</mat-icon>
-      </button>
-      <span>{{ currentPortions === 1 ? 'Person' : 'Personen' }}</span>
+      <span>Zutaten</span>
+      <ng-container *ngIf="_recipe.portions">
+        <span> für</span>
+        <button
+          color="primary"
+          style="margin: 0 5px"
+          (click)="handleRemovePortion()"
+          mat-icon-button
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+        <strong> {{ currentPortions }}</strong>
+        <button color="primary" style="margin: 0 5px" (click)="handleAddPortion()" mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+        <span>{{ currentPortions === 1 ? 'Person' : 'Personen' }}</span>
+      </ng-container>
     </div>
     <div class="mr-05">
       <button mat-icon-button (click)="handleAddToClipboard(selectableIngredients)">
@@ -20,7 +28,7 @@
 
   <mat-selection-list #selectableIngredients color="primary">
     <mat-list-option *ngFor="let ingredient of this._recipe.ingredients" [value]="ingredient">
-      {{ ingredient.amount | multiplyPortions: _recipe.portions:currentPortions }}
+      {{ ingredient.amount | multiplyPortions: _recipe.portions || 1:currentPortions }}
       {{ ingredient.measurement }} {{ ingredient.name }}
     </mat-list-option>
   </mat-selection-list>

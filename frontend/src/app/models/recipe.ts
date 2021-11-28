@@ -7,7 +7,7 @@ export interface Recipe {
   note: string;
   thumbnailAsBase64: string;
   imageIds: string[];
-  portions: number;
+  portions?: number;
   ingredients: Ingredient[];
   preparationTimeInMinutes: number;
   dateCreatedAsISOString: string;

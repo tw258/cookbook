@@ -16,7 +16,7 @@ export class IngredientCalculatorComponent {
 
   @Input() set recipe(recipe: Recipe) {
     this._recipe = recipe;
-    this.currentPortions = recipe.portions;
+    this.currentPortions = recipe.portions || 1;
   }
 
   constructor(private clipboard: Clipboard, private snackBar: MatSnackBar) {}
@@ -36,7 +36,7 @@ export class IngredientCalculatorComponent {
 
     const stringToCopy = values.reduce(
       (acc, curr) =>
-        (acc += `- ${(curr.amount / this._recipe.portions) * this.currentPortions} ${
+        (acc += `- ${(curr.amount / (this._recipe.portions || 1)) * this.currentPortions} ${
           curr.measurement
         } ${curr.name}\n`),
       `Einkaufsliste für "${this._recipe.title}" (${this.currentPortions} Pers.):\n\n`,

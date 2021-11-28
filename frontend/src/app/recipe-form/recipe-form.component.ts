@@ -23,6 +23,7 @@ export class RecipeFormComponent implements OnInit {
   recipe!: Recipe;
   maxTime = 60;
   isEditMode = false;
+  isPortionsChecked = false;
   currentIngredient: Ingredient = this.createIngredient();
 
   imagesToDisplay: Image[] = [];
@@ -52,7 +53,10 @@ export class RecipeFormComponent implements OnInit {
       this.recipeservice
         .getRecipeById(recipeId)
         .pipe(
-          tap(recipe => (this.recipe = recipe)),
+          tap(recipe => {
+            this.recipe = recipe;
+            if (this.recipe.portions) this.isPortionsChecked = true;
+          }),
           switchMap(recipe => this.imageService.getImagesById(recipe.imageIds)),
         )
         .subscribe({
@@ -71,7 +75,6 @@ export class RecipeFormComponent implements OnInit {
         userId: '',
         note: '',
         isPublic: true,
-        portions: 2,
         ingredients: [],
         preparationTimeInMinutes: 0,
         dateCreatedAsISOString: '',
@@ -89,6 +92,8 @@ export class RecipeFormComponent implements OnInit {
    */
   onSave() {
     this.isLoading = true;
+
+    if (!this.isPortionsChecked) this.recipe.portions = undefined;
 
     const user$ = this.userService.getUser();
     let recipe$: Observable<Recipe>;
