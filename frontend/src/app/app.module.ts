@@ -52,6 +52,7 @@ const routes: Route[] = [
     ImageSliderComponent,
     ApostrophPipe,
     ConfirmRecipeDeleteDialogComponent,
+    ImageClickDialogComponent,
     ChangePasswordComponent,
     ConfirmPasswordChangeDialogComponent,
   ],

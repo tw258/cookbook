@@ -6,6 +6,7 @@ import { AlertComponent } from './alert/alert.component';
 import { FormsModule } from '@angular/forms';
 import { GermanDatePipe } from './german-date.pipe';
 import { ToPipe } from './to.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   exports: [
@@ -16,6 +17,7 @@ import { ToPipe } from './to.pipe';
     ToPipe,
     SpinnerComponent,
     AlertComponent,
+    ReactiveFormsModule,
   ],
   imports: [MaterialModule, CommonModule],
   declarations: [SpinnerComponent, AlertComponent, GermanDatePipe, ToPipe],

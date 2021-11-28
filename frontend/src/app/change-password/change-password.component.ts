@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
@@ -13,7 +13,11 @@ import { ConfirmPasswordChangeDialogComponent } from './confirm-password-change-
 })
 export class ChangePasswordComponent {
   password = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  confirmPassword = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  confirmPassword = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+    this.matchPassword.bind(this),
+  ]);
   isPasswordVisible = false;
 
   constructor(
@@ -33,6 +37,8 @@ export class ChangePasswordComponent {
   getErrorMessageConfirmPassword() {
     if (this.confirmPassword.hasError('minlength')) {
       return 'Passwort muss mindestens 6 Zeichen lang sein!';
+    } else if (this.confirmPassword.hasError('noMatch')) {
+      return 'Passwörter stimmen nicht überein';
     }
     return 'Passwort muss gesetzt werden';
   }
@@ -58,5 +64,12 @@ export class ChangePasswordComponent {
         onCancel: () => {}, //we ignore Cancel
       },
     });
+  }
+
+  matchPassword(control: AbstractControl): ValidationErrors | null {
+    if (this.password.value != control.value) {
+      return { noMatch: true };
+    }
+    return null;
   }
 }
