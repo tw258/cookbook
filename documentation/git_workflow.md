@@ -11,5 +11,5 @@
 8. `git reset --hard origin/master`
 9. `git merge my_feature`
 10. `git push origin`
-11. Optional: `git branch --delete my_feature`
+11. Optional: `git branch -D my_feature`
 12. Optional: `git push --delete origin my_feature`
