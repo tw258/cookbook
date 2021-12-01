@@ -16,7 +16,6 @@ router.get('/', async (_, res) => {
 
 router.patch('/update-password', async (req, res) => {
   const name = res.locals.username;
-  console.log(name);
   const newPassword = req.body.password;
   const newHashedPassword = hashPassword(newPassword);
 

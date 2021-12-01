@@ -16,6 +16,11 @@ router.get('/:id', async (req, res) => {
 
   const recipe = await mongodb.getRecipeById(recipeId);
 
+  // TODO: Authorization
+  // 1. recipe.isPublic == true
+  // 2. load user with username
+  // 3. recipe.userId === user.id
+
   res.send(recipe);
 });
 
