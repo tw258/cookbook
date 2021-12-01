@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { GermanDatePipe } from './german-date.pipe';
 import { ToPipe } from './to.pipe';
 import { ClearOnFocusDirective } from './clear-on-focus.directive';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   exports: [
@@ -18,6 +19,7 @@ import { ClearOnFocusDirective } from './clear-on-focus.directive';
     SpinnerComponent,
     AlertComponent,
     ClearOnFocusDirective,
+    ReactiveFormsModule,
   ],
   imports: [MaterialModule, CommonModule],
   declarations: [SpinnerComponent, AlertComponent, GermanDatePipe, ToPipe, ClearOnFocusDirective],

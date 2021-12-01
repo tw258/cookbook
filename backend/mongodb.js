@@ -146,6 +146,14 @@ class Mongodb {
     imagesClient.close();
   }
 
+  async updatePassword(name, newHashedPassword) {
+    const [collection, client] = await this.connect(USERS_COLLECTION);
+
+    await collection.updateOne({ name }, { $set: { password: newHashedPassword } });
+
+    client.close();
+  }
+
   async checkIfUserAuthenticated(name, hashedPassword) {
     const [collection, client] = await this.connect(USERS_COLLECTION);
 
