@@ -88,11 +88,17 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Einheit</mat-label>
-          <mat-select
+          <input
+            matInput
+            type="text"
+            placeholder="Stk,g,..."
             [(ngModel)]="currentIngredient.measurement"
             [ngModelOptions]="{ standalone: true }"
             value="Stk"
-          >
+            [matAutocomplete]="auto"
+          />
+
+          <mat-autocomplete #auto="matAutocomplete">
             <mat-option value="g">g</mat-option>
             <mat-option value="kg">kg</mat-option>
             <mat-option value="ml">ml</mat-option>
@@ -102,7 +108,7 @@
             <mat-option value="EL">EL</mat-option>
             <mat-option value="Prise">Prise</mat-option>
             <mat-option value="Stk">Stk</mat-option>
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
